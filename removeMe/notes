@@ -1,0 +1,15 @@
+
+
+ 1) The TFTP protocol does not have messaging between users. but connections<T> is a modification for the server, not part of the protocol.
+
+ In theory, lets say we want to create a protocol for a chat server. Then in our implementation of MessagingProtocol, if we know the connection id of another client we can call: connections.send(otherConnid, messageToSend);
+
+ 2) This is NOT a mistake.
+ As stated Connections<T> does not know the protocol and care about it... It's part of the new server design now.
+ It has a broadcast function cause it has one... If any protocol that you wish to implement needs it...
+ In our case, TFTP never sends broadcasts to all the active clients, only to those who logged in (Logging in is part of our altered TFTP protocol, you can figure it out since its part of the protocol specifications).
+ To implement BCAST you need to figure out how the MessagingProtocol knows the connection id's of all logged in users.
+
+
+
+
