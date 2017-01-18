@@ -1,7 +1,7 @@
 package bgu.spl171.net.impl.TFTPtpc;
 
 
-import bgu.spl171.net.api.bidi.BidiMessagingProtocol;
+import bgu.spl171.net.impl.TFTPimplDown.*;
 import bgu.spl171.net.srv.Server;
 
 import java.util.Set;
@@ -17,11 +17,11 @@ public class TPCMain {
         Set<String> filesList = new ConcurrentSkipListSet<>();
 
         //start the server
-//        Server.threadPerClient(
-//                7777, //port
-//                () -> new BidiMessagingProtocol<>(filesList), //protocol factory
-//                TFTPEncoderDecoder::new //message encoder decoder factory
-//        ).serve();
+        Server.threadPerClient(
+                7777, //port
+                () -> new BidiServerProtocolImpl<BidiMessage>(filesList), //protocol factory
+                TFTPEncoderDecoder::new //message encoder decoder factory
+        ).serve();
     }
 
 }
