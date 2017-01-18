@@ -31,6 +31,13 @@
  * }
  * use the already implemented shorttobytes and vise versa functions inside process
  *
+ * Create TFTPConnections that implements Connections interface {
+ *     Save this for the comments of this Object's Class file
+ *     It will hold a list of files that is initialized with the list of folder contents{
+ *         and is synchronized when it is updated and when the fileData object opens the file until it is closed
+ *     }
+ *     Add a map that maps between clienID and its connectionHandler -> this will be initialized in the server
+ * }
  *
  *
  *
