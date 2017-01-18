@@ -5,7 +5,7 @@ import bgu.spl171.net.api.MessageEncoderDecoder;
 /**
  * Created by blumenra on 1/18/17.
  */
-public class BidiEncDecImpl implements MessageEncoderDecoder<T>{
+public class BidiEncDecImpl<T> implements MessageEncoderDecoder<T>{
     @Override
     public T decodeNextByte(byte nextByte) {
         return null;
