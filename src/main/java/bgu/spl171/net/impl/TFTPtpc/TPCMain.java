@@ -16,11 +16,12 @@ public class TPCMain {
 
         Set<String> filesList = new ConcurrentSkipListSet<>();
 
-        Server.threadPerClient(
-                7777, //port
-                () -> new BidiMessagingProtocol<>(filesList), //protocol factory
-                TFTPEncoderDecoder::new //message encoder decoder factory
-        ).serve();
+        //start the server
+//        Server.threadPerClient(
+//                7777, //port
+//                () -> new BidiMessagingProtocol<>(filesList), //protocol factory
+//                TFTPEncoderDecoder::new //message encoder decoder factory
+//        ).serve();
     }
 
 }
