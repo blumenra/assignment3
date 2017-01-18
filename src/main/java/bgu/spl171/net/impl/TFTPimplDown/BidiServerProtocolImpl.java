@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Created by blumenra on 1/18/17.
  */
-public class BidiServerProtocolImpl<T> implements BidiMessagingProtocol<T> {
+public class BidiServerProtocolImpl<T> implements BidiMessagingProtocol<BidiMessage> {
 
     Set<String> filesList;
     Connections<ConnectionHandler> connections;
@@ -31,8 +31,9 @@ public class BidiServerProtocolImpl<T> implements BidiMessagingProtocol<T> {
     }
 
     @Override
-    public void process(T message) {
+    public void process(BidiMessage message) {
 
+        byte opcode =
     }
 
 
