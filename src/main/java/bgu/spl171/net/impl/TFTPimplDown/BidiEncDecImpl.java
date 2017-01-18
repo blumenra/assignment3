@@ -81,12 +81,20 @@ public class BidiEncDecImpl<T> implements MessageEncoderDecoder<BidiMessage>{
                 String errMsg = message.getErrMsg();
                 byte[] errMsgBytes = errMsg.getBytes();
 
+                byte[] aByte = {message.getaByte()};
+
                 encoded = new byte[errMsgBytes.length + 5];
+
+                putInByteArray(msgTypeBytes, encoded, 0);
+                putInByteArray(errorCodeBytes, encoded, 2);
+                putInByteArray(errMsgBytes, encoded, 4);
+                putInByteArray(aByte, encoded, encoded.length-1);
 
             }
 
-//            DIRQ
-            case 6: {
+//            DIRQ, DISC
+            case 6:
+            case 10: {
 
                 encoded = msgTypeBytes;
             }
@@ -124,7 +132,7 @@ public class BidiEncDecImpl<T> implements MessageEncoderDecoder<BidiMessage>{
                 putInByteArray(aByte, encoded, encoded.length-1);
 
             }
-            case 10:
+            
             default:{
                 encoded = new byte[0];
             }
