@@ -19,8 +19,8 @@ public class TPCMain {
         //start the server
         Server.threadPerClient(
                 7777, //port
-                () -> new BidiServerProtocolImpl<BidiMessage>(filesList), //protocol factory
-                TFTPEncoderDecoder::new //message encoder decoder factory
+                () -> new BidiServerProtocolImpl<>(filesList), //protocol factory
+                BidiEncDecImpl::new //message encoder decoder factory
         ).serve();
     }
 

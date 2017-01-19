@@ -1,7 +1,14 @@
 package bgu.spl171.net.srv;
 
 import bgu.spl171.net.api.MessageEncoderDecoder;
+//import bgu.spl171.net.api.MessagingProtocol;
 import bgu.spl171.net.api.MessagingProtocol;
+import bgu.spl171.net.api.bidi.BidiMessagingProtocol;
+import bgu.spl171.net.api.bidi.Connections;
+import bgu.spl171.net.impl.TFTPimplDown.BidiEncDecImpl;
+import bgu.spl171.net.impl.TFTPimplDown.BidiServerProtocolImpl;
+import bgu.spl171.net.impl.TFTPimplDown.ConnectionsImpl;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -10,19 +17,22 @@ import java.util.function.Supplier;
 public abstract class BaseServer<T> implements Server<T> {
 
     private final int port;
-    private final Supplier<MessagingProtocol<T>> protocolFactory;
-    private final Supplier<MessageEncoderDecoder<T>> encdecFactory;
+    private final Supplier<BidiMessagingProtocol<T>> protocolFactory;
+    private final Supplier<BidiEncDecImpl<T>> encdecFactory;
     private ServerSocket sock;
+    private int clientIdCounter = 0;
+    private Connections<T> connections;
 
     public BaseServer(
             int port,
-            Supplier<MessagingProtocol<T>> protocolFactory,
-            Supplier<MessageEncoderDecoder<T>> encdecFactory) {
+            Supplier<BidiMessagingProtocol<T>> protocolFactory,
+            Supplier<BidiEncDecImpl<T>> encdecFactory) {
 
         this.port = port;
         this.protocolFactory = protocolFactory;
         this.encdecFactory = encdecFactory;
 		this.sock = null;
+        this.connections = new ConnectionsImpl();
     }
 
     @Override
@@ -39,7 +49,9 @@ public abstract class BaseServer<T> implements Server<T> {
                 BlockingConnectionHandler<T> handler = new BlockingConnectionHandler<>(
                         clientSock,
                         encdecFactory.get(),
-                        protocolFactory.get());
+                        protocolFactory.get(),
+                        clientIdCounter,
+                        connections);
 
                 execute(handler);
             }
