@@ -19,6 +19,65 @@ public class BidiMessage {
 
 
 //    Constructors
+
+//    empty
+
+
+    public BidiMessage() {
+    }
+
+    //    copy
+    public BidiMessage(BidiMessage original) {
+
+        this.opcode = original.getOpcode();
+        switch (opcode){
+//            LOGRQ
+            case 7: {
+                this.userName = original.getUserName();
+                this.aByte = original.getaByte();
+            }
+
+//            DELRQ,RRQ,WRQ
+            case 1:
+            case 2:
+            case 8: {
+                this.fileName = original.getFileName();
+                this.aByte = original.getaByte();
+            }
+
+//            DATA
+            case 3: {
+
+                this.packetSize = original.getPacketSize();
+                this.blockNumber = original.getBlockNumber();
+                this.data = original.getData();
+            }
+
+//            ACK
+            case 4: {
+                this.blockNumber = original.getBlockNumber();
+            }
+
+//            BCAST
+            case 9: {
+
+                this.deletedAdded = original.getDeletedAdded();
+                this.fileName = original.getFileName();
+                this.aByte = original.getaByte();
+            }
+
+//            ERROR
+            case 5: {
+
+                this.errorCode = original.getErrorCode();
+                this.errMsg = original.getErrMsg();
+                this.aByte  = original.getaByte();
+            }
+        }
+    }
+
+
+
     public BidiMessage(short opcode, String string, byte aByte) {
         this.opcode = opcode;
         switch (opcode){
@@ -76,6 +135,7 @@ public class BidiMessage {
 
 
 //    getters
+
     public short getOpcode() {
 
         return opcode;
@@ -83,7 +143,7 @@ public class BidiMessage {
 
     public String getFileName() {
 
-        return this.fileName;
+        return this.fileName + "";
     }
 
     public byte getaByte() {
@@ -92,7 +152,7 @@ public class BidiMessage {
     }
 
     public String getUserName() {
-        return userName;
+        return userName + "";
     }
 
     public short getPacketSize() {
@@ -104,7 +164,15 @@ public class BidiMessage {
     }
 
     public byte[] getData() {
-        return data;
+
+        byte[] dataCopy = new byte[this.data.length];
+
+        for(int i=0; i<dataCopy.length-1; i++){
+
+            dataCopy[i] = this.data[i];
+        }
+
+        return dataCopy;
     }
 
     public byte getDeletedAdded() {
@@ -116,6 +184,49 @@ public class BidiMessage {
     }
 
     public String getErrMsg() {
-        return errMsg;
+        return errMsg + "";
+    }
+
+
+//    setters
+
+    public void setOpcode(short opcode) {
+        this.opcode = opcode;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPacketSize(short packetSize) {
+        this.packetSize = packetSize;
+    }
+
+    public void setBlockNumber(short blockNumber) {
+        this.blockNumber = blockNumber;
+    }
+
+    public void setData(byte[] data) {
+        this.data = data;
+    }
+
+    public void setDeletedAdded(byte deletedAdded) {
+        this.deletedAdded = deletedAdded;
+    }
+
+    public void setErrorCode(short errorCode) {
+        this.errorCode = errorCode;
+    }
+
+    public void setErrMsg(String errMsg) {
+        this.errMsg = errMsg;
+    }
+
+    public void setaByte(byte aByte) {
+        this.aByte = aByte;
     }
 }
