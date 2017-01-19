@@ -2,7 +2,17 @@ package bgu.spl171.net.impl.TFTPimplDown;
 
 
 /**
- * Created by blumenra on 1/18/17.
+ *  opcode operation
+ *      1 Read request (RRQ)
+ *      2 Write request (WRQ)
+ *      3 Data (DATA)
+ *      4 Acknowledgment (ACK)
+ *      5 Error (ERROR)
+ *      6 Directory listing request (DIRQ)
+ *      7 Login request (LOGRQ)
+ *      8 Delete request (DELRQ)
+ *      9 Broadcast file added/deleted (BCAST)
+ *      10 Disconnect (DISC)
  */
 public class BidiMessage {
 
@@ -17,9 +27,23 @@ public class BidiMessage {
     private String errMsg;
     private byte aByte;
 
+    public static BidiMessage createBcastMessage(int event, String fileName) {
+
+        return new BidiMessage((short) 9, (byte) event, fileName, (byte) 0);
+    }
+
+    public static BidiMessage createAckMessage(int ackNum) {
+
+        return new BidiMessage((short) 4, (short) ackNum);
+    }
+
+    public static BidiMessage createErrorMessage(int errNum, String errMsg) {
+
+        return new BidiMessage((short) 7, (short) errNum, errMsg, (byte) 0);
+    }
 
 //    Constructors
-    public BidiMessage(short opcode, String string, byte aByte) {
+    private BidiMessage(short opcode, String string, byte aByte) {
         this.opcode = opcode;
         switch (opcode){
 
@@ -39,12 +63,12 @@ public class BidiMessage {
         this.aByte = aByte;
     }
 
-    public BidiMessage(short opcode) {
+    private BidiMessage(short opcode) {
 
         this.opcode = opcode;
     }
 
-    public BidiMessage(short opcode, short packetSize, short blockNumber, byte[] data) {
+    private BidiMessage(short opcode, short packetSize, short blockNumber, byte[] data) {
 
         this.opcode = opcode;
         this.packetSize = packetSize;
@@ -52,13 +76,13 @@ public class BidiMessage {
         this.data = data;
     }
 
-    public BidiMessage(short opcode, short blockNumber) {
+    private BidiMessage(short opcode, short blockNumber) {
 
         this.opcode = opcode;
         this.blockNumber = blockNumber;
     }
 
-    public BidiMessage(short opcode, byte deletedAdded, String fileName, byte aByte) {
+    private BidiMessage(short opcode, byte deletedAdded, String fileName, byte aByte) {
 
         this.opcode = opcode;
         this.deletedAdded = deletedAdded;
@@ -66,7 +90,7 @@ public class BidiMessage {
         this.aByte = aByte;
     }
 
-    public BidiMessage(short opcode, short errorCode, String errMsg, byte aByte) {
+    private BidiMessage(short opcode, short errorCode, String errMsg, byte aByte) {
 
         this.opcode = opcode;
         this.errorCode = errorCode;
