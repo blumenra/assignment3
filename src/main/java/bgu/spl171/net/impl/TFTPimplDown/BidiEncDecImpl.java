@@ -54,6 +54,38 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
 
                     done = ackMessageCreator(nextByte);
                 }
+
+//                ERROR
+                case 5: {
+
+                    done = errorMessageCreator(nextByte);
+                }
+
+//                DIRQ, DISC
+                case 6:
+                case 10: {
+
+                    return incomingMessage;
+                }
+
+//                LOGRQ
+                case 7: {
+
+                    done = logrqMessageCreator(nextByte);
+                }
+
+//                BCAST
+                case 9: {
+
+                    done = bcastMessageCreator(nextByte);
+                }
+
+//                unKnown opcode
+                default: {
+
+                    incomingMessage.setOpcode((short) -1);
+                    return incomingMessage;
+                }
             }
         }
 
@@ -70,22 +102,22 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
         }
     }
 
-    private boolean ackMessageCreator(byte nextByte) {
+
+
+    //    After determining the message type, these methods create the relevant message
+    private boolean delrqRrqWrqMessageCreator(byte nextByte) {
 
         boolean done = false;
 
         if(currentMessageFieldNumber == 1){
 
-            done = bytesToBlockNumber(nextByte);
+            if(bytesToFileName(nextByte)){
+
+                incomingMessage.setaByte(nextByte);
+                done = true;
+            }
         }
         return done;
-    }
-
-    private void doneWithMessage() {
-
-        this.incomingMessage = null;
-        doneWithField();
-        currentMessageFieldNumber = 0;
     }
 
     private boolean dataMessageCreator(byte nextByte) {
@@ -116,6 +148,140 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
         return done;
     }
 
+    private boolean ackMessageCreator(byte nextByte) {
+
+        boolean done = false;
+
+        if(currentMessageFieldNumber == 1){
+
+            done = bytesToBlockNumber(nextByte);
+        }
+        return done;
+    }
+
+    private boolean errorMessageCreator(byte nextByte) {
+
+        boolean done = false;
+
+        switch(currentMessageFieldNumber){
+
+//            working on errorCode
+            case 1: {
+
+                bytesToErrorCode(nextByte);
+            }
+
+//            working on errMsg
+            case 2: {
+
+                done = bytesToErrMsg(nextByte);
+
+                if(done){
+
+                    incomingMessage.setaByte(nextByte);
+                }
+            }
+        }
+
+        return done;
+    }
+
+    private boolean logrqMessageCreator(byte nextByte) {
+
+        boolean done = false;
+
+        if(currentMessageFieldNumber == 1){
+
+            if(bytesToUserName(nextByte)){
+
+                incomingMessage.setaByte(nextByte);
+                done = true;
+            }
+        }
+        return done;
+    }
+
+    private boolean bcastMessageCreator(byte nextByte) {
+
+        boolean done = false;
+
+        switch (currentMessageFieldNumber){
+
+//            deletedAdded
+            case 1: {
+
+                incomingMessage.setDeletedAdded(nextByte);
+                doneWithField();
+            }
+
+//            fileName
+            case 2: {
+
+                done = bytesToFileName(nextByte);
+
+                if(done){
+
+                    incomingMessage.setaByte(nextByte);
+                }
+            }
+        }
+
+        return done;
+    }
+
+
+
+    //    These methods set the relevant field in the incomingMessage from the stream of bytes
+    private void bytesToOpcode(byte nextByte) {
+
+        short opcode = incomingBytesToShort(nextByte);
+
+        if(opcode != -1){
+
+            incomingMessage.setOpcode(opcode);
+            doneWithField();
+        }
+    }
+
+    private boolean bytesToFileName(byte nextByte){
+
+        String fileName = incomingBytesToString(nextByte);
+
+        if(fileName != null){
+
+            incomingMessage.setFileName(fileName);
+            doneWithField();
+            return true;
+        }
+
+        return false;
+        }
+
+    private boolean bytesToBlockNumber(byte nextByte) {
+
+        short blockNumber = incomingBytesToShort(nextByte);
+
+        if(blockNumber != -1){
+
+            incomingMessage.setPacketSize(blockNumber);
+            doneWithField();
+            return true;
+        }
+
+        return false;
+    }
+
+    private void bytesToPacketSize(byte nextByte) {
+
+        short packetSize = incomingBytesToShort(nextByte);
+
+        if(packetSize != -1){
+
+            incomingMessage.setPacketSize(packetSize);
+            doneWithField();
+        }
+    }
+
     private boolean bytesToData(byte nextByte) {
 
         incomingBytes.add(nextByte);
@@ -131,26 +297,38 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
         return false;
     }
 
-    private boolean bytesToBlockNumber(byte nextByte) {
+    private void bytesToErrorCode(byte nextByte) {
 
-        short blockNumber = incomingBytesToShort(nextByte);
+        short errorCode = incomingBytesToShort(nextByte);
 
-        if(blockNumber != -1){
+        if(errorCode != -1){
 
-            incomingMessage.setPacketSize(blockNumber);
+            incomingMessage.setErrorCode(errorCode);
+            doneWithField();
+        }
+    }
+
+    private boolean bytesToErrMsg(byte nextByte) {
+
+        String errMsg = incomingBytesToString(nextByte);
+
+        if(errMsg != null){
+
+            incomingMessage.setErrMsg(errMsg);
             doneWithField();
             return true;
         }
-        return false;
+
+        return  false;
     }
 
-    private boolean bytesToPacketSize(byte nextByte) {
+    private boolean bytesToUserName(byte nextByte) {
 
-        short packetSize = incomingBytesToShort(nextByte);
+        String userName = incomingBytesToString(nextByte);
 
-        if(packetSize != -1){
+        if(userName != null){
 
-            incomingMessage.setPacketSize(packetSize);
+            incomingMessage.setUserName(userName);
             doneWithField();
             return true;
         }
@@ -158,53 +336,42 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
         return false;
     }
 
-    private boolean delrqRrqWrqMessageCreator(byte nextByte) {
 
-        boolean done = false;
 
-        String fileName = incomingBytesToString(nextByte);
+//    These methods convert the stream of bytes to the relevant data type
+    private short incomingBytesToShort(byte nextByte) {
 
-        if(currentMessageFieldNumber == 1){
+        incomingBytes.add(nextByte);
 
-            if(fileName != null){
+        if(incomingBytes.size() == 2){
 
-                incomingMessage.setFileName(fileName);
-                incomingMessage.setaByte(nextByte);
-                done = true;
-            }
-            else{
+            byte[] shortBytes = {incomingBytes.get(0), incomingBytes.get(1)};
+            short num = bytesToShort(shortBytes);
 
-                incomingBytes.add(nextByte);
-            }
-
+            return num;
         }
-        return done;
+        return (short) -1;
     }
 
     private String incomingBytesToString(byte nextByte) {
 
-            if(nextByte == (byte) 0){
+        if(nextByte == (byte) 0){
 
-                String string = bytesToString();
-                doneWithField();
-                return string;
-            }
-            else{
+            byte[] fileNameBytes = byteListToArr();
 
-                incomingBytes.add(nextByte);
-                return null;
-            }
+            String string = new String(fileNameBytes);
+
+            return string;
+        }
+        else{
+
+            incomingBytes.add(nextByte);
+            return null;
+        }
     }
 
-    private String bytesToString() {
 
-        byte[] fileNameBytes = byteListToArr();
-
-        String string = new String(fileNameBytes);
-
-        return string;
-    }
-
+//    Other helper methods
     private byte[] byteListToArr() {
 
         byte[] byteArr = new byte[incomingBytes.size()];
@@ -217,30 +384,13 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
         return byteArr;
     }
 
-    private void bytesToOpcode(byte nextByte) {
 
-        short opcode = incomingBytesToShort(nextByte);
+//    These methods set this Object's fields to the desired state when needed
+    private void doneWithMessage() {
 
-        if(opcode != -1){
-
-            incomingMessage.setOpcode(opcode);
-        }
-    }
-
-    private short incomingBytesToShort(byte nextByte) {
-
-        incomingBytes.add(nextByte);
-
-        if(incomingBytes.size() == 2){
-
-            byte[] shortBytes = {incomingBytes.get(0), incomingBytes.get(1)};
-            short num = bytesToShort(shortBytes);
-
-            doneWithField();
-
-            return num;
-        }
-        return (short) -1;
+        this.incomingMessage = null;
+        doneWithField();
+        currentMessageFieldNumber = 0;
     }
 
     private void doneWithField() {
@@ -256,6 +406,7 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
             incomingBytes.remove(aByte);
         }
     }
+
 
     @Override
     public byte[] encode(BidiMessage message) {
