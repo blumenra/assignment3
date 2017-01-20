@@ -6,6 +6,7 @@ import bgu.spl171.net.api.MessagingProtocol;
 import bgu.spl171.net.api.bidi.BidiMessagingProtocol;
 import bgu.spl171.net.api.bidi.Connections;
 import bgu.spl171.net.impl.TFTPimplDown.BidiEncDecImpl;
+import bgu.spl171.net.impl.TFTPimplDown.BidiMessage;
 import bgu.spl171.net.impl.TFTPimplDown.BidiServerProtocolImpl;
 import bgu.spl171.net.impl.TFTPimplDown.ConnectionsImpl;
 
@@ -18,7 +19,7 @@ public abstract class BaseServer<T> implements Server<T> {
 
     private final int port;
     private final Supplier<BidiMessagingProtocol<T>> protocolFactory;
-    private final Supplier<BidiEncDecImpl<T>> encdecFactory;
+    private final Supplier<MessageEncoderDecoder<T>> encdecFactory;
     private ServerSocket sock;
     private int clientIdCounter = 0;
     private Connections<T> connections;
@@ -26,7 +27,7 @@ public abstract class BaseServer<T> implements Server<T> {
     public BaseServer(
             int port,
             Supplier<BidiMessagingProtocol<T>> protocolFactory,
-            Supplier<BidiEncDecImpl<T>> encdecFactory) {
+            Supplier<MessageEncoderDecoder<T>> encdecFactory) {
 
         this.port = port;
         this.protocolFactory = protocolFactory;
@@ -46,7 +47,7 @@ public abstract class BaseServer<T> implements Server<T> {
 
                 Socket clientSock = serverSock.accept();
 
-                BlockingConnectionHandler<T> handler = new BlockingConnectionHandler<>(
+                BlockingConnectionHandler<T> handler = new BlockingConnectionHandler<T>(
                         clientSock,
                         encdecFactory.get(),
                         protocolFactory.get(),

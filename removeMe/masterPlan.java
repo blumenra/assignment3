@@ -38,7 +38,7 @@
  *     }
  *     Add a map that maps between clienID and its connectionHandler -> this will be initialized in the server
  * }
- *
+ * remove the removeMe.txt file in the Files folder
  *
  *
  */

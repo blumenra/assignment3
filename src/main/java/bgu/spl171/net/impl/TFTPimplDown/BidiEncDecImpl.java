@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Created by blumenra on 1/18/17.
  */
-public class BidiEncDecImpl<T> implements MessageEncoderDecoder<BidiMessage>{
+public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
 
     private ArrayList<Byte> incomingBytes;
     private BidiMessage incomingMessage;
