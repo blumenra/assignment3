@@ -32,7 +32,7 @@ public class TPCMain {
 
 
 
-        Map<String, Boolean> filesList = new ConcurrentHashMap<>();
+        Map<String, BidiFile> filesList = new ConcurrentHashMap<>();
 
         //start the server
         Server.threadPerClient(
