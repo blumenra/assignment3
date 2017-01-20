@@ -402,10 +402,11 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
 
     private void emptyIncomingBytes(){
 
-        for(byte aByte : incomingBytes){
+        while(!incomingBytes.isEmpty()){
 
-            incomingBytes.remove(aByte);
+            incomingBytes.remove(0);
         }
+
     }
 
 
