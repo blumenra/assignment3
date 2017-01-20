@@ -19,27 +19,27 @@ public class TPCMain {
 
     public static void main(String[] args) {
 
-        // REMOVE FROM HERE
-
-        File file = new File("Files/removeMe.txt");
-        System.out.println(file.exists());
-
-        // REMOVE UP TO HERE
-
-
-
-
-
-
-
-//        Map<String, Boolean> filesList = new ConcurrentHashMap<>();
+//        // REMOVE FROM HERE
 //
-//        //start the server
-//        Server.threadPerClient(
-//                7777, //port
-//                () -> new BidiServerProtocolImpl(filesList), //protocol factory
-//                BidiEncDecImpl::new //message encoder decoder factory
-//        ).serve();
+//        File file = new File("Files/removeMe.txt");
+//        System.out.println(file.exists());
+//
+//        // REMOVE UP TO HERE
+
+
+
+
+
+
+
+        Map<String, Boolean> filesList = new ConcurrentHashMap<>();
+
+        //start the server
+        Server.threadPerClient(
+                7777, //port
+                () -> new BidiServerProtocolImpl(filesList), //protocol factory
+                BidiEncDecImpl::new //message encoder decoder factory
+        ).serve();
     }
 
 }
