@@ -3,26 +3,23 @@ package bgu.spl171.net.impl.TFTPimplDown;
 import bgu.spl171.net.api.bidi.BidiMessagingProtocol;
 import bgu.spl171.net.api.bidi.Connections;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by blumenra on 1/18/17.
  */
 public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage> {
 
-    private final Map<String, Boolean> filesList;
+    private final Map<String, BidiFile> filesList;
     private ConnectionsImpl connections;
     private int ownerClientId;
+    private ByteArrayOutputStream byteOutPutStream = new ByteArrayOutputStream();
 
 
-    public BidiServerProtocolImpl(Map<String, Boolean> filesList) {
+    public BidiServerProtocolImpl(Map<String, BidiFile> filesList) {
 
         this.filesList = filesList;
     }
@@ -61,44 +58,123 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
 
                 case 1: //RRQ
 
-                    synchronized (filesList) {
+                    synchronized (filesList){
 
-                        if(rejectIfNotAccessible(message)) {
+                        if(!filesList.containsKey(message.getFileName())) {
 
+                            response = BidiMessage.createErrorMessage(1, "File not found – RRQ \\ DELRQ of non-existing file");
+                            connections.send(ownerClientId, response);
+                            break;
+                        }
+                        else if(!filesList.get(message.getFileName()).isReadable()) {
+
+                            response = BidiMessage.createErrorMessage(2, "Access violation – File cannot be written, read or deleted");
+                            connections.send(ownerClientId, response);
                             break;
                         }
                         else {
 
-                            filesList.put(message.getFileName(), false);
+                            filesList.get(message.getFileName()).setDeleable(false);
                         }
                     }
 
                     try {
                         byte[] array = Files.readAllBytes(new File("Files/"+message.getFileName()).toPath());
-                        filesList.put(message.getFileName(), true);
+                        filesList.get(message.getFileName()).setDeleable(true);
 
-                        int x = 512;  // chunk size
-                        int len = array.length;
-                        int counter = 0;
-
-                        for (int i = 0; i < len - x + 1; i += x) {
-
-                            byte[] newArray = Arrays.copyOfRange(array, i, i + x);
-                            response = BidiMessage.createDataMessage(newArray.length, counter++, newArray);
-                            connections.send(ownerClientId, response);
-                        }
-
-                        if (len % x != 0) {
-                            byte[] newArray = Arrays.copyOfRange(array, len - len % x, len);
-                            response = BidiMessage.createDataMessage(newArray.length, counter, newArray);
-                            connections.send(ownerClientId, response);
-                        }
+                        sendDataMessages(array);
 
                     } catch (IOException e) {
                         response = BidiMessage.createErrorMessage(6, "User not logged in – Any opcode received before Login completes.");
                         connections.send(ownerClientId, response);
                     }
 
+                    break;
+
+                case 2: //WRQ
+
+                    synchronized (filesList) {
+
+                        if(filesList.containsKey(message.getFileName())) {
+
+                            response = BidiMessage.createErrorMessage(5, "File already exists – File name exists on WRQ.");
+                            connections.send(ownerClientId, response);
+                            break;
+                        }
+                        else if(filesList.get(message.getFileName()).isUploading()) {
+
+                            response = BidiMessage.createErrorMessage(2, "Access violation – File cannot be written, read or deleted.");
+                            connections.send(ownerClientId, response);
+                            break;
+                        }
+                        else {
+
+                            filesList.get(message.getFileName()).setUploading(true);
+                        }
+                    }
+
+                    response = BidiMessage.createAckMessage(0);
+                    connections.send(ownerClientId, response);
+
+                case 3: //DATA
+
+                    if(message.getPacketSize() < 512) {
+
+                        FileOutputStream fos = null;
+                        try {
+
+                            byteOutPutStream.write(message.getData());
+
+                            fos = new FileOutputStream("Files/");
+                            fos.write(byteOutPutStream.toByteArray());
+                            fos.close();
+
+                            byteOutPutStream.reset();
+
+                            filesList.get(message.getFileName()).setUploading(false);
+
+                            connections.broadcast(BidiMessage.createBcastMessage(1, message.getFileName()));
+
+                            response = BidiMessage.createAckMessage(message.getBlockNumber());
+
+                        } catch (FileNotFoundException e) {
+                            response = BidiMessage.createErrorMessage(1, "File not found – RRQ \\ DELRQ of non-existing file");
+                        } catch (IOException e) {
+                            response = BidiMessage.createErrorMessage(0, e.getMessage());
+                        }
+                    }
+                    else {
+
+                        try {
+
+                            byteOutPutStream.write(message.getData());
+                            response = BidiMessage.createAckMessage(message.getBlockNumber());
+
+                        } catch (IOException e) {
+                            response = BidiMessage.createErrorMessage(0, e.getMessage());
+                        }
+                    }
+
+                    connections.send(ownerClientId, response);
+                    break;
+
+                case 6: //DIRQ
+
+                    String files = "";
+
+                    synchronized (filesList) {
+
+                        for(String key : filesList.keySet()) {
+
+                            if(filesList.get(key).isReadable()){
+
+                                files += key + "\0";
+                            }
+                        }
+                    }
+
+                    byte[] byteFiles = files.getBytes();
+                    sendDataMessages(byteFiles);
                     break;
 
                 case 7: //LOGRQ
@@ -127,12 +203,13 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
                             response = BidiMessage.createErrorMessage(1, "File not found – RRQ \\ DELRQ of non-existing file");
                         }
                         // File exists but not accessible
-                        else if (!filesList.get(message.getFileName())) {
+                        else if (!filesList.get(message.getFileName()).isDeleable()) {
 
                             response = BidiMessage.createErrorMessage(2, "Access violation – File cannot be written, read or deleted");
-                        } else {
+                        }
+                        else {
 
-                            filesList.put(message.getFileName(), false);
+                            filesList.remove(message.getFileName());
                             response = BidiMessage.createAckMessage(0);
                         }
                     }
@@ -170,7 +247,7 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
 
             if(file.isFile()) {
 
-                filesList.put(file.getName(), true);
+                filesList.put(file.getName(), new BidiFile(file.getName()));
             }
         }
     }
@@ -191,30 +268,25 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
 
         File fileToDelete = new File("Files/" + fileName);
         fileToDelete.delete();
-        filesList.remove(fileName);
     }
 
-    private boolean rejectIfNotAccessible(BidiMessage message) {
+    private void sendDataMessages(byte[] data) {
 
-        boolean ans = false;
-        BidiMessage response = null;
+        int x = 512;  // chunk size
+        int len = data.length;
+        int counter = 0;
 
-        // Files does NOT exist
-        if (!filesList.containsKey(message.getFileName())) {
+        for (int i = 0; i < len - x + 1; i += x) {
 
-            response = BidiMessage.createErrorMessage(1, "File not found – RRQ \\ DELRQ of non-existing file");
-            ans = true;
-        }
-        // File exists but not accessible
-        else if (!filesList.get(message.getFileName())) {
-
-            response = BidiMessage.createErrorMessage(2, "Access violation – File cannot be written, read or deleted");
-            ans = true;
-        }
-
-        if(ans)
+            byte[] newArray = Arrays.copyOfRange(data, i, i + x);
+            BidiMessage response = BidiMessage.createDataMessage(newArray.length, counter++, newArray);
             connections.send(ownerClientId, response);
+        }
 
-        return ans;
+        if (len % x != 0) {
+            byte[] newArray = Arrays.copyOfRange(data, len - len % x, len);
+            BidiMessage response = BidiMessage.createDataMessage(newArray.length, counter, newArray);
+            connections.send(ownerClientId, response);
+        }
     }
 }
