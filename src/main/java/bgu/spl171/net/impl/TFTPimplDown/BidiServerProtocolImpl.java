@@ -12,10 +12,10 @@ import java.util.Set;
 /**
  * Created by blumenra on 1/18/17.
  */
-public class BidiServerProtocolImpl<T> implements BidiMessagingProtocol<BidiMessage> {
+public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage> {
 
     private Set<String> filesList;
-    private ConnectionsImpl<T> connections;
+    private ConnectionsImpl connections;
     private int ownerClientId;
 
 
@@ -29,7 +29,7 @@ public class BidiServerProtocolImpl<T> implements BidiMessagingProtocol<BidiMess
     @Override
     public void start(int connectionId, Connections<BidiMessage> connections) {
 
-        this.connections = (ConnectionsImpl<T>) connections;
+        this.connections = (ConnectionsImpl) connections;
         this.ownerClientId = connectionId;
 
         initializeFilesSet();
@@ -46,7 +46,7 @@ public class BidiServerProtocolImpl<T> implements BidiMessagingProtocol<BidiMess
             //TODO: in all cases check if the user is logged in first!!
             //TODO: when  file was deleted/added => broadcast the shit out of it baby!!
 
-            case 1:
+            case 1: //RRQ
 
                 if(!connections.isLoggedIn(ownerClientId)) {
 
@@ -54,10 +54,8 @@ public class BidiServerProtocolImpl<T> implements BidiMessagingProtocol<BidiMess
                 }
                 else {
 
-                    try {
-                        File fileToRead = new File("Files/" + message.getFileName());
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                    synchronized (filesList) {
+
                     }
                 }
 

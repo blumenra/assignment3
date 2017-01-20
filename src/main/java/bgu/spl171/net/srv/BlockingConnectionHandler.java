@@ -1,8 +1,10 @@
 package bgu.spl171.net.srv;
 
+import bgu.spl171.net.api.MessageEncoderDecoder;
 import bgu.spl171.net.api.bidi.BidiMessagingProtocol;
 import bgu.spl171.net.api.bidi.Connections;
 import bgu.spl171.net.impl.TFTPimplDown.BidiEncDecImpl;
+import bgu.spl171.net.impl.TFTPimplDown.BidiMessage;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -12,7 +14,7 @@ import java.net.Socket;
 public class BlockingConnectionHandler<T> implements Runnable, ConnectionHandler<T> {
 
     private final BidiMessagingProtocol<T> protocol;
-    private final BidiEncDecImpl<T> encdec;
+    private final MessageEncoderDecoder<T> encdec;
     private final Socket sock;
     private final Connections<T> connections;
     private final int clientID;
@@ -20,7 +22,7 @@ public class BlockingConnectionHandler<T> implements Runnable, ConnectionHandler
     private BufferedOutputStream out;
     private volatile boolean connected = true;
 
-    public BlockingConnectionHandler(Socket sock, BidiEncDecImpl<T> reader, BidiMessagingProtocol<T> protocol, int clientID, Connections<T> connections) {
+    public BlockingConnectionHandler(Socket sock, MessageEncoderDecoder<T> reader, BidiMessagingProtocol<T> protocol, int clientID, Connections<T> connections) {
         this.sock = sock;
         this.encdec = reader;
         this.protocol = protocol;
