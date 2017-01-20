@@ -21,6 +21,7 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
 
         if(incomingBytes == null){
 
+            incomingBytes = new ArrayList<>();
             incomingMessage = new BidiMessage();
             currentMessageFieldNumber = 0;
         }
@@ -388,8 +389,8 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
 //    These methods set this Object's fields to the desired state when needed
     private void doneWithMessage() {
 
+        this.incomingBytes = null;
         this.incomingMessage = null;
-        doneWithField();
         currentMessageFieldNumber = 0;
     }
 
