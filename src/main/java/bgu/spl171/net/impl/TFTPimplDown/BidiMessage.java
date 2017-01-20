@@ -27,6 +27,11 @@ public class BidiMessage {
     private String errMsg;
     private byte aByte;
 
+    public static BidiMessage createDataMessage(int packetSize, int blockNum, byte[] fileData) {
+
+        return new BidiMessage((short) 3, (short) packetSize, (short) blockNum, fileData);
+    }
+
     public static BidiMessage createBcastMessage(int event, String fileName) {
 
         return new BidiMessage((short) 9, (byte) event, fileName, (byte) 0);
