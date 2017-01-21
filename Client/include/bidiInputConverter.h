@@ -2,6 +2,7 @@
 #ifndef BIDI_CONVERTER_H
 #define BIDI_CONVERTER_H
 
+#include "BidiMessage.h"
 #include <string>
 #include <iostream>
 
@@ -9,13 +10,20 @@
 
 using namespace std;
 
-class bidiInputConverter {
+class BidiInputConverter {
 
 private:
 
+    string input = "";
+    string command = "";
+    string arg = "";
 
+    void split(const string& s, char delim,vector<string>& v);
+    void splitToCommandAndArg(string input);
 
 public:
 
+    BidiInputConverter();
+    BidiMessage convertInput(string input);
 
-};
+ };
