@@ -1,4 +1,4 @@
-/users/studs/msc/brukes/clion-2016.3/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /users/studs/msc/brukes/intelliJ/assignment3/Client
+/users/studs/msc/brukes/clion-2016.3/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /users/studs/msc/brukes/intelliJ/Client
 -- The C compiler identification is GNU 5.4.0
 -- The CXX compiler identification is GNU 5.4.0
 -- Check for working C compiler: /usr/bin/cc
@@ -14,16 +14,5 @@
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
 -- Configuring done
-CMake Error at CMakeLists.txt:19 (add_executable):
-  Cannot find source file:
-
-    cmake-build-debug/CMakeFiles/3.6.3/CompilerIdC/CMakeCCompilerId.c
-
-  Tried extensions .c .C .c++ .cc .cpp .cxx .m .M .mm .h .hh .h++ .hm .hpp
-  .hxx .in .txx
-
-
-CMake Error: CMake can not determine linker language for target: Client
-CMake Error: Cannot determine link language for target "Client".
 -- Generating done
--- Build files have been written to: /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug
+-- Build files have been written to: /users/studs/msc/brukes/intelliJ/Client/cmake-build-debug

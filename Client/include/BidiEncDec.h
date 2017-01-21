@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
 #include "BidiMessage.h"
 
 #endif //CLIENT_BIDIENCDEC_H
@@ -12,7 +13,8 @@ using namespace std;
 class BidiEncDec {
 
 private:
-    vector<char*> incomingBytes;
+    vector<char> incomingBytes;
+    bool isNewMessage = true;
     BidiMessage incomingMessage;
     int currentMessageFieldNumber;
 
@@ -35,7 +37,7 @@ private:
     bool bytesToErrMsg(char nextByte);
     bool bytesToUserName(char nextByte);
     string incomingBytesToString(char nextByte);
-    char* byteListToArr();
+    char* incomingBytesToArr();
     void doneWithMessage();
     void doneWithField();
     void emptyIncomingBytes();
@@ -44,9 +46,9 @@ private:
 
     short incomingBytesToShort(char nextByte);
 
-    char* shortToBytes(short num, char* byteArr);
+    char* shortToBytes(short num);
     short bytesToShort(char* byteArr);
-    void putInByteArray(char* toPut, char* container, int fromIndex);
+    void putInByteArray(char* toPut, int toPutLength, char* container, int fromIndex);
 
 public:
     BidiMessage decodeNextByte(char nextByte);

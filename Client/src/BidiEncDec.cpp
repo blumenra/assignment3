@@ -1,5 +1,5 @@
 
-#include "BidiEncDec"
+#include "../include/BidiEncDec.h"
 
 
 bool BidiEncDec::delrqRrqWrqMessageCreator(char nextByte){
@@ -43,6 +43,9 @@ bool BidiEncDec::dataMessageCreator(char nextByte){
             done = bytesToData(nextByte);
             break;
         }
+
+        default:
+            break;
     }
 
     return done;
@@ -84,6 +87,9 @@ bool BidiEncDec::errorMessageCreator(char nextByte){
 
             break;
         }
+
+        default:
+            break;
     }
 
     return done;
@@ -130,6 +136,11 @@ bool BidiEncDec::bcastMessageCreator(char nextByte){
 
             break;
         }
+
+        default: {
+
+            break;
+        }
     }
 
     return done;
@@ -153,7 +164,7 @@ bool BidiEncDec::bytesToFileName(char nextByte){
 
     string fileName = incomingBytesToString(nextByte);
 
-    if(fileName != null){
+    if(fileName != NULL){
 
         incomingMessage.setFileName(fileName);
         doneWithField();
@@ -190,11 +201,11 @@ void BidiEncDec::bytesToPacketSize(char nextByte){
 
 bool BidiEncDec::bytesToData(char nextByte){
 
-    incomingBytes.add(nextByte);
+    incomingBytes.push_back(nextByte);
 
     if(incomingMessage.getPacketSize() != (short) 512){
 
-        char* data = byteListToArr();
+        char* data = incomingBytesToArr();
         incomingMessage.setData(data);
         doneWithField();
         return true;
@@ -218,7 +229,7 @@ bool BidiEncDec::bytesToErrMsg(char nextByte){
 
     string errMsg = incomingBytesToString(nextByte);
 
-    if(errMsg != null){
+    if(errMsg != NULL){
 
         incomingMessage.setErrMsg(errMsg);
         doneWithField();
@@ -232,7 +243,7 @@ bool BidiEncDec::bytesToUserName(char nextByte){
 
     string userName = incomingBytesToString(nextByte);
 
-    if(userName != null){
+    if(userName != NULL){
 
         incomingMessage.setUserName(userName);
         doneWithField();
@@ -246,30 +257,38 @@ bool BidiEncDec::bytesToUserName(char nextByte){
 
 string BidiEncDec::incomingBytesToString(char nextByte){
 
-    if(nextByte == (byte) 0){
+    if(nextByte == (char) 0){
 
-        char* fileNameBytes = byteListToArr();
+        char* fileNameBytes = incomingBytesToArr();
 
-        String string = new String(fileNameBytes);
+        string aString = string(fileNameBytes);
 
-        return string;
+        return aString;
     }
     else{
 
-        incomingBytes.add(nextByte);
-        return null;
+        incomingBytes.push_back(nextByte);
+        return NULL;
     }
 }
 
-char* BidiEncDec::byteListToArr(){
+char* BidiEncDec::incomingBytesToArr(){
 
+    char* byteArr = (char*)"";
+
+    for(int i=0; i<incomingBytes.size(); i++){
+
+        byteArr[i] = incomingBytes.at((unsigned long) i);
+    }
+    return byteArr;
 }
 
 void BidiEncDec::doneWithMessage(){
 
-    this.incomingBytes = null;
-    this.incomingMessage = null;
+    this->incomingBytes = NULL;
+    this->incomingMessage = NULL;
     currentMessageFieldNumber = 0;
+    this->isNewMessage = true;
 }
 
 void BidiEncDec::doneWithField(){
@@ -280,10 +299,7 @@ void BidiEncDec::doneWithField(){
 
 void BidiEncDec::emptyIncomingBytes(){
 
-    while(!incomingBytes.isEmpty()){
-
-        incomingBytes.remove(0);
-    }
+    incomingBytes.clear();
 }
 
 
@@ -291,11 +307,11 @@ void BidiEncDec::emptyIncomingBytes(){
 
 short BidiEncDec::incomingBytesToShort(char nextByte){
 
-    incomingBytes.add(nextByte);
+    incomingBytes.push_back(nextByte);
 
     if(incomingBytes.size() == 2){
 
-        char* shortBytes = {incomingBytes.get(0), incomingBytes.get(1)};
+        char* shortBytes = incomingBytesToArr();
         short num = bytesToShort(shortBytes);
 
         return num;
@@ -304,10 +320,13 @@ short BidiEncDec::incomingBytesToShort(char nextByte){
 }
 
 
-char* BidiEncDec::shortToBytes(short num, char* byteArr){
+char* BidiEncDec::shortToBytes(short num){
 
-    byteArr[0] = ((num >> 8) & 0xFF);
-    byteArr[1] = (num & 0xFF);
+    char* byteArr = (char *) "";
+    byteArr[0] = (char) ((num >> 8) & 0xFF);
+    byteArr[1] = (char) (num & 0xFF);
+
+    return byteArr;
 }
 
 short BidiEncDec::bytesToShort(char* byteArr){
@@ -317,8 +336,12 @@ short BidiEncDec::bytesToShort(char* byteArr){
     return result;
 }
 
-void BidiEncDec::putInByteArray(char* toPut, char* container, int fromIndex){
+void BidiEncDec::putInByteArray(char* toPut, int toPutLength, char* container, int fromIndex){
 
+    for(int putIndex = 0, containerIndex = fromIndex; putIndex < toPutLength ; putIndex++, containerIndex++){
+
+        container[containerIndex] = toPut[putIndex];
+    }
 }
 
 
@@ -327,11 +350,12 @@ BidiMessage BidiEncDec::decodeNextByte(char nextByte){
 
     bool done = false;
 
-    if(incomingBytes == null){
+    if(isNewMessage){
 
-        incomingBytes = new vector<>();
-        incomingMessage = new BidiMessage();
+        incomingBytes = vector<char>();
+        incomingMessage = BidiMessage();
         currentMessageFieldNumber = 0;
+        this->isNewMessage = false;
     }
 
     if(currentMessageFieldNumber == 0){
@@ -403,13 +427,24 @@ BidiMessage BidiEncDec::decodeNextByte(char nextByte){
             }
         }
     }
+
+    if(done){
+        BidiMessage newMessage = BidiMessage(this->incomingMessage);
+
+        doneWithMessage();
+        return newMessage;
+    }
+    else {
+
+        return NULL;
+    }
 }
 
 
 
 char* BidiEncDec::encode(BidiMessage message){
 
-    char* encoded;
+    char* encoded = (char*)"";
 
     short msgType = message.getOpcode();
     char* msgTypeBytes = shortToBytes(msgType);
@@ -422,15 +457,18 @@ char* BidiEncDec::encode(BidiMessage message){
         case 8:{
 
             string fileName = message.getFileName();
-            char* fileNameBytes = fileName.getBytes();
+            char* fileNameBytes = (char *) fileName.c_str();
 
-            char* aByte = {message.getaByte()};
+//            vector<char> aByte;
+//            aByte.push_back(message.getaByte());
 
-            encoded = new byte[fileNameBytes.length + 3];
+            char* aByte = (char*)message.getaByte();
 
-            putInByteArray(msgTypeBytes, encoded, 0);
-            putInByteArray(fileNameBytes, encoded, 2);
-            putInByteArray(aByte, encoded, encoded.length-1);
+            int encodedLength = (int)fileName.length + 3;
+
+            putInByteArray(msgTypeBytes, 2, encoded, 0);
+            putInByteArray(fileNameBytes, (int) fileName.length(), encoded, 2);
+            putInByteArray(aByte, 1, encoded, encodedLength-1);
 
             break;
         }
@@ -446,12 +484,10 @@ char* BidiEncDec::encode(BidiMessage message){
 
             char* data = message.getData();
 
-            encoded = new byte[data.length + 7];
-
-            putInByteArray(msgTypeBytes, encoded, 0);
-            putInByteArray(packetSizeBytes, encoded, 2);
-            putInByteArray(blockNumberBytes, encoded, 4);
-            putInByteArray(data, encoded, 6);
+            putInByteArray(msgTypeBytes, 2, encoded, 0);
+            putInByteArray(packetSizeBytes, 2, encoded, 2);
+            putInByteArray(blockNumberBytes, 2, encoded, 4);
+            putInByteArray(data, (int) packetSize, encoded, 6);
 
             break;
         }
@@ -462,10 +498,8 @@ char* BidiEncDec::encode(BidiMessage message){
             short blockNumber = message.getBlockNumber();
             char* blockNumberBytes = shortToBytes(blockNumber);
 
-            encoded = new byte[4];
-
-            putInByteArray(msgTypeBytes, encoded, 0);
-            putInByteArray(blockNumberBytes, encoded, 2);
+            putInByteArray(msgTypeBytes, 2, encoded, 0);
+            putInByteArray(blockNumberBytes, 2, encoded, 2);
 
             break;
         }
@@ -477,16 +511,16 @@ char* BidiEncDec::encode(BidiMessage message){
             char* errorCodeBytes = shortToBytes(errorCode);
 
             string errMsg = message.getErrMsg();
-            char* errMsgBytes = errMsg.getBytes();
+            char* errMsgBytes = (char *) errMsg.c_str();
 
-            char* aByte = {message.getaByte()};
+            char* aByte = (char*)message.getaByte();
 
-            encoded = new byte[errMsgBytes.length + 5];
+            int encodedLength = (int)errMsg.length + 5;
 
-            putInByteArray(msgTypeBytes, encoded, 0);
-            putInByteArray(errorCodeBytes, encoded, 2);
-            putInByteArray(errMsgBytes, encoded, 4);
-            putInByteArray(aByte, encoded, encoded.length-1);
+            putInByteArray(msgTypeBytes, 2, encoded, 0);
+            putInByteArray(errorCodeBytes, 2, encoded, 2);
+            putInByteArray(errMsgBytes, (int) errMsg.length(), encoded, 4);
+            putInByteArray(aByte, 1, encoded, encodedLength-1);
 
             break;
         }
@@ -503,15 +537,15 @@ char* BidiEncDec::encode(BidiMessage message){
         case 7: {
 
             string userName = message.getUserName();
-            char* userNameBytes = userName.getBytes();
+            char* userNameBytes = (char *) userName.c_str();
 
-            char* aByte = {message.getaByte()};
+            char* aByte = (char*)message.getaByte();
 
-            encoded = new byte[userNameBytes.length + 3];
+            int encodedLength = (int)userName.length + 3;
 
-            putInByteArray(msgTypeBytes, encoded, 0);
-            putInByteArray(userNameBytes, encoded, 2);
-            putInByteArray(aByte, encoded, encoded.length-1);
+            putInByteArray(msgTypeBytes, 2, encoded, 0);
+            putInByteArray(userNameBytes, (int) userName.length(), encoded, 2);
+            putInByteArray(aByte, 1, encoded, encodedLength-1);
 
             break;
         }
@@ -519,25 +553,25 @@ char* BidiEncDec::encode(BidiMessage message){
 //            BCAST
         case 9: {
 
-            char* deletedAdded = {message.getDeletedAdded()};
+            char* deletedAdded = (char*)message.getDeletedAdded();
 
             string fileName = message.getFileName();
-            char* fileNameBytes = fileName.getBytes();
+            char* fileNameBytes = (char *) fileName.c_str();
 
-            char* aByte = {message.getaByte()};
+            char* aByte = (char*)message.getaByte();
 
-            encoded = new byte[fileNameBytes.length + 4];
+            int encodedLength = (int)fileName.length + 4;
 
-            putInByteArray(msgTypeBytes, encoded, 0);
-            putInByteArray(deletedAdded, encoded, 2);
-            putInByteArray(fileNameBytes, encoded, 3);
-            putInByteArray(aByte, encoded, encoded.length-1);
+            putInByteArray(msgTypeBytes, 2, encoded, 0);
+            putInByteArray(deletedAdded, 1, encoded, 2);
+            putInByteArray(fileNameBytes, (int) fileName.length(), encoded, 3);
+            putInByteArray(aByte, 1, encoded, encodedLength-1);
 
             break;
         }
 
         default:{
-            encoded = new byte[0];
+            break;
         }
     }
 

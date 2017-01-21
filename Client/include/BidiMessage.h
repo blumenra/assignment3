@@ -33,10 +33,10 @@ private:
 
 public:
 
-    static BidiMessage createDataMessage(int packetSize, int blockNum, char* fileData);
-    static BidiMessage createBcastMessage(int event, string fileName);
-    static BidiMessage createAckMessage(int ackNum);
-    static BidiMessage createErrorMessage(int errNum, string errMsg);
+    static BidiMessage* createDataMessage(int packetSize, int blockNum, char* fileData);
+    static BidiMessage* createBcastMessage(int event, string fileName);
+    static BidiMessage* createAckMessage(int ackNum);
+    static BidiMessage* createErrorMessage(int errNum, string errMsg);
 //    empty
     BidiMessage();
 

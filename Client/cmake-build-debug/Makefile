@@ -48,10 +48,10 @@ RM = /users/studs/msc/brukes/clion-2016.3/bin/cmake/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /users/studs/msc/brukes/intelliJ/assignment3/Client
+CMAKE_SOURCE_DIR = /users/studs/msc/brukes/intelliJ/Client
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug
+CMAKE_BINARY_DIR = /users/studs/msc/brukes/intelliJ/Client/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /users/studs/msc/brukes/intelliJ/Client/cmake-build-debug/CMakeFiles /users/studs/msc/brukes/intelliJ/Client/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /users/studs/msc/brukes/intelliJ/Client/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,6 +123,114 @@ Client/fast:
 	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/build
 .PHONY : Client/fast
 
+src/BidiEncDec.o: src/BidiEncDec.cpp.o
+
+.PHONY : src/BidiEncDec.o
+
+# target to build an object file
+src/BidiEncDec.cpp.o:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/BidiEncDec.cpp.o
+.PHONY : src/BidiEncDec.cpp.o
+
+src/BidiEncDec.i: src/BidiEncDec.cpp.i
+
+.PHONY : src/BidiEncDec.i
+
+# target to preprocess a source file
+src/BidiEncDec.cpp.i:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/BidiEncDec.cpp.i
+.PHONY : src/BidiEncDec.cpp.i
+
+src/BidiEncDec.s: src/BidiEncDec.cpp.s
+
+.PHONY : src/BidiEncDec.s
+
+# target to generate assembly for a file
+src/BidiEncDec.cpp.s:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/BidiEncDec.cpp.s
+.PHONY : src/BidiEncDec.cpp.s
+
+src/BidiMessage.o: src/BidiMessage.cpp.o
+
+.PHONY : src/BidiMessage.o
+
+# target to build an object file
+src/BidiMessage.cpp.o:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/BidiMessage.cpp.o
+.PHONY : src/BidiMessage.cpp.o
+
+src/BidiMessage.i: src/BidiMessage.cpp.i
+
+.PHONY : src/BidiMessage.i
+
+# target to preprocess a source file
+src/BidiMessage.cpp.i:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/BidiMessage.cpp.i
+.PHONY : src/BidiMessage.cpp.i
+
+src/BidiMessage.s: src/BidiMessage.cpp.s
+
+.PHONY : src/BidiMessage.s
+
+# target to generate assembly for a file
+src/BidiMessage.cpp.s:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/BidiMessage.cpp.s
+.PHONY : src/BidiMessage.cpp.s
+
+src/client.o: src/client.cpp.o
+
+.PHONY : src/client.o
+
+# target to build an object file
+src/client.cpp.o:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/client.cpp.o
+.PHONY : src/client.cpp.o
+
+src/client.i: src/client.cpp.i
+
+.PHONY : src/client.i
+
+# target to preprocess a source file
+src/client.cpp.i:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/client.cpp.i
+.PHONY : src/client.cpp.i
+
+src/client.s: src/client.cpp.s
+
+.PHONY : src/client.s
+
+# target to generate assembly for a file
+src/client.cpp.s:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/client.cpp.s
+.PHONY : src/client.cpp.s
+
+src/connectionHandler.o: src/connectionHandler.cpp.o
+
+.PHONY : src/connectionHandler.o
+
+# target to build an object file
+src/connectionHandler.cpp.o:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/connectionHandler.cpp.o
+.PHONY : src/connectionHandler.cpp.o
+
+src/connectionHandler.i: src/connectionHandler.cpp.i
+
+.PHONY : src/connectionHandler.i
+
+# target to preprocess a source file
+src/connectionHandler.cpp.i:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/connectionHandler.cpp.i
+.PHONY : src/connectionHandler.cpp.i
+
+src/connectionHandler.s: src/connectionHandler.cpp.s
+
+.PHONY : src/connectionHandler.s
+
+# target to generate assembly for a file
+src/connectionHandler.cpp.s:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/connectionHandler.cpp.s
+.PHONY : src/connectionHandler.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -132,6 +240,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Client"
+	@echo "... src/BidiEncDec.o"
+	@echo "... src/BidiEncDec.i"
+	@echo "... src/BidiEncDec.s"
+	@echo "... src/BidiMessage.o"
+	@echo "... src/BidiMessage.i"
+	@echo "... src/BidiMessage.s"
+	@echo "... src/client.o"
+	@echo "... src/client.i"
+	@echo "... src/client.s"
+	@echo "... src/connectionHandler.o"
+	@echo "... src/connectionHandler.i"
+	@echo "... src/connectionHandler.s"
 .PHONY : help
 
 
