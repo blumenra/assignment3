@@ -3,6 +3,7 @@ package bgu.spl171.net.impl.TFTPimplDown;
 import bgu.spl171.net.api.MessageEncoderDecoder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by blumenra on 1/18/17.
@@ -42,24 +43,28 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
                 case 8: {
 
                     done = delrqRrqWrqMessageCreator(nextByte);
+                    break;
                 }
 
 //                DATA
                 case 3: {
 
                     done = dataMessageCreator(nextByte);
+                    break;
                 }
 
 //                ACK
                 case 4: {
 
                     done = ackMessageCreator(nextByte);
+                    break;
                 }
 
 //                ERROR
                 case 5: {
 
                     done = errorMessageCreator(nextByte);
+                    break;
                 }
 
 //                DIRQ, DISC
@@ -73,12 +78,14 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
                 case 7: {
 
                     done = logrqMessageCreator(nextByte);
+                    break;
                 }
 
 //                BCAST
                 case 9: {
 
                     done = bcastMessageCreator(nextByte);
+                    break;
                 }
 
 //                unKnown opcode
@@ -131,18 +138,21 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
             case 1: {
 
                 bytesToPacketSize(nextByte);
+                break;
             }
 
 //            working on blockNumber
             case 2: {
 
                 bytesToBlockNumber(nextByte);
+                break;
             }
 
 //            working on data
             case 3: {
 
                 done = bytesToData(nextByte);
+                break;
             }
         }
 
@@ -170,6 +180,7 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
             case 1: {
 
                 bytesToErrorCode(nextByte);
+                break;
             }
 
 //            working on errMsg
@@ -181,6 +192,8 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
 
                     incomingMessage.setaByte(nextByte);
                 }
+
+                break;
             }
         }
 
@@ -213,6 +226,7 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
 
                 incomingMessage.setDeletedAdded(nextByte);
                 doneWithField();
+                break;
             }
 
 //            fileName
@@ -224,6 +238,8 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
 
                     incomingMessage.setaByte(nextByte);
                 }
+
+                break;
             }
         }
 
@@ -436,6 +452,7 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
                 putInByteArray(fileNameBytes, encoded, 2);
                 putInByteArray(aByte, encoded, encoded.length-1);
 
+                break;
             }
 
 //            DATA
@@ -456,6 +473,7 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
                 putInByteArray(blockNumberBytes, encoded, 4);
                 putInByteArray(data, encoded, 6);
 
+                break;
             }
 
 //            ACK
@@ -468,6 +486,8 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
 
                 putInByteArray(msgTypeBytes, encoded, 0);
                 putInByteArray(blockNumberBytes, encoded, 2);
+
+                break;
             }
 
 //            ERROR
@@ -488,6 +508,7 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
                 putInByteArray(errMsgBytes, encoded, 4);
                 putInByteArray(aByte, encoded, encoded.length-1);
 
+                break;
             }
 
 //            DIRQ, DISC
@@ -495,6 +516,7 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
             case 10: {
 
                 encoded = msgTypeBytes;
+                break;
             }
 
 //            LOGRQ
@@ -510,6 +532,8 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
                 putInByteArray(msgTypeBytes, encoded, 0);
                 putInByteArray(userNameBytes, encoded, 2);
                 putInByteArray(aByte, encoded, encoded.length-1);
+
+                break;
             }
 
 //            BCAST
@@ -529,12 +553,17 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
                 putInByteArray(fileNameBytes, encoded, 3);
                 putInByteArray(aByte, encoded, encoded.length-1);
 
+                break;
             }
 
             default:{
                 encoded = new byte[0];
             }
         }
+
+        System.out.println(message.getErrMsg());
+        System.out.println("encoded:");
+        System.out.println(Arrays.toString(encoded));
 
         return encoded;
     }
@@ -554,7 +583,7 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
         return result;
     }
 
-    private void putInByteArray(byte[] toPut, byte[] container, int fromIndex){
+    private void     putInByteArray(byte[] toPut, byte[] container, int fromIndex){
 
         for(int putIndex = 0, containerIndex = fromIndex; putIndex < toPut.length ; putIndex++, containerIndex++){
 
