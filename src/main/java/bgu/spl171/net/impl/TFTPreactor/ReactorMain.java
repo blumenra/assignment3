@@ -1,7 +1,42 @@
 package bgu.spl171.net.impl.TFTPreactor;
 
+import bgu.spl171.net.impl.TFTPimplDown.BidiEncDecImpl;
+import bgu.spl171.net.impl.TFTPimplDown.BidiFile;
+import bgu.spl171.net.impl.TFTPimplDown.BidiServerProtocolImpl;
+import bgu.spl171.net.impl.TFTPimplDown.ConnectionsImpl;
+import bgu.spl171.net.srv.Server;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * Created by blumenra on 1/17/17.
  */
 public class ReactorMain {
+
+    public static void main(String[] args) {
+
+//        // REMOVE FROM HERE
+//
+//        File file = new File("Files/removeMe.txt");
+//        System.out.println(file.exists());
+//
+//        // REMOVE UP TO HERE
+
+
+
+
+
+        int port = 7777;
+        int nThreads = 5;
+        Map<String, BidiFile> filesList = new ConcurrentHashMap<>();
+
+        //start the server
+        Server.reactor(
+                nThreads, //nThreads
+                port, //port
+                () -> new BidiServerProtocolImpl(filesList), //protocol factory
+                BidiEncDecImpl::new //message encoder decoder factory
+                ).serve();
+    }
 }
