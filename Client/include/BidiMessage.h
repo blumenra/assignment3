@@ -37,6 +37,14 @@ public:
     static BidiMessage createBcastMessage(int event, string fileName);
     static BidiMessage createAckMessage(int ackNum);
     static BidiMessage createErrorMessage(int errNum, string errMsg);
+    static BidiMessage createLoginMessage(string userName);
+    static BidiMessage createDeleteMessage(string fileName);
+    static BidiMessage createRRQMessage(string fileName);
+    static BidiMessage createWRQMessage(string fileName);
+    static BidiMessage createDirMessage();
+    static BidiMessage createDiscMessage();
+    
+    
 //    empty
     BidiMessage();
 
