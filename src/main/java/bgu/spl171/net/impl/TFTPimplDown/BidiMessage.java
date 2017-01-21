@@ -212,7 +212,7 @@ public class BidiMessage {
 
         byte[] dataCopy = new byte[packetSize];
 
-        for(int i=0; i<packetSize-1; i++){
+        for(int i=0; i<packetSize; i++){
 
             dataCopy[i] = this.data[i];
         }

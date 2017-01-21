@@ -1,1 +1,1 @@
-CMake: 3.6.3@/Applications/CLion.app/Contents/bin/cmake/bin/cmake
+CMake: 3.6.2@/users/studs/msc/brukes/clion-2016.3/bin/cmake/bin/cmake

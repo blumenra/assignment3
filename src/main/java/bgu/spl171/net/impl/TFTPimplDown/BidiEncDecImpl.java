@@ -97,7 +97,6 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
             }
         }
 
-
         if(done){
             BidiMessage newMessage = new BidiMessage(this.incomingMessage);
 
@@ -305,7 +304,7 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
 
         if(incomingMessage.getPacketSize() != (short) 512){
 
-            byte[] data = byteListToArr();
+            byte[] data = incomingBytesToArr();
             incomingMessage.setData(data);
             doneWithField();
             return true;
@@ -374,7 +373,7 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
 
         if(nextByte == (byte) 0){
 
-            byte[] fileNameBytes = byteListToArr();
+            byte[] fileNameBytes = incomingBytesToArr();
 
             String string = new String(fileNameBytes);
 
@@ -389,11 +388,11 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
 
 
 //    Other helper methods
-    private byte[] byteListToArr() {
+    private byte[] incomingBytesToArr() {
 
         byte[] byteArr = new byte[incomingBytes.size()];
 
-        for(int i=0; 1<byteArr.length-1; i++){
+        for(int i=0; i<byteArr.length; i++){
 
             byteArr[i] = incomingBytes.get(i);
         }
@@ -583,7 +582,7 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
         return result;
     }
 
-    private void     putInByteArray(byte[] toPut, byte[] container, int fromIndex){
+    private void putInByteArray(byte[] toPut, byte[] container, int fromIndex){
 
         for(int putIndex = 0, containerIndex = fromIndex; putIndex < toPut.length ; putIndex++, containerIndex++){
 
