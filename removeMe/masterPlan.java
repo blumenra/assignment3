@@ -6,7 +6,11 @@
  *     client side: for every data packet will check if the size is less than 512. if yes so its the last packet. else contonue to wait
  *     server side: keep a field which holds the accumulated
  * }
- * implement EncDec
+ * ---implement EncDec for server
+ * test EncDec for server
+ *
+ * implement EndDec for client
+ *
  * implement the connections inteface {
  *      add field map for client id and conectionHandler in connections
  * }
@@ -38,7 +42,7 @@
  *     }
  *     Add a map that maps between clienID and its connectionHandler -> this will be initialized in the server
  * }
- *
+ * remove the removeMe.txt file in the Files folder
  *
  *
  */
