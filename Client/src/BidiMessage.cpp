@@ -22,6 +22,38 @@ static BidiMessage* BidiMessage::createErrorMessage(int errNum, string errMsg){
     return new BidiMessage((short) 7, (short) errNum, errMsg, (char) 0);
 }
 
+static BidiMessage BidiMessage::createLoginMessage(string userName) {
+
+    return new BidiMessage((short) 7, userName, (char) 0);   
+}
+
+
+static BidiMessage BidiMessage::createDeleteMessage(string fileName) {
+
+    return new BidiMessage((short) 8, fileName, (char) 0);   
+}
+
+static BidiMessage BidiMessage::createRRQMessage(string fileName); {
+
+    return new BidiMessage((short) 1, fileName, (char) 0);   
+}
+
+static BidiMessage BidiMessage::createWRQMessage(string fileName); {
+
+    return new BidiMessage((short) 1, fileName, (char) 0);   
+}
+
+static BidiMessage BidiMessage::createDirMessage(); {
+
+    return new BidiMessage((short) 6);   
+}
+
+static BidiMessage BidiMessage::createDiscMessage(); {
+
+    return new BidiMessage((short) 10);
+}
+
+
 //empty
 BidiMessage::BidiMessage();
 
