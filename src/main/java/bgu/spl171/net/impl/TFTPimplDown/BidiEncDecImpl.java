@@ -264,7 +264,7 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
 
         if(blockNumber != -1){
 
-            incomingMessage.setPacketSize(blockNumber);
+            incomingMessage.setBlockNumber(blockNumber);
             doneWithField();
             return true;
         }
