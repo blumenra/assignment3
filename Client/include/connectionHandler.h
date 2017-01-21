@@ -4,7 +4,8 @@
 #include <string>
 #include <iostream>
 #include <boost/asio.hpp>
- 
+#include "BidiMessage.h"
+
 using boost::asio::ip::tcp;
  
 class ConnectionHandler {
@@ -47,7 +48,8 @@ public:
     
     // Close down the connection properly.
     void close();
- 
+
+    bool getMessage(BidiMessage message);
 }; //class ConnectionHandler
  
 #endif

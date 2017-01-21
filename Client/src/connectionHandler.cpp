@@ -1,4 +1,4 @@
-#include "connectionHandler.h"
+#include "../include/connectionHandler.h"
  
 using boost::asio::ip::tcp;
  
@@ -102,4 +102,8 @@ void ConnectionHandler::close() {
     } catch (...) {
         std::cout << "closing failed: connection already closed" << std::endl;
     }
+}
+
+bool ConnectionHandler::getMessage(BidiMessage message) {
+    return false;
 }

@@ -164,7 +164,7 @@ bool BidiEncDec::bytesToFileName(char nextByte){
 
     string fileName = incomingBytesToString(nextByte);
 
-    if(fileName != NULL){
+    if(fileName != ""){
 
         incomingMessage.setFileName(fileName);
         doneWithField();
@@ -229,7 +229,7 @@ bool BidiEncDec::bytesToErrMsg(char nextByte){
 
     string errMsg = incomingBytesToString(nextByte);
 
-    if(errMsg != NULL){
+    if(errMsg != ""){
 
         incomingMessage.setErrMsg(errMsg);
         doneWithField();
@@ -243,7 +243,7 @@ bool BidiEncDec::bytesToUserName(char nextByte){
 
     string userName = incomingBytesToString(nextByte);
 
-    if(userName != NULL){
+    if(userName != ""){
 
         incomingMessage.setUserName(userName);
         doneWithField();
@@ -268,7 +268,7 @@ string BidiEncDec::incomingBytesToString(char nextByte){
     else{
 
         incomingBytes.push_back(nextByte);
-        return NULL;
+        return "";
     }
 }
 
@@ -276,7 +276,7 @@ char* BidiEncDec::incomingBytesToArr(){
 
     char* byteArr = (char*)"";
 
-    for(int i=0; i<incomingBytes.size(); i++){
+    for(unsigned int i=0; i<incomingBytes.size(); i++){
 
         byteArr[i] = incomingBytes.at((unsigned long) i);
     }
@@ -285,8 +285,8 @@ char* BidiEncDec::incomingBytesToArr(){
 
 void BidiEncDec::doneWithMessage(){
 
-    this->incomingBytes = NULL;
-    this->incomingMessage = NULL;
+    this->incomingBytes.clear();
+    this->incomingMessage = BidiMessage();
     currentMessageFieldNumber = 0;
     this->isNewMessage = true;
 }
