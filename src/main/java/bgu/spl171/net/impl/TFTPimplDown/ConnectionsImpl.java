@@ -11,21 +11,22 @@ import java.util.Set;
 /**
  * Created by blumenra on 1/18/17.
  */
-public class ConnectionsImpl<T> implements Connections<BidiMessage> {
+public class ConnectionsImpl<T> implements Connections<T> {
 
-    private Map<Integer, ConnectionHandler> clients = new HashMap<>();
+    private Map<Integer, ConnectionHandler<T>> clients = new HashMap<>();
     private Map<Integer, String> loggedInUsers = new HashMap<>();
 
     @Override
-    public boolean send(int connectionId, BidiMessage msg) {
+    public boolean send(int connectionId, T msg) {
 
         clients.get(connectionId).send(msg);
+//        System.out.println(clients.get(connectionId) == null);
         //TODO: decide when to return what boolean
         return false;
     }
 
     @Override
-    public void broadcast(BidiMessage msg) {
+    public void broadcast(T msg) {
 
         for(Integer key : clients.keySet()) {
 
@@ -40,7 +41,7 @@ public class ConnectionsImpl<T> implements Connections<BidiMessage> {
         clients.remove(connectionId);
     }
 
-    public Map<Integer, ConnectionHandler> getClients() {
+    public Map<Integer, ConnectionHandler<T>> getClients() {
 
         return clients;
     }
@@ -52,5 +53,10 @@ public class ConnectionsImpl<T> implements Connections<BidiMessage> {
     public boolean isLoggedIn(int clientId) {
 
         return loggedInUsers.containsKey(clientId);
+    }
+
+    public void addConnector(int clientId, ConnectionHandler<T> client) {
+
+        clients.put(clientId, client);
     }
 }

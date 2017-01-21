@@ -14,7 +14,7 @@ import java.util.Map;
 public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage> {
 
     private final Map<String, BidiFile> filesList;
-    private ConnectionsImpl connections;
+    private ConnectionsImpl<BidiMessage> connections;
     private int ownerClientId;
     private ByteArrayOutputStream byteOutPutStream = new ByteArrayOutputStream();
 
@@ -29,7 +29,7 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
     @Override
     public void start(int connectionId, Connections<BidiMessage> connections) {
 
-        this.connections = (ConnectionsImpl) connections;
+        this.connections = (ConnectionsImpl<BidiMessage>) connections;
         this.ownerClientId = connectionId;
 
         initializeFilesMap();
@@ -44,12 +44,12 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
         // Illegal Opcode
         if (message.getOpcode() == -1) {
 
-            sendIllegalOpcodeError(message);
+            sendIllegalOpcodeError();
         }
         // attempt to do something before logging in
         else if (!connections.isLoggedIn(ownerClientId) && (opcode != 7)) {
 
-            sendPleaseLoginFirstError(message);
+            sendPleaseLoginFirstError();
         }
         else {
             switch (opcode) {
@@ -252,13 +252,13 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
         }
     }
 
-    private void sendIllegalOpcodeError(BidiMessage message) {
+    private void sendIllegalOpcodeError() {
 
         BidiMessage response = BidiMessage.createErrorMessage(4, "Illegal TFTP operation – Unknown Opcode.");
         connections.send(ownerClientId, response);
     }
 
-    private void sendPleaseLoginFirstError(BidiMessage message) {
+    private void sendPleaseLoginFirstError() {
 
         BidiMessage response = BidiMessage.createErrorMessage(6, "User not logged in – Any opcode received before Login completes.");
         connections.send(ownerClientId, response);

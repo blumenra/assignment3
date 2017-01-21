@@ -5,6 +5,7 @@ import bgu.spl171.net.api.bidi.BidiMessagingProtocol;
 import bgu.spl171.net.api.bidi.Connections;
 import bgu.spl171.net.impl.TFTPimplDown.BidiEncDecImpl;
 import bgu.spl171.net.impl.TFTPimplDown.BidiMessage;
+import bgu.spl171.net.impl.TFTPimplDown.ConnectionsImpl;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -40,9 +41,14 @@ public class BlockingConnectionHandler<T> implements Runnable, ConnectionHandler
 
             protocol.start(clientID, connections);
 
+            ConnectionsImpl<T> connectionImpl = (ConnectionsImpl<T>) connections;
+            connectionImpl.addConnector(clientID, this);
+
             while (!protocol.shouldTerminate() && connected && (read = in.read()) >= 0) {
                 T nextMessage = encdec.decodeNextByte((byte) read);
+
                 if (nextMessage != null) {
+                    System.out.println("bla");
                     protocol.process(nextMessage);
                 }
             }
@@ -63,6 +69,7 @@ public class BlockingConnectionHandler<T> implements Runnable, ConnectionHandler
     public void send(T msg) {
         try {
             if(msg != null){
+
                 out.write(encdec.encode(msg));
                 out.flush();
             }

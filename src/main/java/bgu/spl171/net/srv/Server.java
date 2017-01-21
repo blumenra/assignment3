@@ -3,6 +3,7 @@ package bgu.spl171.net.srv;
 import bgu.spl171.net.api.MessageEncoderDecoder;
 import bgu.spl171.net.api.MessagingProtocol;
 import bgu.spl171.net.api.bidi.BidiMessagingProtocol;
+import bgu.spl171.net.api.bidi.Connections;
 import bgu.spl171.net.impl.TFTPimplDown.BidiEncDecImpl;
 
 import java.io.Closeable;
@@ -26,9 +27,10 @@ public interface Server<T> extends Closeable {
     public static <T> Server<T>  threadPerClient(
             int port,
             Supplier<BidiMessagingProtocol<T>> protocolFactory,
-            Supplier<MessageEncoderDecoder<T>> encoderDecoderFactory) {
+            Supplier<MessageEncoderDecoder<T>> encoderDecoderFactory,
+            Supplier<Connections<T>> connections) {
 
-        return new BaseServer<T>(port, protocolFactory, encoderDecoderFactory) {
+        return new BaseServer<T>(port, protocolFactory, encoderDecoderFactory, connections) {
             @Override
             protected void execute(BlockingConnectionHandler<T>  handler) {
                 new Thread(handler).start();

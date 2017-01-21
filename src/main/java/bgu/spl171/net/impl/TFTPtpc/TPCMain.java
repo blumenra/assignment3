@@ -30,15 +30,15 @@ public class TPCMain {
 
 
 
-
-
+        int port = 7777;
         Map<String, BidiFile> filesList = new ConcurrentHashMap<>();
 
         //start the server
         Server.threadPerClient(
-                7777, //port
+                port, //port
                 () -> new BidiServerProtocolImpl(filesList), //protocol factory
-                BidiEncDecImpl::new //message encoder decoder factory
+                BidiEncDecImpl::new, //message encoder decoder factory
+                ConnectionsImpl::new
         ).serve();
     }
 

@@ -44,7 +44,7 @@ public class BidiMessage {
 
     public static BidiMessage createErrorMessage(int errNum, String errMsg) {
 
-        return new BidiMessage((short) 7, (short) errNum, errMsg, (byte) 0);
+        return new BidiMessage((short) 5, (short) errNum, errMsg, (byte) 0);
     }
 
 //    Constructors
@@ -64,6 +64,8 @@ public class BidiMessage {
             case 7: {
                 this.userName = original.getUserName();
                 this.aByte = original.getaByte();
+
+                break;
             }
 
 //            DELRQ,RRQ,WRQ
@@ -72,6 +74,8 @@ public class BidiMessage {
             case 8: {
                 this.fileName = original.getFileName();
                 this.aByte = original.getaByte();
+
+                break;
             }
 
 //            DATA
@@ -80,11 +84,15 @@ public class BidiMessage {
                 this.packetSize = original.getPacketSize();
                 this.blockNumber = original.getBlockNumber();
                 this.data = original.getData();
+
+                break;
             }
 
 //            ACK
             case 4: {
                 this.blockNumber = original.getBlockNumber();
+
+                break;
             }
 
 //            BCAST
@@ -93,6 +101,8 @@ public class BidiMessage {
                 this.deletedAdded = original.getDeletedAdded();
                 this.fileName = original.getFileName();
                 this.aByte = original.getaByte();
+
+                break;
             }
 
 //            ERROR
@@ -101,24 +111,30 @@ public class BidiMessage {
                 this.errorCode = original.getErrorCode();
                 this.errMsg = original.getErrMsg();
                 this.aByte  = original.getaByte();
+
+                break;
             }
         }
     }
 
 
 
-    public BidiMessage(short opcode, String string, byte aByte) {
+    private BidiMessage(short opcode, String string, byte aByte) {
         this.opcode = opcode;
         switch (opcode){
 
             case 7: {
                 this.userName = string;
+
+                break;
             }
 
             case 1:
             case 2:
             case 8: {
                 this.fileName = string;
+
+                break;
             }
 
 
