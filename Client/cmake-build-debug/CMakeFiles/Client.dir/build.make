@@ -43,10 +43,10 @@ RM = /users/studs/msc/brukes/clion-2016.3/bin/cmake/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /users/studs/msc/brukes/intelliJ/Client
+CMAKE_SOURCE_DIR = /users/studs/msc/brukes/intelliJ/assignment3/Client
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /users/studs/msc/brukes/intelliJ/Client/cmake-build-debug
+CMAKE_BINARY_DIR = /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Client.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/Client.dir/flags.make
 
 CMakeFiles/Client.dir/src/BidiEncDec.cpp.o: CMakeFiles/Client.dir/flags.make
 CMakeFiles/Client.dir/src/BidiEncDec.cpp.o: ../src/BidiEncDec.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Client.dir/src/BidiEncDec.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Client.dir/src/BidiEncDec.cpp.o -c /users/studs/msc/brukes/intelliJ/Client/src/BidiEncDec.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Client.dir/src/BidiEncDec.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Client.dir/src/BidiEncDec.cpp.o -c /users/studs/msc/brukes/intelliJ/assignment3/Client/src/BidiEncDec.cpp
 
 CMakeFiles/Client.dir/src/BidiEncDec.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Client.dir/src/BidiEncDec.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/msc/brukes/intelliJ/Client/src/BidiEncDec.cpp > CMakeFiles/Client.dir/src/BidiEncDec.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/msc/brukes/intelliJ/assignment3/Client/src/BidiEncDec.cpp > CMakeFiles/Client.dir/src/BidiEncDec.cpp.i
 
 CMakeFiles/Client.dir/src/BidiEncDec.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Client.dir/src/BidiEncDec.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/msc/brukes/intelliJ/Client/src/BidiEncDec.cpp -o CMakeFiles/Client.dir/src/BidiEncDec.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/msc/brukes/intelliJ/assignment3/Client/src/BidiEncDec.cpp -o CMakeFiles/Client.dir/src/BidiEncDec.cpp.s
 
 CMakeFiles/Client.dir/src/BidiEncDec.cpp.o.requires:
 
@@ -83,16 +83,16 @@ CMakeFiles/Client.dir/src/BidiEncDec.cpp.o.provides.build: CMakeFiles/Client.dir
 
 CMakeFiles/Client.dir/src/BidiMessage.cpp.o: CMakeFiles/Client.dir/flags.make
 CMakeFiles/Client.dir/src/BidiMessage.cpp.o: ../src/BidiMessage.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Client.dir/src/BidiMessage.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Client.dir/src/BidiMessage.cpp.o -c /users/studs/msc/brukes/intelliJ/Client/src/BidiMessage.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Client.dir/src/BidiMessage.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Client.dir/src/BidiMessage.cpp.o -c /users/studs/msc/brukes/intelliJ/assignment3/Client/src/BidiMessage.cpp
 
 CMakeFiles/Client.dir/src/BidiMessage.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Client.dir/src/BidiMessage.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/msc/brukes/intelliJ/Client/src/BidiMessage.cpp > CMakeFiles/Client.dir/src/BidiMessage.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/msc/brukes/intelliJ/assignment3/Client/src/BidiMessage.cpp > CMakeFiles/Client.dir/src/BidiMessage.cpp.i
 
 CMakeFiles/Client.dir/src/BidiMessage.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Client.dir/src/BidiMessage.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/msc/brukes/intelliJ/Client/src/BidiMessage.cpp -o CMakeFiles/Client.dir/src/BidiMessage.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/msc/brukes/intelliJ/assignment3/Client/src/BidiMessage.cpp -o CMakeFiles/Client.dir/src/BidiMessage.cpp.s
 
 CMakeFiles/Client.dir/src/BidiMessage.cpp.o.requires:
 
@@ -107,16 +107,16 @@ CMakeFiles/Client.dir/src/BidiMessage.cpp.o.provides.build: CMakeFiles/Client.di
 
 CMakeFiles/Client.dir/src/client.cpp.o: CMakeFiles/Client.dir/flags.make
 CMakeFiles/Client.dir/src/client.cpp.o: ../src/client.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Client.dir/src/client.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Client.dir/src/client.cpp.o -c /users/studs/msc/brukes/intelliJ/Client/src/client.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Client.dir/src/client.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Client.dir/src/client.cpp.o -c /users/studs/msc/brukes/intelliJ/assignment3/Client/src/client.cpp
 
 CMakeFiles/Client.dir/src/client.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Client.dir/src/client.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/msc/brukes/intelliJ/Client/src/client.cpp > CMakeFiles/Client.dir/src/client.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/msc/brukes/intelliJ/assignment3/Client/src/client.cpp > CMakeFiles/Client.dir/src/client.cpp.i
 
 CMakeFiles/Client.dir/src/client.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Client.dir/src/client.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/msc/brukes/intelliJ/Client/src/client.cpp -o CMakeFiles/Client.dir/src/client.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/msc/brukes/intelliJ/assignment3/Client/src/client.cpp -o CMakeFiles/Client.dir/src/client.cpp.s
 
 CMakeFiles/Client.dir/src/client.cpp.o.requires:
 
@@ -131,16 +131,16 @@ CMakeFiles/Client.dir/src/client.cpp.o.provides.build: CMakeFiles/Client.dir/src
 
 CMakeFiles/Client.dir/src/connectionHandler.cpp.o: CMakeFiles/Client.dir/flags.make
 CMakeFiles/Client.dir/src/connectionHandler.cpp.o: ../src/connectionHandler.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Client.dir/src/connectionHandler.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Client.dir/src/connectionHandler.cpp.o -c /users/studs/msc/brukes/intelliJ/Client/src/connectionHandler.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Client.dir/src/connectionHandler.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Client.dir/src/connectionHandler.cpp.o -c /users/studs/msc/brukes/intelliJ/assignment3/Client/src/connectionHandler.cpp
 
 CMakeFiles/Client.dir/src/connectionHandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Client.dir/src/connectionHandler.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/msc/brukes/intelliJ/Client/src/connectionHandler.cpp > CMakeFiles/Client.dir/src/connectionHandler.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/msc/brukes/intelliJ/assignment3/Client/src/connectionHandler.cpp > CMakeFiles/Client.dir/src/connectionHandler.cpp.i
 
 CMakeFiles/Client.dir/src/connectionHandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Client.dir/src/connectionHandler.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/msc/brukes/intelliJ/Client/src/connectionHandler.cpp -o CMakeFiles/Client.dir/src/connectionHandler.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/msc/brukes/intelliJ/assignment3/Client/src/connectionHandler.cpp -o CMakeFiles/Client.dir/src/connectionHandler.cpp.s
 
 CMakeFiles/Client.dir/src/connectionHandler.cpp.o.requires:
 
@@ -153,12 +153,37 @@ CMakeFiles/Client.dir/src/connectionHandler.cpp.o.provides: CMakeFiles/Client.di
 CMakeFiles/Client.dir/src/connectionHandler.cpp.o.provides.build: CMakeFiles/Client.dir/src/connectionHandler.cpp.o
 
 
+CMakeFiles/Client.dir/src/bidiInputConverter.cpp.o: CMakeFiles/Client.dir/flags.make
+CMakeFiles/Client.dir/src/bidiInputConverter.cpp.o: ../src/bidiInputConverter.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Client.dir/src/bidiInputConverter.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Client.dir/src/bidiInputConverter.cpp.o -c /users/studs/msc/brukes/intelliJ/assignment3/Client/src/bidiInputConverter.cpp
+
+CMakeFiles/Client.dir/src/bidiInputConverter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Client.dir/src/bidiInputConverter.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/msc/brukes/intelliJ/assignment3/Client/src/bidiInputConverter.cpp > CMakeFiles/Client.dir/src/bidiInputConverter.cpp.i
+
+CMakeFiles/Client.dir/src/bidiInputConverter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Client.dir/src/bidiInputConverter.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/msc/brukes/intelliJ/assignment3/Client/src/bidiInputConverter.cpp -o CMakeFiles/Client.dir/src/bidiInputConverter.cpp.s
+
+CMakeFiles/Client.dir/src/bidiInputConverter.cpp.o.requires:
+
+.PHONY : CMakeFiles/Client.dir/src/bidiInputConverter.cpp.o.requires
+
+CMakeFiles/Client.dir/src/bidiInputConverter.cpp.o.provides: CMakeFiles/Client.dir/src/bidiInputConverter.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/bidiInputConverter.cpp.o.provides.build
+.PHONY : CMakeFiles/Client.dir/src/bidiInputConverter.cpp.o.provides
+
+CMakeFiles/Client.dir/src/bidiInputConverter.cpp.o.provides.build: CMakeFiles/Client.dir/src/bidiInputConverter.cpp.o
+
+
 # Object files for target Client
 Client_OBJECTS = \
 "CMakeFiles/Client.dir/src/BidiEncDec.cpp.o" \
 "CMakeFiles/Client.dir/src/BidiMessage.cpp.o" \
 "CMakeFiles/Client.dir/src/client.cpp.o" \
-"CMakeFiles/Client.dir/src/connectionHandler.cpp.o"
+"CMakeFiles/Client.dir/src/connectionHandler.cpp.o" \
+"CMakeFiles/Client.dir/src/bidiInputConverter.cpp.o"
 
 # External object files for target Client
 Client_EXTERNAL_OBJECTS =
@@ -167,9 +192,10 @@ Client: CMakeFiles/Client.dir/src/BidiEncDec.cpp.o
 Client: CMakeFiles/Client.dir/src/BidiMessage.cpp.o
 Client: CMakeFiles/Client.dir/src/client.cpp.o
 Client: CMakeFiles/Client.dir/src/connectionHandler.cpp.o
+Client: CMakeFiles/Client.dir/src/bidiInputConverter.cpp.o
 Client: CMakeFiles/Client.dir/build.make
 Client: CMakeFiles/Client.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/users/studs/msc/brukes/intelliJ/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable Client"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable Client"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Client.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -181,6 +207,7 @@ CMakeFiles/Client.dir/requires: CMakeFiles/Client.dir/src/BidiEncDec.cpp.o.requi
 CMakeFiles/Client.dir/requires: CMakeFiles/Client.dir/src/BidiMessage.cpp.o.requires
 CMakeFiles/Client.dir/requires: CMakeFiles/Client.dir/src/client.cpp.o.requires
 CMakeFiles/Client.dir/requires: CMakeFiles/Client.dir/src/connectionHandler.cpp.o.requires
+CMakeFiles/Client.dir/requires: CMakeFiles/Client.dir/src/bidiInputConverter.cpp.o.requires
 
 .PHONY : CMakeFiles/Client.dir/requires
 
@@ -189,6 +216,6 @@ CMakeFiles/Client.dir/clean:
 .PHONY : CMakeFiles/Client.dir/clean
 
 CMakeFiles/Client.dir/depend:
-	cd /users/studs/msc/brukes/intelliJ/Client/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /users/studs/msc/brukes/intelliJ/Client /users/studs/msc/brukes/intelliJ/Client /users/studs/msc/brukes/intelliJ/Client/cmake-build-debug /users/studs/msc/brukes/intelliJ/Client/cmake-build-debug /users/studs/msc/brukes/intelliJ/Client/cmake-build-debug/CMakeFiles/Client.dir/DependInfo.cmake --color=$(COLOR)
+	cd /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /users/studs/msc/brukes/intelliJ/assignment3/Client /users/studs/msc/brukes/intelliJ/assignment3/Client /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/Client.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Client.dir/depend
 

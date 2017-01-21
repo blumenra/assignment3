@@ -5,6 +5,7 @@
 #include "BidiMessage.h"
 #include <string>
 #include <iostream>
+#include <vector>
 
 #endif //CLIENT_BIDIMESSAGE_H
 
@@ -18,12 +19,11 @@ private:
     string command = "";
     string arg = "";
 
-    void split(const string& s, char delim,vector<string>& v);
-    void splitToCommandAndArg(string input);
+    vector<string> split(const string& s, char delim);
+    bool splitToCommandAndArg(string input);
 
 public:
 
-    BidiInputConverter();
     BidiMessage convertInput(string input);
 
  };

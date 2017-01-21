@@ -48,10 +48,10 @@ RM = /users/studs/msc/brukes/clion-2016.3/bin/cmake/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /users/studs/msc/brukes/intelliJ/Client
+CMAKE_SOURCE_DIR = /users/studs/msc/brukes/intelliJ/assignment3/Client
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /users/studs/msc/brukes/intelliJ/Client/cmake-build-debug
+CMAKE_BINARY_DIR = /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /users/studs/msc/brukes/intelliJ/Client/cmake-build-debug/CMakeFiles /users/studs/msc/brukes/intelliJ/Client/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /users/studs/msc/brukes/intelliJ/Client/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -177,6 +177,33 @@ src/BidiMessage.cpp.s:
 	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/BidiMessage.cpp.s
 .PHONY : src/BidiMessage.cpp.s
 
+src/bidiInputConverter.o: src/bidiInputConverter.cpp.o
+
+.PHONY : src/bidiInputConverter.o
+
+# target to build an object file
+src/bidiInputConverter.cpp.o:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/bidiInputConverter.cpp.o
+.PHONY : src/bidiInputConverter.cpp.o
+
+src/bidiInputConverter.i: src/bidiInputConverter.cpp.i
+
+.PHONY : src/bidiInputConverter.i
+
+# target to preprocess a source file
+src/bidiInputConverter.cpp.i:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/bidiInputConverter.cpp.i
+.PHONY : src/bidiInputConverter.cpp.i
+
+src/bidiInputConverter.s: src/bidiInputConverter.cpp.s
+
+.PHONY : src/bidiInputConverter.s
+
+# target to generate assembly for a file
+src/bidiInputConverter.cpp.s:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/bidiInputConverter.cpp.s
+.PHONY : src/bidiInputConverter.cpp.s
+
 src/client.o: src/client.cpp.o
 
 .PHONY : src/client.o
@@ -246,6 +273,9 @@ help:
 	@echo "... src/BidiMessage.o"
 	@echo "... src/BidiMessage.i"
 	@echo "... src/BidiMessage.s"
+	@echo "... src/bidiInputConverter.o"
+	@echo "... src/bidiInputConverter.i"
+	@echo "... src/bidiInputConverter.s"
 	@echo "... src/client.o"
 	@echo "... src/client.i"
 	@echo "... src/client.s"

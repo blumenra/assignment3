@@ -22,14 +22,9 @@ private:
     short errorCode;
     string errMsg;
     char aByte;
+    bool complete;
 
-//
-    BidiMessage(short opcode, string aString, char aByte);
-    BidiMessage(short opcode);
-    BidiMessage(short opcode, short packetSize, short blockNumber, char* data);
-    BidiMessage(short opcode, short blockNumber);
-    BidiMessage(short opcode, char deletedAdded, string fileName, char aByte);
-    BidiMessage(short opcode, short errorCode, string errMsg, char aByte);
+
 
 public:
 
@@ -43,6 +38,13 @@ public:
     static BidiMessage createWRQMessage(string fileName);
     static BidiMessage createDirMessage();
     static BidiMessage createDiscMessage();
+
+    BidiMessage(short opcode, string aString, char aByte);
+    BidiMessage(short opcode);
+    BidiMessage(short opcode, short packetSize, short blockNumber, char* data);
+    BidiMessage(short opcode, short blockNumber);
+    BidiMessage(short opcode, char deletedAdded, string fileName, char aByte);
+    BidiMessage(short opcode, short errorCode, string errMsg, char aByte);
 
 
 //    empty
@@ -62,6 +64,7 @@ public:
     char getDeletedAdded();
     short getErrorCode();
     string getErrMsg();
+    bool isComplete() const;
 
 
 //    setters
@@ -75,6 +78,7 @@ public:
     void setErrorCode(short errorCode);
     void setErrMsg(string errMsg);
     void setaByte(char aByte);
+    void setComplete(bool complete);
 
     virtual ~BidiMessage();
 };

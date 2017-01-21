@@ -436,7 +436,7 @@ BidiMessage BidiEncDec::decodeNextByte(char nextByte){
     }
     else {
 
-        return NULL;
+        return incomingMessage;
     }
 }
 
@@ -462,9 +462,10 @@ char* BidiEncDec::encode(BidiMessage message){
 //            vector<char> aByte;
 //            aByte.push_back(message.getaByte());
 
-            char* aByte = (char*)message.getaByte();
+            char* aByte = (char*) "";
+            aByte[0] = message.getaByte();
 
-            int encodedLength = (int)fileName.length + 3;
+            int encodedLength = (int)fileName.length() + 3;
 
             putInByteArray(msgTypeBytes, 2, encoded, 0);
             putInByteArray(fileNameBytes, (int) fileName.length(), encoded, 2);
@@ -513,9 +514,10 @@ char* BidiEncDec::encode(BidiMessage message){
             string errMsg = message.getErrMsg();
             char* errMsgBytes = (char *) errMsg.c_str();
 
-            char* aByte = (char*)message.getaByte();
+            char* aByte = (char*) "";
+            aByte[0] = message.getaByte();
 
-            int encodedLength = (int)errMsg.length + 5;
+            int encodedLength = (int)errMsg.length() + 5;
 
             putInByteArray(msgTypeBytes, 2, encoded, 0);
             putInByteArray(errorCodeBytes, 2, encoded, 2);
@@ -539,9 +541,10 @@ char* BidiEncDec::encode(BidiMessage message){
             string userName = message.getUserName();
             char* userNameBytes = (char *) userName.c_str();
 
-            char* aByte = (char*)message.getaByte();
+            char* aByte = (char*) "";
+            aByte[0] = message.getaByte();
 
-            int encodedLength = (int)userName.length + 3;
+            int encodedLength = (int) userName.length() + 3;
 
             putInByteArray(msgTypeBytes, 2, encoded, 0);
             putInByteArray(userNameBytes, (int) userName.length(), encoded, 2);
@@ -553,14 +556,16 @@ char* BidiEncDec::encode(BidiMessage message){
 //            BCAST
         case 9: {
 
-            char* deletedAdded = (char*)message.getDeletedAdded();
+            char* deletedAdded = (char*) "";
+            deletedAdded[0] = message.getDeletedAdded();
 
             string fileName = message.getFileName();
             char* fileNameBytes = (char *) fileName.c_str();
 
-            char* aByte = (char*)message.getaByte();
+            char* aByte = (char*) "";
+            aByte[0] = message.getaByte();
 
-            int encodedLength = (int)fileName.length + 4;
+            int encodedLength = (int)fileName.length() + 4;
 
             putInByteArray(msgTypeBytes, 2, encoded, 0);
             putInByteArray(deletedAdded, 1, encoded, 2);

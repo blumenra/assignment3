@@ -2,65 +2,69 @@
 #include "../include/BidiMessage.h"
 
 
-static BidiMessage* BidiMessage::createDataMessage(int packetSize, int blockNum, char* fileData){
+static BidiMessage BidiMessage::createDataMessage(int packetSize, int blockNum, char* fileData){
 
-    return new BidiMessage((short) 3, (short) packetSize, (short) blockNum, fileData);
+    return BidiMessage((short) 3, (short) packetSize, (short) blockNum, fileData);
 }
 
-static BidiMessage* BidiMessage::createBcastMessage(int event, string fileName){
+static BidiMessage BidiMessage::createBcastMessage(int event, string fileName){
 
-    return new BidiMessage((short) 9, (char) event, fileName, (char) 0);
+    return BidiMessage((short) 9, (char) event, fileName, (char) 0);
 }
 
-static BidiMessage* BidiMessage::createAckMessage(int ackNum){
+static BidiMessage BidiMessage::createAckMessage(int ackNum){
 
-    return new BidiMessage((short) 4, (short) ackNum);
+    return BidiMessage((short) 4, (short) ackNum);
 }
 
-static BidiMessage* BidiMessage::createErrorMessage(int errNum, string errMsg){
+static BidiMessage BidiMessage::createErrorMessage(int errNum, string errMsg){
 
-    return new BidiMessage((short) 7, (short) errNum, errMsg, (char) 0);
+    return BidiMessage((short) 7, (short) errNum, errMsg, (char) 0);
 }
 
 static BidiMessage BidiMessage::createLoginMessage(string userName) {
 
-    return new BidiMessage((short) 7, userName, (char) 0);   
+    return BidiMessage((short) 7, userName, (char) 0);
 }
 
 
 static BidiMessage BidiMessage::createDeleteMessage(string fileName) {
 
-    return new BidiMessage((short) 8, fileName, (char) 0);   
+    return BidiMessage((short) 8, fileName, (char) 0);
 }
 
-static BidiMessage BidiMessage::createRRQMessage(string fileName); {
+static BidiMessage BidiMessage::createRRQMessage(string fileName) {
 
-    return new BidiMessage((short) 1, fileName, (char) 0);   
+    return BidiMessage((short) 1, fileName, (char) 0);
 }
 
-static BidiMessage BidiMessage::createWRQMessage(string fileName); {
+static BidiMessage BidiMessage::createWRQMessage(string fileName) {
 
-    return new BidiMessage((short) 1, fileName, (char) 0);   
+    return BidiMessage((short) 1, fileName, (char) 0);
 }
 
-static BidiMessage BidiMessage::createDirMessage(); {
+static BidiMessage BidiMessage::createDirMessage() {
 
-    return new BidiMessage((short) 6);   
+    return BidiMessage((short) 6);
 }
 
-static BidiMessage BidiMessage::createDiscMessage(); {
+static BidiMessage BidiMessage::createDiscMessage() {
 
-    return new BidiMessage((short) 10);
+    return BidiMessage((short) 10);
 }
 
 
 //empty
-BidiMessage::BidiMessage();
+BidiMessage::BidiMessage(){
+
+    this->complete = false;
+}
 
 //copy
 BidiMessage::BidiMessage(BidiMessage original){
 
     this->opcode = original.getOpcode();
+    this->complete = true;
     switch (opcode){
 //            LOGRQ
         case 7: {
@@ -110,6 +114,9 @@ BidiMessage::BidiMessage(BidiMessage original){
             this->aByte  = original.getaByte();
             break;
         }
+
+        default:
+            break;
     }
 }
 
@@ -117,6 +124,8 @@ BidiMessage::BidiMessage(BidiMessage original){
 BidiMessage::BidiMessage(short opcode, string aString, char aByte){
 
     this->opcode = opcode;
+    this->complete = true;
+
     switch (opcode){
 
         case 7: {
@@ -131,7 +140,8 @@ BidiMessage::BidiMessage(short opcode, string aString, char aByte){
             break;
         }
 
-
+        default:
+            break;
     }
     this->fileName = aString;
     this->aByte = aByte;
@@ -140,11 +150,14 @@ BidiMessage::BidiMessage(short opcode, string aString, char aByte){
 BidiMessage::BidiMessage(short opcode){
 
     this->opcode = opcode;
+    this->complete = true;
+
 }
 
 BidiMessage::BidiMessage(short opcode, short packetSize, short blockNumber, char* data){
 
     this->opcode = opcode;
+    this->complete = true;
     this->packetSize = packetSize;
     this->blockNumber = blockNumber;
     this->data = data;
@@ -153,12 +166,14 @@ BidiMessage::BidiMessage(short opcode, short packetSize, short blockNumber, char
 BidiMessage::BidiMessage(short opcode, short blockNumber){
 
     this->opcode = opcode;
+    this->complete = true;
     this->blockNumber = blockNumber;
 }
 
 BidiMessage::BidiMessage(short opcode, char deletedAdded, string fileName, char aByte){
 
     this->opcode = opcode;
+    this->complete = true;
     this->deletedAdded = deletedAdded;
     this->fileName = fileName;
     this->aByte = aByte;
@@ -167,6 +182,7 @@ BidiMessage::BidiMessage(short opcode, char deletedAdded, string fileName, char 
 BidiMessage::BidiMessage(short opcode, short errorCode, string errMsg, char aByte){
 
     this->opcode = opcode;
+    this->complete = true;
     this->errorCode = errorCode;
     this->errMsg = errMsg;
     this->aByte = aByte;
@@ -207,7 +223,7 @@ short BidiMessage::getBlockNumber(){
 
 char*  BidiMessage::getData(){
 
-    char* dataCopy;
+    char* dataCopy = (char*) "";
 
     for(int i=0; i<packetSize; i++){
 
@@ -230,6 +246,10 @@ short BidiMessage::getErrorCode(){
 string BidiMessage::getErrMsg(){
 
     return errMsg + "";
+}
+
+bool BidiMessage::isComplete() const {
+    return complete;
 }
 
 
@@ -285,5 +305,11 @@ void BidiMessage::setaByte(char aByte){
     this->aByte = aByte;
 }
 
+void BidiMessage::setComplete(bool complete) {
+    BidiMessage::complete = complete;
+}
 
 BidiMessage::~BidiMessage() {}
+
+
+
