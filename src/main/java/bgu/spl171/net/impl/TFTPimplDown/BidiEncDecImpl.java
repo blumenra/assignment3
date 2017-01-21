@@ -272,7 +272,7 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
         }
 
         return false;
-        }
+    }
 
     private boolean bytesToBlockNumber(byte nextByte) {
 
@@ -576,14 +576,14 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
         return bytesArr;
     }
 
-    public short bytesToShort(byte[] byteArr) {
+    private short bytesToShort(byte[] byteArr) {
 
         short result = (short)((byteArr[0] & 0xff) << 8);
         result += (short)(byteArr[1] & 0xff);
         return result;
     }
 
-    private void     putInByteArray(byte[] toPut, byte[] container, int fromIndex){
+    private void putInByteArray(byte[] toPut, byte[] container, int fromIndex){
 
         for(int putIndex = 0, containerIndex = fromIndex; putIndex < toPut.length ; putIndex++, containerIndex++){
 
