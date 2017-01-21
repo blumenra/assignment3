@@ -12,17 +12,17 @@ using namespace std;
 class BidiMessage {
 
 private:
-    short opcode;
-    string fileName;
-    string userName;
-    short packetSize;
-    short blockNumber;
-    char* data;
-    char deletedAdded;
-    short errorCode;
-    string errMsg;
-    char aByte;
-    bool complete;
+    short opcode = -1;
+    string fileName = "";
+    string userName = "";
+    short packetSize = -1;
+    short blockNumber = -1;
+    char* data = (char*) "";
+    char deletedAdded = (char) 0;
+    short errorCode = -1;
+    string errMsg = "";
+    char aByte = (char) 0;
+    bool complete = false;
 
 
 
@@ -51,19 +51,19 @@ public:
     BidiMessage();
 
 //    copy
-    BidiMessage(BidiMessage original);
+    BidiMessage(const BidiMessage& original);
 
 //    getters
-    short getOpcode();
-    string getFileName();
-    char getaByte();
-    string getUserName();
-    short getPacketSize();
-    short getBlockNumber();
-    char*  getData();
-    char getDeletedAdded();
-    short getErrorCode();
-    string getErrMsg();
+    short getOpcode()const;
+    string getFileName()const;
+    char getaByte()const;
+    string getUserName()const;
+    short getPacketSize()const;
+    short getBlockNumber()const;
+    char * getData()const;
+    char getDeletedAdded()const;
+    short getErrorCode()const;
+    string getErrMsg()const;
     bool isComplete() const;
 
 
@@ -81,4 +81,6 @@ public:
     void setComplete(bool complete);
 
     virtual ~BidiMessage();
+
+    BidiMessage& operator=(const BidiMessage& other);
 };

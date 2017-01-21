@@ -8,7 +8,7 @@ BidiMessage BidiInputConverter::convertInput(string input) {
 	BidiMessage completeMessage;
 
 	if(!splitToCommandAndArg(input))
-		return NULL;
+		completeMessage = BidiMessage();
 
 	if(command == "LOGRQ") {
 
@@ -35,7 +35,7 @@ BidiMessage BidiInputConverter::convertInput(string input) {
 		completeMessage = BidiMessage::createDiscMessage();
 	}
 	else
-		return NULL;
+		completeMessage = BidiMessage();
 
 	return completeMessage;
 

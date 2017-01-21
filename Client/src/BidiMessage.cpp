@@ -2,66 +2,80 @@
 #include "../include/BidiMessage.h"
 
 
-static BidiMessage BidiMessage::createDataMessage(int packetSize, int blockNum, char* fileData){
+BidiMessage BidiMessage::createDataMessage(int packetSize, int blockNum, char* fileData) {
 
     return BidiMessage((short) 3, (short) packetSize, (short) blockNum, fileData);
 }
 
-static BidiMessage BidiMessage::createBcastMessage(int event, string fileName){
+BidiMessage BidiMessage::createBcastMessage(int event, string fileName){
 
     return BidiMessage((short) 9, (char) event, fileName, (char) 0);
 }
 
-static BidiMessage BidiMessage::createAckMessage(int ackNum){
+BidiMessage BidiMessage::createAckMessage(int ackNum){
 
     return BidiMessage((short) 4, (short) ackNum);
 }
 
-static BidiMessage BidiMessage::createErrorMessage(int errNum, string errMsg){
+BidiMessage BidiMessage::createErrorMessage(int errNum, string errMsg){
 
     return BidiMessage((short) 7, (short) errNum, errMsg, (char) 0);
 }
 
-static BidiMessage BidiMessage::createLoginMessage(string userName) {
+BidiMessage BidiMessage::createLoginMessage(string userName) {
 
     return BidiMessage((short) 7, userName, (char) 0);
 }
 
 
-static BidiMessage BidiMessage::createDeleteMessage(string fileName) {
+BidiMessage BidiMessage::createDeleteMessage(string fileName) {
 
     return BidiMessage((short) 8, fileName, (char) 0);
 }
 
-static BidiMessage BidiMessage::createRRQMessage(string fileName) {
+BidiMessage BidiMessage::createRRQMessage(string fileName) {
 
     return BidiMessage((short) 1, fileName, (char) 0);
 }
 
-static BidiMessage BidiMessage::createWRQMessage(string fileName) {
+BidiMessage BidiMessage::createWRQMessage(string fileName) {
 
     return BidiMessage((short) 1, fileName, (char) 0);
 }
 
-static BidiMessage BidiMessage::createDirMessage() {
+BidiMessage BidiMessage::createDirMessage() {
 
     return BidiMessage((short) 6);
 }
 
-static BidiMessage BidiMessage::createDiscMessage() {
+BidiMessage BidiMessage::createDiscMessage() {
 
     return BidiMessage((short) 10);
 }
 
 
-//empty
-BidiMessage::BidiMessage(){
 
-    this->complete = false;
-}
+
+
+
+
+//empty
+BidiMessage::BidiMessage():
+opcode(-1),
+fileName(""),
+userName(""),
+packetSize(-1),
+blockNumber(-1),
+data((char*) ""),
+deletedAdded((char) 0),
+errorCode(-1),
+errMsg(""),
+aByte((char) 0),
+complete(false)
+{}
 
 //copy
-BidiMessage::BidiMessage(BidiMessage original){
+BidiMessage::BidiMessage(const BidiMessage& original){
 
     this->opcode = original.getOpcode();
     this->complete = true;
@@ -147,81 +161,110 @@ BidiMessage::BidiMessage(short opcode, string aString, char aByte){
     this->aByte = aByte;
 }
 
-BidiMessage::BidiMessage(short opcode){
+BidiMessage::BidiMessage(short opcode):
+opcode(opcode),
+fileName(""),
+userName(""),
+packetSize(-1),
+blockNumber(-1),
+data((char*) ""),
+deletedAdded((char) 0),
+errorCode(-1),
+errMsg(""),
+aByte((char) 0),
+complete(true)
+{}
 
-    this->opcode = opcode;
-    this->complete = true;
+BidiMessage::BidiMessage(short opcode, short packetSize, short blockNumber, char* data):
+opcode(opcode),
+fileName(""),
+userName(""),
+packetSize(packetSize),
+blockNumber(blockNumber),
+data(data),
+deletedAdded((char) 0),
+errorCode(-1),
+errMsg(""),
+aByte((char) 0),
+complete(true)
+{}
 
-}
+BidiMessage::BidiMessage(short opcode, short blockNumber):
+opcode(opcode),
+fileName(""),
+userName(""),
+packetSize(-1),
+blockNumber(blockNumber),
+data((char*) ""),
+deletedAdded((char) 0),
+errorCode(-1),
+errMsg(""),
+aByte((char) 0),
+complete(true)
+{}
 
-BidiMessage::BidiMessage(short opcode, short packetSize, short blockNumber, char* data){
+BidiMessage::BidiMessage(short opcode, char deletedAdded, string fileName, char aByte):
+opcode(opcode),
+fileName(fileName),
+userName(""),
+packetSize(-1),
+blockNumber(-1),
+data((char*) ""),
+deletedAdded(deletedAdded),
+errorCode(-1),
+errMsg(""),
+aByte(aByte),
+complete(true)
+{}
 
-    this->opcode = opcode;
-    this->complete = true;
-    this->packetSize = packetSize;
-    this->blockNumber = blockNumber;
-    this->data = data;
-}
-
-BidiMessage::BidiMessage(short opcode, short blockNumber){
-
-    this->opcode = opcode;
-    this->complete = true;
-    this->blockNumber = blockNumber;
-}
-
-BidiMessage::BidiMessage(short opcode, char deletedAdded, string fileName, char aByte){
-
-    this->opcode = opcode;
-    this->complete = true;
-    this->deletedAdded = deletedAdded;
-    this->fileName = fileName;
-    this->aByte = aByte;
-}
-
-BidiMessage::BidiMessage(short opcode, short errorCode, string errMsg, char aByte){
-
-    this->opcode = opcode;
-    this->complete = true;
-    this->errorCode = errorCode;
-    this->errMsg = errMsg;
-    this->aByte = aByte;
-}
+BidiMessage::BidiMessage(short opcode, short errorCode, string errMsg, char aByte):
+opcode(opcode),
+fileName(""),
+userName(""),
+packetSize(-1),
+blockNumber(-1),
+data((char*) ""),
+deletedAdded((char) 0),
+errorCode(errorCode),
+errMsg(errMsg),
+aByte(aByte),
+complete(true)
+{}
 
 
 //getters
 
-short BidiMessage::getOpcode(){
+short BidiMessage::getOpcode()const {
 
     return opcode;
 }
 
-string BidiMessage::getFileName(){
+string BidiMessage::getFileName()const {
 
     return fileName + "";
 }
 
-char BidiMessage::getaByte(){
+char BidiMessage::getaByte()const {
 
     return aByte;
 }
 
-string BidiMessage::getUserName(){
+string BidiMessage::getUserName()const {
 
     return userName + "";
 }
 
-short BidiMessage::getPacketSize(){
+short BidiMessage::getPacketSize()const {
 
     return packetSize;
 }
 
-short BidiMessage::getBlockNumber(){
+short BidiMessage::getBlockNumber()const {
 
     return blockNumber;
 }
 
-char*  BidiMessage::getData(){
+char * BidiMessage::getData()const {
 
     char* dataCopy = (char*) "";
 
@@ -233,17 +276,17 @@ char*  BidiMessage::getData(){
     return dataCopy;
 }
 
-char BidiMessage::getDeletedAdded(){
+char BidiMessage::getDeletedAdded()const {
 
     return deletedAdded;
 }
 
-short BidiMessage::getErrorCode(){
+short BidiMessage::getErrorCode()const {
 
     return errorCode;
 }
 
-string BidiMessage::getErrMsg(){
+string BidiMessage::getErrMsg()const {
 
     return errMsg + "";
 }
@@ -311,5 +354,22 @@ void BidiMessage::setComplete(bool complete) {
 
 BidiMessage::~BidiMessage() {}
 
+BidiMessage& BidiMessage::operator=(const BidiMessage& other) // copy assignment
+{
+    if (this != &other) { // self-assignment check expected
 
+        this->opcode = other.getOpcode();
+        this->fileName = other.getFileName();
+        this->userName = other.getUserName();
+        this->packetSize = other.getPacketSize();
+        this->blockNumber = other.getBlockNumber();
+        this->data = other.getData();
+        this->deletedAdded = other.getDeletedAdded();
+        this->errorCode = other.getErrorCode();
+        this->errMsg = other.getErrMsg();
+        this->aByte = other.getaByte();
+        this->complete = other.isComplete();
+    }
+    return *this;
+}
 
