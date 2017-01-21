@@ -119,12 +119,12 @@ public class BidiMessage {
 
 
 
-    private BidiMessage(short opcode, String string, byte aByte) {
+    private BidiMessage(short opcode, String aString, byte aByte) {
         this.opcode = opcode;
         switch (opcode){
 
             case 7: {
-                this.userName = string;
+                this.userName = aString;
 
                 break;
             }
@@ -132,14 +132,14 @@ public class BidiMessage {
             case 1:
             case 2:
             case 8: {
-                this.fileName = string;
+                this.fileName = aString;
 
                 break;
             }
 
 
         }
-        this.fileName = fileName;
+        this.fileName = aString;
         this.aByte = aByte;
     }
 
@@ -183,12 +183,12 @@ public class BidiMessage {
 
     public short getOpcode() {
 
-        return opcode;
+        return this.opcode;
     }
 
     public String getFileName() {
 
-        return this.fileName + "";
+        return fileName + "";
     }
 
     public byte getaByte() {
@@ -210,9 +210,9 @@ public class BidiMessage {
 
     public byte[] getData() {
 
-        byte[] dataCopy = new byte[this.data.length];
+        byte[] dataCopy = new byte[packetSize];
 
-        for(int i=0; i<dataCopy.length-1; i++){
+        for(int i=0; i<packetSize-1; i++){
 
             dataCopy[i] = this.data[i];
         }
