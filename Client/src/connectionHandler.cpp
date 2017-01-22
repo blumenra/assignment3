@@ -130,7 +130,6 @@ bool ConnectionHandler::getMessage(BidiMessage& message, BidiEncDec decoder) {
             std::cout << ""<< std::endl;
             std::cout << "before decoder isComplete "<< message.isComplete() << std::endl;
             decoder.decodeNextByte(ch[0], message);
-//            message = BidiMessage(decoder.decodeNextByte(ch[0]));
             std::cout << "after decoder isComplete "<< message.isComplete() << std::endl;
             std::cout << "after decoder opcodeXXXXXXXXXXXXX "<< message.getOpcode() << std::endl;
             std::cout << "after decoder blockNumberXXXXXXXXXXXXX "<< message.getBlockNumber() << std::endl;

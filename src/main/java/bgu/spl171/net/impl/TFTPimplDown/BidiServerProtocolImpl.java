@@ -169,12 +169,14 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
 
                             if(filesList.get(key).isReadable()){
 
-                                files += key + "\0";
+                                files += key + "-1";
                             }
                         }
                     }
 
+
                     byte[] byteFiles = files.getBytes();
+                    System.out.println("bytesFiles: " + Arrays.toString(byteFiles));
                     sendDataMessages(byteFiles);
                     break;
 
@@ -288,7 +290,7 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
 
         if (len % x != 0) {
             byte[] newArray = Arrays.copyOfRange(data, len - len % x, len);
-            BidiMessage response = BidiMessage.createDataMessage(newArray.length, counter, newArray);
+            BidiMessage response = BidiMessage.createDataMessage(newArray.length, counter+1, newArray);
             connections.send(ownerClientId, response);
         }
     }

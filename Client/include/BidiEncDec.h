@@ -37,7 +37,7 @@ private:
     bool bytesToErrMsg(char nextByte);
     bool bytesToUserName(char nextByte);
     string incomingBytesToString(char nextByte);
-    void incomingBytesToArr(char* shortBytes);
+    void incomingBytesToArr(char* bytesArr);
     void doneWithMessage();
     void doneWithField();
     void emptyIncomingBytes();

@@ -218,10 +218,12 @@ bool BidiEncDec::bytesToData(char nextByte){
 
     incomingBytes.push_back(nextByte);
 
-    if(incomingMessage.getPacketSize() != (short) 512){
+    if(incomingBytes.size() == (unsigned int)incomingMessage.getPacketSize()){
 
         char data[incomingMessage.getPacketSize()];
         incomingBytesToArr(data);
+        std::cout << "DATA1: " << std::endl;
+        std::cout << "DATA1: " << data[1] << std::endl;
         incomingMessage.setData(data);
         doneWithField();
         return true;
@@ -289,19 +291,21 @@ string BidiEncDec::incomingBytesToString(char nextByte){
     }
 }
 
-void BidiEncDec::incomingBytesToArr(char* shortBytes){
+void BidiEncDec::incomingBytesToArr(char* bytesArr){
+    std::cout << "incomingBytesToArr size of incomingBytes: " << incomingBytes.size() << std::endl;
+    std::cout << "incomingBytesToArr incomingBytes[10]: " << (int)incomingBytes[10] << std::endl;
 
 //    char byteArr[incomingBytes.size()];
 
     for(unsigned int i=0; i<incomingBytes.size(); i++){
 
-        shortBytes[i] = incomingBytes.at((unsigned long) i);
+        bytesArr[i] = incomingBytes.at((unsigned long) i);
 //        byteArr[i] = incomingBytes.at((unsigned long) i);
     }
 
 //    shortBytes = byteArr;
-    std::cout << "ba0 "<< (int)shortBytes[0] << std::endl;
-    std::cout << "ba1 "<< (int)shortBytes[1] << std::endl;
+    std::cout << "ba0 "<< (int)bytesArr[0] << std::endl;
+//    std::cout << "ba1 "<< (int)shortBytes[1] << std::endl;
 
 }
 
@@ -404,6 +408,13 @@ void BidiEncDec::decodeNextByte(char nextByte, BidiMessage& newMessage){
 
         bytesToOpcode(nextByte);
         std::cout << "after bytesToOpcode" << std::endl;
+
+//        DIRQ, DISC
+        if(incomingMessage.getOpcode() == 6 || incomingMessage.getOpcode() == 10){
+
+            done = true;
+        }
+
     }
     else {
 
@@ -442,16 +453,6 @@ void BidiEncDec::decodeNextByte(char nextByte, BidiMessage& newMessage){
                 break;
             }
 
-//                DIRQ, DISC
-            case 6:
-            case 10: {
-
-                incomingMessage.setBytesLength(2);
-                newMessage = incomingMessage;
-
-//                return incomingMessage;
-            }
-
 //                LOGRQ
             case 7: {
 
@@ -478,24 +479,29 @@ void BidiEncDec::decodeNextByte(char nextByte, BidiMessage& newMessage){
             }
         }
     }
-    std::cout << "after if else doen:  "<< done << std::endl;
+    std::cout << "after if else done:  "<< done << std::endl;
     std::cout << "after if else FIELDnUMBER "<< currentMessageFieldNumber << std::endl;
 
 
     if(done){
 
+        std::cout << "1" << std::endl;
+
         incomingMessage.setComplete(true);
+        std::cout << "2" << std::endl;
 
         newMessage = incomingMessage;
+        std::cout << "3" << std::endl;
 
         doneWithMessage();
-        std::cout << "isComplete? "<< incomingMessage.isComplete() << std::endl;
+        std::cout << "4" << std::endl;
 
 //        return incomingMessage;
     }
     else {
         std::cout << "isComplete? "<< incomingMessage.isComplete() << std::endl;
-        newMessage = incomingMessage;
+//        newMessage = incomingMessage;
+        std::cout << "isComplete2? "<< incomingMessage.isComplete() << std::endl;
 
 //        return incomingMessage;
     }
@@ -549,7 +555,8 @@ void BidiEncDec::encode(BidiMessage message, char* encoded){
             char blockNumberBytes[] = "";
             shortToBytes(blockNumber, blockNumberBytes);
 
-            char* data = message.getData();
+            char data[packetSize];
+            message.copyData(data);
 
             putInByteArray(msgTypeBytes, 2, encoded, 0);
             putInByteArray(packetSizeBytes, 2, encoded, 2);

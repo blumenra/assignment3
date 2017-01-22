@@ -74,6 +74,7 @@ public class BlockingConnectionHandler<T> implements Runnable, ConnectionHandler
 
 //                byte[] deleteMe = {4, 0, 0, 0};
 //                out.write(deleteMe);
+
                 out.write(encdec.encode(msg));
                 out.flush();
             }

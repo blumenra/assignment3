@@ -16,7 +16,7 @@ private:
     string userName = "";
     short packetSize = -1;
     short blockNumber = -1;
-    char* data = (char*) "";
+    char data[512];
     char deletedAdded = (char) 0;
     short errorCode = -1;
     string errMsg = "";
@@ -60,7 +60,7 @@ public:
     string getUserName()const;
     short getPacketSize()const;
     short getBlockNumber()const;
-    char * getData()const;
+    void copyData(char* dataCopy)const;
     char getDeletedAdded()const;
     short getErrorCode()const;
     string getErrMsg()const;
