@@ -14,8 +14,14 @@ BidiMessage BidiInputConverter::convertInput(string input) {
 
 	if(command == "LOGRQ") {
 
+        if(arg == "") {
+            std::cout << "Empty login name" << std::endl;
+            completeMessage = BidiMessage();
+        }
+        else {
 
-		completeMessage = BidiMessage::createLoginMessage(arg);
+            completeMessage = BidiMessage::createLoginMessage(arg);
+        }
 	}
 	else if(command == "DELRQ") {
 
