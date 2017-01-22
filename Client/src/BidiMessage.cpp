@@ -66,7 +66,6 @@ fileName(""),
 userName(""),
 packetSize(-1),
 blockNumber(-1),
-data((char*) ""),
 deletedAdded((char) 0),
 errorCode(-1),
 errMsg(""),
@@ -106,7 +105,8 @@ BidiMessage::BidiMessage(const BidiMessage& original){
 
             this->packetSize = original.getPacketSize();
             this->blockNumber = original.getBlockNumber();
-            this->data = original.getData();
+
+            original.copyData(this->data);
             break;
         }
 
@@ -172,7 +172,6 @@ fileName(""),
 userName(""),
 packetSize(-1),
 blockNumber(-1),
-data((char*) ""),
 deletedAdded((char) 0),
 errorCode(-1),
 errMsg(""),
@@ -187,14 +186,15 @@ fileName(""),
 userName(""),
 packetSize(packetSize),
 blockNumber(blockNumber),
-data(data),
 deletedAdded((char) 0),
 errorCode(-1),
 errMsg(""),
 aByte((char) 0),
 complete(true),
 bytesLength(packetSize+6)
-{}
+{
+    setData(data);
+}
 
 BidiMessage::BidiMessage(short opcode, short blockNumber):
 opcode(opcode),
@@ -202,7 +202,6 @@ fileName(""),
 userName(""),
 packetSize(-1),
 blockNumber(blockNumber),
-data((char*) ""),
 deletedAdded((char) 0),
 errorCode(-1),
 errMsg(""),
@@ -217,7 +216,6 @@ fileName(fileName),
 userName(""),
 packetSize(-1),
 blockNumber(-1),
-data((char*) ""),
 deletedAdded(deletedAdded),
 errorCode(-1),
 errMsg(""),
@@ -232,7 +230,6 @@ fileName(""),
 userName(""),
 packetSize(-1),
 blockNumber(-1),
-data((char*) ""),
 deletedAdded((char) 0),
 errorCode(errorCode),
 errMsg(errMsg),
@@ -274,16 +271,18 @@ short BidiMessage::getBlockNumber()const {
     return blockNumber;
 }
 
-char * BidiMessage::getData()const {
+void BidiMessage::copyData(char* dataCopy)const {
 
-    char* dataCopy = (char*) "";
 
+//    std::cout << "packetSize: " << packetSize << std::endl;
     for(int i=0; i<packetSize; i++){
+//        std::cout << "i: " << i << std::endl;
+//        std::cout << "DATAi: " << (int)data[i] << std::endl;
 
         dataCopy[i] = this->data[i];
+//        std::cout << "DATACOPYi: " << (int)dataCopy[i] << std::endl;
     }
 
-    return dataCopy;
 }
 
 char BidiMessage::getDeletedAdded()const {
@@ -339,7 +338,10 @@ void BidiMessage::setBlockNumber(short blockNumber){
 
 void BidiMessage::setData(char* data){
 
-    this->data = data;
+    for(int i=0; i<packetSize; i++){
+
+        this->data[i] = data[i];
+    }
 }
 
 void BidiMessage::setDeletedAdded(char deletedAdded){
@@ -381,7 +383,7 @@ BidiMessage& BidiMessage::operator=(const BidiMessage& other) // copy assignment
         this->userName = other.getUserName();
         this->packetSize = other.getPacketSize();
         this->blockNumber = other.getBlockNumber();
-        this->data = other.getData();
+        other.copyData(this->data);
         this->deletedAdded = other.getDeletedAdded();
         this->errorCode = other.getErrorCode();
         this->errMsg = other.getErrMsg();

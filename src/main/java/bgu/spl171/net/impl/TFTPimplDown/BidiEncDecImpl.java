@@ -30,6 +30,11 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
         if(currentMessageFieldNumber == 0){
 
             bytesToOpcode(nextByte);
+//            DIRQ, DISC
+            if(incomingMessage.getOpcode() == 6 || incomingMessage.getOpcode() == 10){
+
+                done = true;
+            }
         }
         else{
 
@@ -66,13 +71,13 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
                     done = errorMessageCreator(nextByte);
                     break;
                 }
-
-//                DIRQ, DISC
-                case 6:
-                case 10: {
-
-                    return incomingMessage;
-                }
+//
+////                DIRQ, DISC
+//                case 6:
+//                case 10: {
+//
+//                    return incomingMessage;
+//                }
 
 //                LOGRQ
                 case 7: {
@@ -302,7 +307,7 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
 
         incomingBytes.add(nextByte);
 
-        if(incomingMessage.getPacketSize() != (short) 512){
+        if(incomingBytes.size() == incomingMessage.getPacketSize()){
 
             byte[] data = incomingBytesToArr();
             incomingMessage.setData(data);
@@ -465,7 +470,7 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
 
                 byte[] data = message.getData();
 
-                encoded = new byte[data.length + 7];
+                encoded = new byte[data.length + 6];
 
                 putInByteArray(msgTypeBytes, encoded, 0);
                 putInByteArray(packetSizeBytes, encoded, 2);

@@ -44,6 +44,10 @@
  * }
  * remove the removeMe.txt file in the Files folder
  * handle all 'new' object in client side (delete if necessary)
+ * test:
+ *      prevent cliet from logging in with empty name
+ *      handle illegale input in converter
+ *
  *
  *
  * tests:

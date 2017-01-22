@@ -30,24 +30,14 @@ int main (int argc, char *argv[]) {
         std::string line(buf);
 //        unsigned long len=line.length();
 
-        std::cout << "Before convert" << std::endl;
-
         BidiMessage message = converter.convertInput(line);
-
-        std::cout << "After convert" << std::endl;
 
         if(message.isComplete()) {
 
-            std::cout << "After complete message" << std::endl;
-
-            std::cout << "message opcode: " << message.getOpcode() << std::endl;
-
 //            std::cout << "ENCODED: " << encDec.encode(message) <<std::endl;
-            std::cout << "bytesLength: " << message.getBytesLength() <<std::endl;
             char encoded[message.getBytesLength()];
             encDec.encode(message, encoded);
             bool result = connectionHandler.sendBytes(encoded, message.getBytesLength());
-            std::cout << "after result" << std::endl;
             if(!result) {
                 std::cout << "Disconnected. Exiting...\n" << std::endl;
                 break;
@@ -83,6 +73,13 @@ int main (int argc, char *argv[]) {
             // we filled up to the \n char - we must make sure now that a 0 char is also present. So we truncate last character.
 //            answer.resize(len-1);
             std::cout << "**************Reply Opcode: " << answer.getOpcode() << std::endl << std::endl;
+            if(answer.getOpcode() == 3){
+
+                int ps = answer.getPacketSize();
+                char receivedData[ps];
+                answer.copyData(receivedData);
+                std::cout << "DATA: " << string(receivedData) << std::endl << std::endl;
+            }
 
 //            if (answer == "bye") {
 //                std::cout << "Exiting...\n" << std::endl;

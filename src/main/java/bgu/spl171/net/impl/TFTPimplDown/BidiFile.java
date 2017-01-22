@@ -58,7 +58,7 @@ public class BidiFile {
         return uploading;
     }
 
-    public boolean isDeleable() {
+    public boolean isDeletable() {
         return deleable;
     }
 }
