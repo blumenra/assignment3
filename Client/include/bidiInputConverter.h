@@ -7,7 +7,6 @@
 #include <iostream>
 #include <vector>
 
-#endif //CLIENT_BIDIMESSAGE_H
 
 using namespace std;
 
@@ -27,3 +26,5 @@ public:
     BidiMessage convertInput(string input);
 
  };
+
+#endif //CLIENT_BIDIMESSAGE_H

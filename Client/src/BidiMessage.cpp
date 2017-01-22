@@ -71,14 +71,16 @@ deletedAdded((char) 0),
 errorCode(-1),
 errMsg(""),
 aByte((char) 0),
-complete(false)
+complete(false),
+bytesLength(0)
 {}
 
 //copy
 BidiMessage::BidiMessage(const BidiMessage& original){
 
     this->opcode = original.getOpcode();
-    this->complete = true;
+    this->complete = original.isComplete();
+    this->bytesLength = original.getBytesLength();
     switch (opcode){
 //            LOGRQ
         case 7: {
@@ -139,7 +141,7 @@ BidiMessage::BidiMessage(short opcode, string aString, char aByte){
 
     this->opcode = opcode;
     this->complete = true;
-
+    this->bytesLength = (int) aString.length() + 3;
     switch (opcode){
 
         case 7: {
@@ -172,7 +174,8 @@ deletedAdded((char) 0),
 errorCode(-1),
 errMsg(""),
 aByte((char) 0),
-complete(true)
+complete(true),
+bytesLength(2)
 {}
 
 BidiMessage::BidiMessage(short opcode, short packetSize, short blockNumber, char* data):
@@ -186,7 +189,8 @@ deletedAdded((char) 0),
 errorCode(-1),
 errMsg(""),
 aByte((char) 0),
-complete(true)
+complete(true),
+bytesLength(packetSize+6)
 {}
 
 BidiMessage::BidiMessage(short opcode, short blockNumber):
@@ -200,7 +204,8 @@ deletedAdded((char) 0),
 errorCode(-1),
 errMsg(""),
 aByte((char) 0),
-complete(true)
+complete(true),
+bytesLength(4)
 {}
 
 BidiMessage::BidiMessage(short opcode, char deletedAdded, string fileName, char aByte):
@@ -214,7 +219,8 @@ deletedAdded(deletedAdded),
 errorCode(-1),
 errMsg(""),
 aByte(aByte),
-complete(true)
+complete(true),
+bytesLength((int) fileName.length() + 4)
 {}
 
 BidiMessage::BidiMessage(short opcode, short errorCode, string errMsg, char aByte):
@@ -228,7 +234,8 @@ deletedAdded((char) 0),
 errorCode(errorCode),
 errMsg(errMsg),
 aByte(aByte),
-complete(true)
+complete(true),
+bytesLength((int) errMsg.length() + 5)
 {}
 
 
@@ -295,6 +302,10 @@ bool BidiMessage::isComplete() const {
     return complete;
 }
 
+int BidiMessage::getBytesLength() const {
+    return bytesLength;
+}
+
 
 //setters
 
@@ -352,6 +363,10 @@ void BidiMessage::setComplete(bool complete) {
     BidiMessage::complete = complete;
 }
 
+void BidiMessage::setBytesLength(int byteLength) {
+    BidiMessage::bytesLength = byteLength;
+}
+
 BidiMessage::~BidiMessage() {}
 
 BidiMessage& BidiMessage::operator=(const BidiMessage& other) // copy assignment
@@ -369,7 +384,11 @@ BidiMessage& BidiMessage::operator=(const BidiMessage& other) // copy assignment
         this->errMsg = other.getErrMsg();
         this->aByte = other.getaByte();
         this->complete = other.isComplete();
+        this->bytesLength = other.getBytesLength();
     }
     return *this;
 }
+
+
+
 

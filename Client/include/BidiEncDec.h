@@ -46,15 +46,16 @@ private:
 
     short incomingBytesToShort(char nextByte);
 
-    char* shortToBytes(short num);
+    void shortToBytes(short num, char* byteArr);
     short bytesToShort(char* byteArr);
     void putInByteArray(char* toPut, int toPutLength, char* container, int fromIndex);
 
 public:
+    BidiEncDec();
+
     BidiMessage decodeNextByte(char nextByte);
 
-
-    char* encode(BidiMessage message);
+    void encode(BidiMessage message, char* encoded);
 
     virtual ~BidiEncDec();
 };

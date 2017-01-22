@@ -38,6 +38,7 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
     @Override
     public void process(BidiMessage message) {
 
+        System.out.println("protocol opcode: " + message.getOpcode());
         short opcode = message.getOpcode();
         BidiMessage response = null;
 
@@ -178,6 +179,8 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
                     break;
 
                 case 7: //LOGRQ
+
+                    System.out.println("user name: " + message.getUserName());
                     String userName = message.getUserName();
 
                     // if the user is NOT logged in
