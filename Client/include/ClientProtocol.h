@@ -7,12 +7,15 @@
 #include "BidiMessage.h"
 
  
-class ConnectionProtocol {
+class ClientProtocol {
 private:
+	bool waitingToLogin;
+	bool upDownProcess;
     
  
 public:
     
+    ClientProtocol();
     BidiMessage process();
 
 
