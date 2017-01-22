@@ -200,28 +200,34 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
 
                 case 8: //DELRQ
 
+                    boolean toDelete = false;
+
                     synchronized (filesList) {
 
                         // Files does NOT exist
                         if (!filesList.containsKey(message.getFileName())) {
 
+                            System.out.println("exist");
                             response = BidiMessage.createErrorMessage(1, "File not found – RRQ \\ DELRQ of non-existing file");
                         }
                         // File exists but not accessible
-                        else if (!filesList.get(message.getFileName()).isDeleable()) {
-
+                        else if (!filesList.get(message.getFileName()).isDeletable()) {
+                            System.out.println("access");
                             response = BidiMessage.createErrorMessage(2, "Access violation – File cannot be written, read or deleted");
                         }
                         else {
 
                             filesList.remove(message.getFileName());
                             response = BidiMessage.createAckMessage(0);
+                            connections.broadcast(BidiMessage.createBcastMessage(0, message.getFileName())); // broadcast all user of the deletion
+                            toDelete = true;
                         }
                     }
 
-                    removeFile(message.getFileName()); //remove file from directory and map
+                    if(toDelete) {
 
-                    connections.broadcast(BidiMessage.createBcastMessage(0, message.getFileName())); // broadcast all user of the deletion
+                        removeFile(message.getFileName()); //remove file from directory and map
+                    }
 
                     connections.send(ownerClientId, response);
                     break;
@@ -269,12 +275,6 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
         connections.send(ownerClientId, response);
     }
 
-    private void removeFile(String fileName) {
-
-        File fileToDelete = new File("Files/" + fileName);
-        fileToDelete.delete();
-    }
-
     private void sendDataMessages(byte[] data) {
 
         int x = 512;  // chunk size
@@ -293,5 +293,11 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
             BidiMessage response = BidiMessage.createDataMessage(newArray.length, counter+1, newArray);
             connections.send(ownerClientId, response);
         }
+    }
+
+    private void removeFile(String fileName) {
+
+        File fileToDelete = new File("Files/" + fileName);
+        fileToDelete.delete();
     }
 }

@@ -72,8 +72,8 @@
       <file leaf-file-name="client.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/client.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="467">
-              <caret line="80" column="61" lean-forward="false" selection-start-line="80" selection-start-column="41" selection-end-line="80" selection-end-column="61" />
+            <state relative-caret-position="1007">
+              <caret line="101" column="1" lean-forward="true" selection-start-line="101" selection-start-column="1" selection-end-line="101" selection-end-column="1" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -135,8 +135,8 @@
       <file leaf-file-name="connectionHandler.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/connectionHandler.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="24" lean-forward="false" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
+            <state relative-caret-position="313">
+              <caret line="119" column="30" lean-forward="false" selection-start-line="119" selection-start-column="30" selection-end-line="119" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -183,11 +183,11 @@
       <find>yD</find>
       <find>setda</find>
       <find>getda</find>
-      <find>conv</find>
       <find>before convert</find>
       <find>copyD</find>
       <find>Before convert</find>
       <find>DATACOPYi:</find>
+      <find>conv</find>
     </findStrings>
     <replaceStrings>
       <replace>NULL</replace>
@@ -493,12 +493,12 @@
       <updated>1485006106897</updated>
       <workItem from="1485006108227" duration="9965000" />
       <workItem from="1485018305378" duration="33613000" />
-      <workItem from="1485095321967" duration="23354000" />
+      <workItem from="1485095321967" duration="24565000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66932000" />
+    <option name="totallyTimeSpent" value="68143000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="508" y="0" width="1412" height="1040" extended-state="0" />
@@ -751,14 +751,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/connectionHandler.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="24" lean-forward="false" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/bidiInputConverter.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
@@ -833,10 +825,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/connectionHandler.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="119" column="30" lean-forward="false" selection-start-line="119" selection-start-column="30" selection-end-line="119" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/client.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
-          <caret line="80" column="61" lean-forward="false" selection-start-line="80" selection-start-column="41" selection-end-line="80" selection-end-column="61" />
+        <state relative-caret-position="1007">
+          <caret line="101" column="1" lean-forward="true" selection-start-line="101" selection-start-column="1" selection-end-line="101" selection-end-column="1" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
