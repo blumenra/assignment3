@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include "../include/connectionHandler.h"
 #include "../include/bidiInputConverter.h"
-#include "../include/BidiEncDec.h"
 
 /**
 * This code assumes that the server replies the exact text the client sent it (as opposed to the practical session example)
@@ -21,7 +20,7 @@ int main (int argc, char *argv[]) {
     }
 
     BidiInputConverter converter;
-    BidiEncDec encDec;
+    BidiEncDec encDec = BidiEncDec();
 
     //From here we will see the rest of the ehco client implementation:
     while (1) {
@@ -29,12 +28,26 @@ int main (int argc, char *argv[]) {
         char buf[bufsize];
         std::cin.getline(buf, bufsize);
         std::string line(buf);
-        unsigned long len=line.length();
+//        unsigned long len=line.length();
+
+        std::cout << "Before convert" << std::endl;
 
         BidiMessage message = converter.convertInput(line);
+
+        std::cout << "After convert" << std::endl;
+
         if(message.isComplete()) {
 
-            bool result = connectionHandler.sendBytes(encDec.encode(message), message.length);
+            std::cout << "After complete message" << std::endl;
+
+            std::cout << "message opcode: " << message.getOpcode() << std::endl;
+
+//            std::cout << "ENCODED: " << encDec.encode(message) <<std::endl;
+            std::cout << "bytesLength: " << message.getBytesLength() <<std::endl;
+            char encoded[message.getBytesLength()];
+            encDec.encode(message, encoded);
+            bool result = connectionHandler.sendBytes(encoded, message.getBytesLength());
+            std::cout << "after result" << std::endl;
             if(!result) {
                 std::cout << "Disconnected. Exiting...\n" << std::endl;
                 break;
@@ -51,30 +64,33 @@ int main (int argc, char *argv[]) {
 //            std::string answer;
             // Get back an answer: by using the expected number of bytes (len bytes + newline delimiter)
             // We could also use: connectionHandler.getline(answer) and then get the answer without the newline char at the end
-            if (!connectionHandler.getLine(answer)) {
-                std::cout << "Disconnected. Exiting...\n" << std::endl;
-                break;
-            }
+//            if (!connectionHandler.getLine(answer)) {
+//                std::cout << "Disconnected. Exiting...\n" << std::endl;
+//                break;
+//            }
 
             BidiMessage answer = BidiMessage();
 
-            if(!connectionHandler.getMessage(answer)){
+            if(!connectionHandler.getMessage(answer, encDec)){
                 std::cout << "Disconnected. Exiting...\n" << std::endl;
                 break;
             }
 
 //            TODO: send answer to protocol for a response. What is under here isn't needed.
 
-            len=answer.length();
+//            len=answer.length();
             // A C string must end with a 0 char delimiter.  When we filled the answer buffer from the socket
             // we filled up to the \n char - we must make sure now that a 0 char is also present. So we truncate last character.
-            answer.resize(len-1);
-            std::cout << "Reply: " << answer << " " << len << " bytes " << std::endl << std::endl;
-            if (answer == "bye") {
-                std::cout << "Exiting...\n" << std::endl;
-                break;
-            }
+//            answer.resize(len-1);
+            std::cout << "**************Reply Opcode: " << answer.getOpcode() << std::endl << std::endl;
+
+//            if (answer == "bye") {
+//                std::cout << "Exiting...\n" << std::endl;
+//                break;
+//            }
         }
+
+        std::cout << "Not complete message" << std::endl;
 
 
 

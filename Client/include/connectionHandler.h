@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 #include <boost/asio.hpp>
-#include "BidiMessage.h"
+#include "BidiEncDec.h"
 
 using boost::asio::ip::tcp;
  
@@ -49,7 +49,7 @@ public:
     // Close down the connection properly.
     void close();
 
-    bool getMessage(BidiMessage message);
+    bool getMessage(BidiMessage& message, BidiEncDec decoder);
 }; //class ConnectionHandler
  
 #endif

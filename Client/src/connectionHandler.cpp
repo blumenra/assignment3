@@ -1,5 +1,5 @@
 #include "../include/connectionHandler.h"
- 
+
 using boost::asio::ip::tcp;
  
 using std::cin;
@@ -36,7 +36,12 @@ bool ConnectionHandler::getBytes(char bytes[], unsigned int bytesToRead) {
     boost::system::error_code error;
     try {
         while (!error && bytesToRead > tmp ) {
-            tmp += socket_.read_some(boost::asio::buffer(bytes+tmp, bytesToRead-tmp), error);            
+            std::cout << "before SOCKET BYTESTOREAD "<< bytesToRead << std::endl;
+            std::cout << "before socket" << std::endl;
+            tmp += socket_.read_some(boost::asio::buffer(bytes+tmp, bytesToRead-tmp), error);
+            std::cout << "after SOCKET bytes[0] "<< (int)bytes[0] << std::endl;
+            std::cout << "after SOCKET bytes[1] "<< (int)bytes[1] << std::endl;
+            std::cout << "after socket tmp" << tmp << std::endl;
         }
         if(error)
             throw boost::system::system_error(error);
@@ -49,10 +54,18 @@ bool ConnectionHandler::getBytes(char bytes[], unsigned int bytesToRead) {
  
 bool ConnectionHandler::sendBytes(const char bytes[], int bytesToWrite) {
     int tmp = 0;
+    std::cout << "before try" << std::endl;
     boost::system::error_code error;
     try {
+        std::cout << "before while error : "<< error << std::endl;
+        std::cout << "before while bytesToWrite: "<< bytesToWrite << std::endl;
         while (!error && bytesToWrite > tmp ) {
+            std::cout << "before while bytesToWrite in: "<< bytesToWrite << std::endl;
+            std::cout << "before while tmp: "<< tmp << std::endl;
+            std::cout << "Inside sendBytes while" << std::endl;
             tmp += socket_.write_some(boost::asio::buffer(bytes + tmp, bytesToWrite - tmp), error);
+            std::cout << "before while bytesToWrite in a: "<< bytesToWrite << std::endl;
+            std::cout << "before while tmp a: "<< tmp << std::endl;
         }
         if(error)
             throw boost::system::system_error(error);
@@ -104,6 +117,25 @@ void ConnectionHandler::close() {
     }
 }
 
-bool ConnectionHandler::getMessage(BidiMessage message) {
-    return false;
+bool ConnectionHandler::getMessage(BidiMessage& message, BidiEncDec decoder) {
+
+    char ch[1];
+
+    try {
+        do{
+            std::cout << "BEFORE getBytes" << std::endl;
+            getBytes(ch, 1);
+            std::cout << "BEFORE decoder" << std::endl;
+            std::cout << "before decoder BYTE "<< ch[0] << std::endl;
+            std::cout << ""<< std::endl;
+            std::cout << "before decoder isComplete "<< message.isComplete() << std::endl;
+            message = BidiMessage(decoder.decodeNextByte(ch[0]));
+            std::cout << "after decoder isComplete "<< message.isComplete() << std::endl;
+        }while(!message.isComplete());
+    } catch (std::exception& e) {
+        std::cerr << "recv failed (Error: " << e.what() << ')' << std::endl;
+        return false;
+    }
+
+    return true;
 }

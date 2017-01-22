@@ -5,7 +5,6 @@
 #include <string>
 #include <iostream>
 
-#endif //CLIENT_BIDIMESSAGE_H
 
 using namespace std;
 
@@ -23,6 +22,7 @@ private:
     string errMsg = "";
     char aByte = (char) 0;
     bool complete = false;
+    int bytesLength = 0;
 
 
 
@@ -65,7 +65,7 @@ public:
     short getErrorCode()const;
     string getErrMsg()const;
     bool isComplete() const;
-
+    int getBytesLength() const;
 
 //    setters
     void setOpcode(short opcode);
@@ -79,8 +79,11 @@ public:
     void setErrMsg(string errMsg);
     void setaByte(char aByte);
     void setComplete(bool complete);
+    void setBytesLength(int byteLength);
 
     virtual ~BidiMessage();
 
     BidiMessage& operator=(const BidiMessage& other);
 };
+
+#endif //CLIENT_BIDIMESSAGE_H
