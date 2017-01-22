@@ -45,6 +45,15 @@
  * remove the removeMe.txt file in the Files folder
  * handle all 'new' object in client side (delete if necessary)
  *
+ *
+ * tests:
+ *      a client logs in for the first time and then try to log-in again{
+ *          outcome:
+ *              the client sohuld receive an error message saying that the user is already logged in and print on his screen "ERROR <error No.>
+ *      }
+ *
+ *
+ *
  */
 // protocol for
 
