@@ -39,7 +39,9 @@ bool ConnectionHandler::getBytes(char bytes[], unsigned int bytesToRead) {
             std::cout << "before SOCKET BYTESTOREAD "<< bytesToRead << std::endl;
             std::cout << "before socket" << std::endl;
             tmp += socket_.read_some(boost::asio::buffer(bytes+tmp, bytesToRead-tmp), error);
-            std::cout << "after socket" << std::endl;
+            std::cout << "after SOCKET bytes[0] "<< (int)bytes[0] << std::endl;
+            std::cout << "after SOCKET bytes[1] "<< (int)bytes[1] << std::endl;
+            std::cout << "after socket tmp" << tmp << std::endl;
         }
         if(error)
             throw boost::system::system_error(error);
@@ -117,16 +119,17 @@ void ConnectionHandler::close() {
 
 bool ConnectionHandler::getMessage(BidiMessage& message, BidiEncDec decoder) {
 
-    char ch;
+    char ch[1];
 
     try {
         do{
             std::cout << "BEFORE getBytes" << std::endl;
-            getBytes(&ch, 1);
+            getBytes(ch, 1);
             std::cout << "BEFORE decoder" << std::endl;
+            std::cout << "before decoder BYTE "<< ch[0] << std::endl;
+            std::cout << ""<< std::endl;
             std::cout << "before decoder isComplete "<< message.isComplete() << std::endl;
-            message = BidiMessage(decoder.decodeNextByte(ch));
-            std::cout << "after decoder" << std::endl;
+            message = BidiMessage(decoder.decodeNextByte(ch[0]));
             std::cout << "after decoder isComplete "<< message.isComplete() << std::endl;
         }while(!message.isComplete());
     } catch (std::exception& e) {

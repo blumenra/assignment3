@@ -218,7 +218,8 @@ bool BidiEncDec::bytesToData(char nextByte){
 
     if(incomingMessage.getPacketSize() != (short) 512){
 
-        char* data = incomingBytesToArr();
+        char data[incomingMessage.getPacketSize()];
+        incomingBytesToArr(data);
         incomingMessage.setData(data);
         doneWithField();
         return true;
@@ -272,7 +273,8 @@ string BidiEncDec::incomingBytesToString(char nextByte){
 
     if(nextByte == (char) 0){
 
-        char* fileNameBytes = incomingBytesToArr();
+        char fileNameBytes[incomingBytes.size()];
+        incomingBytesToArr(fileNameBytes);
 
         string aString = string(fileNameBytes);
 
@@ -285,19 +287,20 @@ string BidiEncDec::incomingBytesToString(char nextByte){
     }
 }
 
-char* BidiEncDec::incomingBytesToArr(){
+void BidiEncDec::incomingBytesToArr(char* shortBytes){
 
-    char byteArr[incomingBytes.size()];
+//    char byteArr[incomingBytes.size()];
 
     for(unsigned int i=0; i<incomingBytes.size(); i++){
 
-        byteArr[i] = incomingBytes.at((unsigned long) i);
+        shortBytes[i] = incomingBytes.at((unsigned long) i);
+//        byteArr[i] = incomingBytes.at((unsigned long) i);
     }
 
-    char* ba = byteArr;
-    std::cout << "ba "<< ba[1] << std::endl;
+//    shortBytes = byteArr;
+    std::cout << "ba0 "<< (int)shortBytes[0] << std::endl;
+    std::cout << "ba1 "<< (int)shortBytes[1] << std::endl;
 
-    return ba;
 }
 
 void BidiEncDec::doneWithMessage(){
@@ -326,13 +329,16 @@ void BidiEncDec::emptyIncomingBytes(){
 short BidiEncDec::incomingBytesToShort(char nextByte){
 
     incomingBytes.push_back(nextByte);
+    std::cout << "INSIDE vector char: " << incomingBytes[incomingBytes.size()-1] << std::endl;
 
     if(incomingBytes.size() == 2){
 
         std::cout << "incomingBytesToShort incomingBytes 0:  "<< incomingBytes.at(0) << std::endl;
         std::cout << "incomingBytesToShort incomingBytes 1:  "<< incomingBytes.at(1) << std::endl;
-        char* shortBytes = incomingBytesToArr();
-        std::cout << "incomingBytesToShort shortBytes:  "<< shortBytes << std::endl;
+        char shortBytes[2];
+        incomingBytesToArr(shortBytes);
+        std::cout << "incomingBytesToShort shortBytes0:  "<< shortBytes[0] << std::endl;
+        std::cout << "incomingBytesToShort shortBytes1:  "<< shortBytes[1] << std::endl;
         short num = bytesToShort(shortBytes);
         char* g = (char*) "04";
         short gg = bytesToShort(g);
@@ -358,7 +364,12 @@ short BidiEncDec::bytesToShort(char* byteArr){
 
     short result = (short)((byteArr[0] & 0xff) << 8);
     std::cout << "inside bytesToShort byteArr[0]:  "<< byteArr[0] << std::endl;
+    std::cout << "inside bytesToShort byteArr[0]&0xff:  "<< ((short)((byteArr[0] & 0xff))) << std::endl;
+    std::cout << "inside bytesToShort 0&0xff:  "<< ((short)(((char)0 & 0xff))) << std::endl;
+    std::cout << "inside bytesToShort 0xff:  "<< ((short)((0xff))) << std::endl;
+    std::cout << "inside bytesToShort result1:  "<< result << std::endl;
     result += (short)(byteArr[1] & 0xff);
+    std::cout << "inside bytesToShort result2:  "<< result << std::endl;
     std::cout << "inside bytesToShort byteArr[1]:  "<< byteArr[1] << std::endl;
     return result;
 }
@@ -379,7 +390,7 @@ BidiMessage BidiEncDec::decodeNextByte(char nextByte){
     std::cout << "before decoder newMessage? "<< isNewMessage << std::endl;
 
     if(isNewMessage){
-        std::cout << "ENTERING NEWMESSAGE" << std::endl;
+        std::cout << "ENTERING vector char: " << nextByte << std::endl;
         incomingBytes = vector<char>();
         incomingMessage = BidiMessage();
         currentMessageFieldNumber = 0;
