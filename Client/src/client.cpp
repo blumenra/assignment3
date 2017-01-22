@@ -88,9 +88,10 @@ int main (int argc, char *argv[]) {
 //                std::cout << "Exiting...\n" << std::endl;
 //                break;
 //            }
-        }
+        } else{
 
-        std::cout << "Not complete message" << std::endl;
+            std::cout << "Not complete message" << std::endl;
+        }
 
 
 

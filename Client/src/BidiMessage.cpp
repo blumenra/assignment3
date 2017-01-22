@@ -79,7 +79,10 @@ bytesLength(0)
 BidiMessage::BidiMessage(const BidiMessage& original){
 
     this->opcode = original.getOpcode();
+    std::cout << "isComplete original? "<< original.isComplete() << std::endl;
     this->complete = original.isComplete();
+    std::cout << "isComplete? this"<< complete << std::endl;
+
     this->bytesLength = original.getBytesLength();
     switch (opcode){
 //            LOGRQ

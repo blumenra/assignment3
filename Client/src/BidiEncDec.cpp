@@ -194,6 +194,8 @@ bool BidiEncDec::bytesToBlockNumber(char nextByte){
     if(blockNumber != -1){
 
         incomingMessage.setBlockNumber(blockNumber);
+        std::cout << "*******************blockNumber:  "<< incomingMessage.getBlockNumber() << std::endl;
+
         doneWithField();
         return true;
     }
@@ -309,7 +311,6 @@ void BidiEncDec::doneWithMessage(){
     this->incomingMessage = BidiMessage();
     currentMessageFieldNumber = 0;
     this->isNewMessage = true;
-    incomingMessage.setComplete(true);
 }
 
 void BidiEncDec::doneWithField(){
@@ -384,7 +385,7 @@ void BidiEncDec::putInByteArray(char* toPut, int toPutLength, char* container, i
 
 
 
-BidiMessage BidiEncDec::decodeNextByte(char nextByte){
+void BidiEncDec::decodeNextByte(char nextByte, BidiMessage& newMessage){
 
     bool done = false;
     std::cout << "before decoder newMessage? "<< isNewMessage << std::endl;
@@ -446,7 +447,9 @@ BidiMessage BidiEncDec::decodeNextByte(char nextByte){
             case 10: {
 
                 incomingMessage.setBytesLength(2);
-                return incomingMessage;
+                newMessage = incomingMessage;
+
+//                return incomingMessage;
             }
 
 //                LOGRQ
@@ -469,7 +472,9 @@ BidiMessage BidiEncDec::decodeNextByte(char nextByte){
 
                 std::cout << "default:  "<< opcode << std::endl;
                 incomingMessage.setOpcode((short) -1);
-                return incomingMessage;
+                newMessage = incomingMessage;
+
+//                return incomingMessage;
             }
         }
     }
@@ -478,16 +483,20 @@ BidiMessage BidiEncDec::decodeNextByte(char nextByte){
 
 
     if(done){
-        BidiMessage newMessage = BidiMessage(this->incomingMessage);
+
+        incomingMessage.setComplete(true);
+
+        newMessage = incomingMessage;
 
         doneWithMessage();
-        return newMessage;
+        std::cout << "isComplete? "<< incomingMessage.isComplete() << std::endl;
+
+//        return incomingMessage;
     }
     else {
         std::cout << "isComplete? "<< incomingMessage.isComplete() << std::endl;
-        BidiMessage newMessage = BidiMessage(this->incomingMessage);
+        newMessage = incomingMessage;
 
-        return newMessage;
 //        return incomingMessage;
     }
 }

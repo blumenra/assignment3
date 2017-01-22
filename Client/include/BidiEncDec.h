@@ -53,7 +53,7 @@ private:
 public:
     BidiEncDec();
 
-    BidiMessage decodeNextByte(char nextByte);
+    void decodeNextByte(char nextByte, BidiMessage& newMessage);
 
     void encode(BidiMessage message, char* encoded);
 
