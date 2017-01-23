@@ -550,3 +550,33 @@ make[1]: Leaving directory '/users/studs/bsc/2016/blumenra/spl/2017/assignments/
     Feature record: CXX_FEATURE:0cxx_variable_templates
     Feature record: CXX_FEATURE:0cxx_variadic_macros
     Feature record: CXX_FEATURE:0cxx_variadic_templates
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_7b07e/fast"
+/usr/bin/make -f CMakeFiles/cmTC_7b07e.dir/build.make CMakeFiles/cmTC_7b07e.dir/build
+make[1]: Entering directory '/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_7b07e.dir/CheckIncludeFile.c.o
+/usr/bin/cc    -Wall -Weffc++    -o CMakeFiles/cmTC_7b07e.dir/CheckIncludeFile.c.o   -c /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+cc1: warning: command line option ‘-Weffc++’ is valid for C++/ObjC++ but not for C
+Linking C executable cmTC_7b07e
+/users/studs/msc/brukes/clion-2016.3/bin/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7b07e.dir/link.txt --verbose=1
+/usr/bin/cc   -Wall -Weffc++     CMakeFiles/cmTC_7b07e.dir/CheckIncludeFile.c.o  -o cmTC_7b07e 
+make[1]: Leaving directory '/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_e4276/fast"
+/usr/bin/make -f CMakeFiles/cmTC_e4276.dir/build.make CMakeFiles/cmTC_e4276.dir/build
+make[1]: Entering directory '/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e4276.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -Wall -Weffc++ -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_e4276.dir/CheckFunctionExists.c.o   -c /users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/CheckFunctionExists.c
+cc1: warning: command line option ‘-Weffc++’ is valid for C++/ObjC++ but not for C
+Linking C executable cmTC_e4276
+/users/studs/msc/brukes/clion-2016.3/bin/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e4276.dir/link.txt --verbose=1
+/usr/bin/cc   -Wall -Weffc++ -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_e4276.dir/CheckFunctionExists.c.o  -o cmTC_e4276 -lpthread 
+make[1]: Leaving directory '/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+
