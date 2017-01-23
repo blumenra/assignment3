@@ -14,13 +14,15 @@ private:
     vector<char> dataBytesBuffer;
     string downloadingFileName;
     int currentBlock;
-    
- 
-public:
-    
-    ClientProtocol();
-    BidiMessage process();
 
+
+    void addDataToBuffer(BidiMessage message);
+
+public:
+    ClientProtocol();
+
+
+    BidiMessage process();
 
     BidiMessage process(BidiMessage message);
 }; //class ConnectionHandler
