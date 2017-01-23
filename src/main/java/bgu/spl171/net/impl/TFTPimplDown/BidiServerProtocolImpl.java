@@ -17,6 +17,7 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
     private ConnectionsImpl<BidiMessage> connections;
     private int ownerClientId;
     private ByteArrayOutputStream byteOutPutStream = new ByteArrayOutputStream();
+    private String writingFileName = "";
 
 
     public BidiServerProtocolImpl(Map<String, BidiFile> filesList) {
@@ -111,10 +112,11 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
                         else {
 
                             filesList.get(message.getFileName()).setUploading(true);
+                            response = BidiMessage.createAckMessage(0);
+                            writingFileName = message.getFileName();
                         }
                     }
 
-                    response = BidiMessage.createAckMessage(0);
                     connections.send(ownerClientId, response);
 
                 case 3: //DATA
@@ -126,17 +128,18 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
 
                             byteOutPutStream.write(message.getData());
 
-                            fos = new FileOutputStream("Files/");
+                            fos = new FileOutputStream("Files/" + writingFileName);
                             fos.write(byteOutPutStream.toByteArray());
                             fos.close();
 
                             byteOutPutStream.reset();
 
-                            filesList.get(message.getFileName()).setUploading(false);
+                            filesList.get(writingFileName).setUploading(false);
 
                             connections.broadcast(BidiMessage.createBcastMessage(1, message.getFileName()));
 
                             response = BidiMessage.createAckMessage(message.getBlockNumber());
+                            writingFileName = "";
 
                         } catch (FileNotFoundException e) {
                             response = BidiMessage.createErrorMessage(1, "File not found – RRQ \\ DELRQ of non-existing file");
