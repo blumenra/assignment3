@@ -45,12 +45,9 @@ public class BlockingConnectionHandler<T> implements Runnable, ConnectionHandler
             connectionImpl.addConnector(clientID, this);
 
             while (!protocol.shouldTerminate() && connected && (read = in.read()) >= 0) {
-                System.out.println("blocking before decode read: " + read);
                 T nextMessage = encdec.decodeNextByte((byte) read);
-                System.out.println("blocking after decode read: " + read);
 
                 if (nextMessage != null) {
-                    System.out.println("next message: " + nextMessage.toString());
                     protocol.process(nextMessage);
                 }
             }

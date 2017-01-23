@@ -55,6 +55,11 @@
  *      }
  *      client tries to send legal input (DIRQ for example) before logging in
  *      client tries to sends empty input
+ *      client sends a RRQ for an existing but EMPTY file
+ *      client ask to read a file bigger that 512 bytes
+ *      client ask to read a file smaller that 512 bytes
+ *      client ask to read a file of EXACTLY 512 bytes
+ *      client ask to read a file of EXACTLY 512 bytes
  *
  *
  *
