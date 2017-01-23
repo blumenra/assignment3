@@ -17,7 +17,8 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
     private ConnectionsImpl<BidiMessage> connections;
     private int ownerClientId;
     private ByteArrayOutputStream byteOutPutStream = new ByteArrayOutputStream();
-    private String writingFileName = "";
+    private String uploadingFileName = "";
+    private int currentBlock = 0;
 
 
     public BidiServerProtocolImpl(Map<String, BidiFile> filesList) {
@@ -113,7 +114,7 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
 
                             filesList.get(message.getFileName()).setUploading(true);
                             response = BidiMessage.createAckMessage(0);
-                            writingFileName = message.getFileName();
+                            uploadingFileName = message.getFileName();
                         }
                     }
 
@@ -128,18 +129,18 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
 
                             byteOutPutStream.write(message.getData());
 
-                            fos = new FileOutputStream("Files/" + writingFileName);
+                            fos = new FileOutputStream("Files/" + uploadingFileName);
                             fos.write(byteOutPutStream.toByteArray());
                             fos.close();
 
                             byteOutPutStream.reset();
 
-                            filesList.get(writingFileName).setUploading(false);
+                            filesList.get(uploadingFileName).setUploading(false);
 
                             connections.broadcast(BidiMessage.createBcastMessage(1, message.getFileName()));
 
                             response = BidiMessage.createAckMessage(message.getBlockNumber());
-                            writingFileName = "";
+                            uploadingFileName = "";
 
                         } catch (FileNotFoundException e) {
                             response = BidiMessage.createErrorMessage(1, "File not found – RRQ \\ DELRQ of non-existing file");

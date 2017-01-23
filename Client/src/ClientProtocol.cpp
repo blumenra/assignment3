@@ -3,7 +3,10 @@
 
 ClientProtocol::ClientProtocol():
 waitingToLogin(false),
-upDownProcess(false)
+upDownProcess(false),
+incomingDataBytes(),
+downloadingFileName(""),
+currentBlock(0)
 {
 
 }
@@ -15,9 +18,11 @@ BidiMessage ClientProtocol::process(BidiMessage message) {
 	switch(opcode) {
 
 		case 3: //DATA
-			if() {
+//			if() {
+//
+//			}
 
-			}
+            break;
 
 
 		case 4: //ACK
@@ -30,7 +35,22 @@ BidiMessage ClientProtocol::process(BidiMessage message) {
 				
 			}
 
+            break;
+
+        case 5: //ERROR
+
+
+            break;
+
 		case 9: //BCAST
+
+
+            break;
+
+        default:
+
+            std::cerr << "Received unknown packet from server" << port << std::endl;
+            break;
 
 	}
 }

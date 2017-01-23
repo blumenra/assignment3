@@ -11,6 +11,9 @@ class ClientProtocol {
 private:
 	bool waitingToLogin;
 	bool upDownProcess;
+    vector<char> incomingDataBytes;
+    string downloadingFileName;
+    int currentBlock;
     
  
 public:
