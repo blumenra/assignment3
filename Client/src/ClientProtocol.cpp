@@ -91,13 +91,14 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 
             waitingToLogin = true;
             reply = message;
-            comunicationCompleted = true;
+//            comunicationCompleted = true;
             break;
         }
         case 6: //DIRQ
         case 8: //DELRQ
         case 10: { //DISC
 
+            reply = message;
             break;
         }
 

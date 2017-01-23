@@ -191,14 +191,6 @@ bool ConnectionHandler::processMessage() {
 
     return result;
 
-
-
-
-
-
-
-
-
 //            TODO: send answer to protocol for a response. What is under here isn't needed.
 
 }
