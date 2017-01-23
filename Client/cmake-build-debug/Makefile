@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Client
+# Target rules for targets named Boost_Client
 
 # Build rule for target.
-Client: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Client
-.PHONY : Client
+Boost_Client: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Boost_Client
+.PHONY : Boost_Client
 
 # fast build rule for target.
-Client/fast:
-	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/build
-.PHONY : Client/fast
+Boost_Client/fast:
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/build
+.PHONY : Boost_Client/fast
 
 src/BidiEncDec.o: src/BidiEncDec.cpp.o
 
@@ -129,7 +129,7 @@ src/BidiEncDec.o: src/BidiEncDec.cpp.o
 
 # target to build an object file
 src/BidiEncDec.cpp.o:
-	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/BidiEncDec.cpp.o
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o
 .PHONY : src/BidiEncDec.cpp.o
 
 src/BidiEncDec.i: src/BidiEncDec.cpp.i
@@ -138,7 +138,7 @@ src/BidiEncDec.i: src/BidiEncDec.cpp.i
 
 # target to preprocess a source file
 src/BidiEncDec.cpp.i:
-	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/BidiEncDec.cpp.i
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.i
 .PHONY : src/BidiEncDec.cpp.i
 
 src/BidiEncDec.s: src/BidiEncDec.cpp.s
@@ -147,7 +147,7 @@ src/BidiEncDec.s: src/BidiEncDec.cpp.s
 
 # target to generate assembly for a file
 src/BidiEncDec.cpp.s:
-	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/BidiEncDec.cpp.s
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.s
 .PHONY : src/BidiEncDec.cpp.s
 
 src/BidiMessage.o: src/BidiMessage.cpp.o
@@ -156,7 +156,7 @@ src/BidiMessage.o: src/BidiMessage.cpp.o
 
 # target to build an object file
 src/BidiMessage.cpp.o:
-	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/BidiMessage.cpp.o
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.o
 .PHONY : src/BidiMessage.cpp.o
 
 src/BidiMessage.i: src/BidiMessage.cpp.i
@@ -165,7 +165,7 @@ src/BidiMessage.i: src/BidiMessage.cpp.i
 
 # target to preprocess a source file
 src/BidiMessage.cpp.i:
-	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/BidiMessage.cpp.i
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.i
 .PHONY : src/BidiMessage.cpp.i
 
 src/BidiMessage.s: src/BidiMessage.cpp.s
@@ -174,7 +174,7 @@ src/BidiMessage.s: src/BidiMessage.cpp.s
 
 # target to generate assembly for a file
 src/BidiMessage.cpp.s:
-	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/BidiMessage.cpp.s
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.s
 .PHONY : src/BidiMessage.cpp.s
 
 src/ClientProtocol.o: src/ClientProtocol.cpp.o
@@ -183,7 +183,7 @@ src/ClientProtocol.o: src/ClientProtocol.cpp.o
 
 # target to build an object file
 src/ClientProtocol.cpp.o:
-	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/ClientProtocol.cpp.o
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o
 .PHONY : src/ClientProtocol.cpp.o
 
 src/ClientProtocol.i: src/ClientProtocol.cpp.i
@@ -192,7 +192,7 @@ src/ClientProtocol.i: src/ClientProtocol.cpp.i
 
 # target to preprocess a source file
 src/ClientProtocol.cpp.i:
-	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/ClientProtocol.cpp.i
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.i
 .PHONY : src/ClientProtocol.cpp.i
 
 src/ClientProtocol.s: src/ClientProtocol.cpp.s
@@ -201,7 +201,7 @@ src/ClientProtocol.s: src/ClientProtocol.cpp.s
 
 # target to generate assembly for a file
 src/ClientProtocol.cpp.s:
-	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/ClientProtocol.cpp.s
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.s
 .PHONY : src/ClientProtocol.cpp.s
 
 src/bidiInputConverter.o: src/bidiInputConverter.cpp.o
@@ -210,7 +210,7 @@ src/bidiInputConverter.o: src/bidiInputConverter.cpp.o
 
 # target to build an object file
 src/bidiInputConverter.cpp.o:
-	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/bidiInputConverter.cpp.o
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o
 .PHONY : src/bidiInputConverter.cpp.o
 
 src/bidiInputConverter.i: src/bidiInputConverter.cpp.i
@@ -219,7 +219,7 @@ src/bidiInputConverter.i: src/bidiInputConverter.cpp.i
 
 # target to preprocess a source file
 src/bidiInputConverter.cpp.i:
-	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/bidiInputConverter.cpp.i
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.i
 .PHONY : src/bidiInputConverter.cpp.i
 
 src/bidiInputConverter.s: src/bidiInputConverter.cpp.s
@@ -228,7 +228,7 @@ src/bidiInputConverter.s: src/bidiInputConverter.cpp.s
 
 # target to generate assembly for a file
 src/bidiInputConverter.cpp.s:
-	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/bidiInputConverter.cpp.s
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.s
 .PHONY : src/bidiInputConverter.cpp.s
 
 src/client.o: src/client.cpp.o
@@ -237,7 +237,7 @@ src/client.o: src/client.cpp.o
 
 # target to build an object file
 src/client.cpp.o:
-	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/client.cpp.o
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/client.cpp.o
 .PHONY : src/client.cpp.o
 
 src/client.i: src/client.cpp.i
@@ -246,7 +246,7 @@ src/client.i: src/client.cpp.i
 
 # target to preprocess a source file
 src/client.cpp.i:
-	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/client.cpp.i
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/client.cpp.i
 .PHONY : src/client.cpp.i
 
 src/client.s: src/client.cpp.s
@@ -255,7 +255,7 @@ src/client.s: src/client.cpp.s
 
 # target to generate assembly for a file
 src/client.cpp.s:
-	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/client.cpp.s
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/client.cpp.s
 .PHONY : src/client.cpp.s
 
 src/connectionHandler.o: src/connectionHandler.cpp.o
@@ -264,7 +264,7 @@ src/connectionHandler.o: src/connectionHandler.cpp.o
 
 # target to build an object file
 src/connectionHandler.cpp.o:
-	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/connectionHandler.cpp.o
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o
 .PHONY : src/connectionHandler.cpp.o
 
 src/connectionHandler.i: src/connectionHandler.cpp.i
@@ -273,7 +273,7 @@ src/connectionHandler.i: src/connectionHandler.cpp.i
 
 # target to preprocess a source file
 src/connectionHandler.cpp.i:
-	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/connectionHandler.cpp.i
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.i
 .PHONY : src/connectionHandler.cpp.i
 
 src/connectionHandler.s: src/connectionHandler.cpp.s
@@ -282,7 +282,7 @@ src/connectionHandler.s: src/connectionHandler.cpp.s
 
 # target to generate assembly for a file
 src/connectionHandler.cpp.s:
-	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/connectionHandler.cpp.s
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.s
 .PHONY : src/connectionHandler.cpp.s
 
 # Help Target
@@ -293,7 +293,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... Client"
+	@echo "... Boost_Client"
 	@echo "... src/BidiEncDec.o"
 	@echo "... src/BidiEncDec.i"
 	@echo "... src/BidiEncDec.s"
