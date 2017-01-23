@@ -12,10 +12,12 @@ find_package(Boost 1.53.0 COMPONENTS
 include_directories(${Boost_INCLUDE_DIRS})
 
 set(SOURCE_FILES
+    include/ClientProtocol.h
     include/BidiEncDec.h
     include/BidiMessage.h
     include/connectionHandler.h
     include/bidiInputConverter.h
+    src/ClientProtocol.cpp
     src/BidiEncDec.cpp
     src/BidiMessage.cpp
     src/client.cpp

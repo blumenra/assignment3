@@ -115,6 +115,7 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
                     }
 
                     connections.send(ownerClientId, response);
+                    break;
 
                 case 3: //DATA
 
