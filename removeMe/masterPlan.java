@@ -47,6 +47,11 @@
  * test:
  *      prevent cliet from logging in with empty name
  *      handle illegale input in converter
+ *      a client logs in for the first time and then try to log-in again{
+ *          outcome:
+ *              the client sohuld receive an error message saying that the user is already logged in and print on his screen "ERROR <error No.>
+ *      }
+ *
  *
  *
  */
