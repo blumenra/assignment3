@@ -45,11 +45,22 @@ BidiMessage ClientProtocol::process(BidiMessage message) {
 
         case 5: //ERROR
 
-
+            std::cout << "Error: " << message.getErrorCode() << std::endl;
             break;
 
-		case 9: //BCAST
+        case 9: //BCAST
 
+            int broadReason = message.getDeletedAdded();
+            string occurrence = "";
+
+            if(broadReason != 0 && broadReason != 1) {
+
+                //TODO: handle the case when the broadcast number is neither 0 nor 1
+                std::cout << "Illegal broadcast" << std::endl;
+            }
+            else {
+                std::cout << "BCAST " << broadReason << " " << message.getFileName() << std::endl;
+            }
 
             break;
 
