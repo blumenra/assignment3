@@ -81,33 +81,9 @@ CMakeFiles/Boost_Client.dir/src/client.cpp.o.provides: CMakeFiles/Boost_Client.d
 CMakeFiles/Boost_Client.dir/src/client.cpp.o.provides.build: CMakeFiles/Boost_Client.dir/src/client.cpp.o
 
 
-CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o: CMakeFiles/Boost_Client.dir/flags.make
-CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o: ../src/ClientProtocol.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o -c /users/studs/msc/brukes/intelliJ/assignment3/Client/src/ClientProtocol.cpp
-
-CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/msc/brukes/intelliJ/assignment3/Client/src/ClientProtocol.cpp > CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.i
-
-CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/msc/brukes/intelliJ/assignment3/Client/src/ClientProtocol.cpp -o CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.s
-
-CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o.requires:
-
-.PHONY : CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o.requires
-
-CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o.provides: CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o.requires
-	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o.provides.build
-.PHONY : CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o.provides
-
-CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o.provides.build: CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o
-
-
 CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o: CMakeFiles/Boost_Client.dir/flags.make
 CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o: ../src/BidiEncDec.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o -c /users/studs/msc/brukes/intelliJ/assignment3/Client/src/BidiEncDec.cpp
 
 CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.i: cmake_force
@@ -127,6 +103,30 @@ CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o.provides: CMakeFiles/Boost_Clie
 .PHONY : CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o.provides
 
 CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o.provides.build: CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o
+
+
+CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o: CMakeFiles/Boost_Client.dir/flags.make
+CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o: ../src/bidiInputConverter.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o -c /users/studs/msc/brukes/intelliJ/assignment3/Client/src/bidiInputConverter.cpp
+
+CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/msc/brukes/intelliJ/assignment3/Client/src/bidiInputConverter.cpp > CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.i
+
+CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/msc/brukes/intelliJ/assignment3/Client/src/bidiInputConverter.cpp -o CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.s
+
+CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o.requires:
+
+.PHONY : CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o.requires
+
+CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o.provides: CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o.provides.build
+.PHONY : CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o.provides
+
+CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o.provides.build: CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o
 
 
 CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.o: CMakeFiles/Boost_Client.dir/flags.make
@@ -153,9 +153,33 @@ CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.o.provides: CMakeFiles/Boost_Cli
 CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.o.provides.build: CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.o
 
 
+CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o: CMakeFiles/Boost_Client.dir/flags.make
+CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o: ../src/ClientProtocol.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o -c /users/studs/msc/brukes/intelliJ/assignment3/Client/src/ClientProtocol.cpp
+
+CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/msc/brukes/intelliJ/assignment3/Client/src/ClientProtocol.cpp > CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.i
+
+CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/msc/brukes/intelliJ/assignment3/Client/src/ClientProtocol.cpp -o CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.s
+
+CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o.requires:
+
+.PHONY : CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o.requires
+
+CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o.provides: CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o.provides.build
+.PHONY : CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o.provides
+
+CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o.provides.build: CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o
+
+
 CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o: CMakeFiles/Boost_Client.dir/flags.make
 CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o: ../src/connectionHandler.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o -c /users/studs/msc/brukes/intelliJ/assignment3/Client/src/connectionHandler.cpp
 
 CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.i: cmake_force
@@ -177,48 +201,24 @@ CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o.provides: CMakeFiles/Boo
 CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o.provides.build: CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o
 
 
-CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o: CMakeFiles/Boost_Client.dir/flags.make
-CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o: ../src/bidiInputConverter.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o -c /users/studs/msc/brukes/intelliJ/assignment3/Client/src/bidiInputConverter.cpp
-
-CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/msc/brukes/intelliJ/assignment3/Client/src/bidiInputConverter.cpp > CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.i
-
-CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/msc/brukes/intelliJ/assignment3/Client/src/bidiInputConverter.cpp -o CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.s
-
-CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o.requires:
-
-.PHONY : CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o.requires
-
-CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o.provides: CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o.requires
-	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o.provides.build
-.PHONY : CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o.provides
-
-CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o.provides.build: CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o
-
-
 # Object files for target Boost_Client
 Boost_Client_OBJECTS = \
 "CMakeFiles/Boost_Client.dir/src/client.cpp.o" \
-"CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o" \
 "CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o" \
+"CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o" \
 "CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.o" \
-"CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o" \
-"CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o"
+"CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o" \
+"CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o"
 
 # External object files for target Boost_Client
 Boost_Client_EXTERNAL_OBJECTS =
 
 Boost_Client: CMakeFiles/Boost_Client.dir/src/client.cpp.o
-Boost_Client: CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o
 Boost_Client: CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o
-Boost_Client: CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.o
-Boost_Client: CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o
 Boost_Client: CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o
+Boost_Client: CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.o
+Boost_Client: CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o
+Boost_Client: CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o
 Boost_Client: CMakeFiles/Boost_Client.dir/build.make
 Boost_Client: /usr/lib/x86_64-linux-gnu/libboost_system.so
 Boost_Client: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
@@ -236,11 +236,11 @@ CMakeFiles/Boost_Client.dir/build: Boost_Client
 .PHONY : CMakeFiles/Boost_Client.dir/build
 
 CMakeFiles/Boost_Client.dir/requires: CMakeFiles/Boost_Client.dir/src/client.cpp.o.requires
-CMakeFiles/Boost_Client.dir/requires: CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o.requires
 CMakeFiles/Boost_Client.dir/requires: CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o.requires
-CMakeFiles/Boost_Client.dir/requires: CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.o.requires
-CMakeFiles/Boost_Client.dir/requires: CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o.requires
 CMakeFiles/Boost_Client.dir/requires: CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o.requires
+CMakeFiles/Boost_Client.dir/requires: CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.o.requires
+CMakeFiles/Boost_Client.dir/requires: CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o.requires
+CMakeFiles/Boost_Client.dir/requires: CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o.requires
 
 .PHONY : CMakeFiles/Boost_Client.dir/requires
 
