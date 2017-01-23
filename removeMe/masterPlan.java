@@ -44,6 +44,8 @@
  * }
  * remove the removeMe.txt file in the Files folder
  * handle all 'new' object in client side (delete if necessary)
+ * not sure if DISC means the client should be removed from the logged-in users list or his CH shoud be completley removed from server
+ *
  * test:
  *      prevent cliet from logging in with empty name
  *      handle illegale input in converter
@@ -51,6 +53,8 @@
  *          outcome:
  *              the client sohuld receive an error message saying that the user is already logged in and print on his screen "ERROR <error No.>
  *      }
+ *      client tries to send legal input (DIRQ for example) before logging in
+ *      client tries to sends empty input
  *
  *
  *

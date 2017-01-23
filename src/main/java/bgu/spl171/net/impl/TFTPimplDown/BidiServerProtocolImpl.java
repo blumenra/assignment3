@@ -238,10 +238,11 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
 
                 case 10: //DISC
 
-                    connections.disconnect(ownerClientId);
                     response = BidiMessage.createAckMessage(0);
-
                     connections.send(ownerClientId, response);
+
+                    connections.disconnect(ownerClientId);
+
                     break;
             }
         }
