@@ -9,7 +9,7 @@ downloadingFileName(""),
 currentBlock(0),
 communicationCompleted(false)
 {
-
+    std::cout << "new protocol 333" << std::endl;
 }
 
 void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
@@ -17,48 +17,48 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 	short opcode = message.getOpcode();
     communicationCompleted = false;
 
+    std::cout << "here1 LAST RQ?" << lastRqCode << std::endl;
     std::cout << "entered protocol process" << std::endl;
-	switch(opcode) {
+    switch(opcode) {
 
 //        DATA
-		case 3: {
+        case 3: {
 
             std::cout << "packet size in protocol" << message.getPacketSize() << std::endl;
             addDataToBuffer(message);
+            std::cout << "here2 LAST RQ?" << lastRqCode << std::endl;
 
             std::cout << " data bytes buffer size" << dataBytesBuffer.size() << std::endl;
             if (message.getPacketSize() < 512) {
 
-                std::cout << "here LAST RQ?" << lastRqCode << std::endl;
+                std::cout << "here R LAST RQ?" << lastRqCode << std::endl;
                 std::cout << "here? OPCODE" << opcode << std::endl;
                 switch(lastRqCode) {
 
-//                    RRQ
+//                    RRQ in data
                     case 1: {
 
                     }
 
-//                    DIRQ
+//                    DIRQ in data
                     case 6: {
 
-                        std::cout << "-1" << std::endl;
                         unsigned long dataSize = dataBytesBuffer.size();
                         char receivedData[dataSize];
+                        std::cout << "data size: " << dataSize << std::endl;
 
-                        std::cout << "0" << std::endl;
+
                         for (unsigned long i = 0; i < dataSize; ++i) {
 
-                            std::cout << "1" << std::endl;
                             if(dataBytesBuffer[i] == '\0'){
-                                std::cout << "2" << std::endl;
                                 dataBytesBuffer[i] = '\n';
-                                std::cout << "3" << std::endl;
                             }
 
-                            std::cout << "4" << std::endl;
                             receivedData[i] = dataBytesBuffer.at(i);
                         }
-                        std::cout << string(receivedData) << std::endl << std::endl;
+                        std::cout << string(receivedData).substr(0, dataSize) << std::endl;
+                        dataBytesBuffer.clear();
+                        std::cout << "BUFFERSIZE" << dataBytesBuffer.size() << std::endl;
                         std::cout << "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" << std::endl;
                     }
 
@@ -66,7 +66,7 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 
                     }
                 }
-
+                lastRqCode = -1;
                 communicationCompleted = true;
             } else {
 
@@ -78,22 +78,23 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 //        ACK
 		case 4: {
 
+            switch (lastRqCode){
 
+//                RRQ in ACK
+                case 1: {
 
+                }
 
-            // Needs to be fixed
-            communicationCompleted = true;
-            if(waitingToLogin) {
-                waitingToLogin = false;
+//                WRQ in ACK
+                case 2: {
 
-			}
-//			else if() {
-//
-//			}
-            // Needs to be fixed
+                }
 
+                default: {
 
-
+                    communicationCompleted = true;
+                }
+            }
 
             break;
         }
@@ -108,6 +109,8 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 //        BCAST
         case 9: {
 
+            reply = message;
+            communicationCompleted = false;
             int broadReason = message.getDeletedAdded();
 
             if(broadReason != 0 && broadReason != 1) {
@@ -129,7 +132,7 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 
             waitingToLogin = true;
             reply = message;
-            communicationCompleted = true;
+//            communicationCompleted = true;
             break;
         }
 
@@ -140,7 +143,10 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 
             reply = message;
             communicationCompleted = true;
-            lastRqCode = opcode;
+            std::cout << "setting lastRqCode as: " << opcode << std::endl;
+
+            setLastRqCode(opcode);
+            std::cout << "set lastRqCode as: " << lastRqCode << std::endl;
             break;
         }
 
@@ -150,13 +156,13 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
             break;
         }
 
-
 	}
 }
 
 void ClientProtocol::addDataToBuffer(BidiMessage message) {
 
     char data[message.getPacketSize()];
+    message.copyData(data);
     int size = message.getPacketSize();
 
     for (int i = 0; i < size; ++i) {
@@ -166,7 +172,7 @@ void ClientProtocol::addDataToBuffer(BidiMessage message) {
 }
 
 void ClientProtocol::setLastRqCode(int lastRqCode) {
-    ClientProtocol::lastRqCode = lastRqCode;
+    this->lastRqCode = lastRqCode;
 }
 
 int ClientProtocol::getLastRqCode() const {

@@ -76,38 +76,7 @@ bool ConnectionHandler::sendBytes(const char bytes[], int bytesToWrite) {
     }
     return true;
 }
- 
-bool ConnectionHandler::getLine(std::string& line) {
 
-//    return getFrameAscii(line, '\n');
-    return getFrameAscii(line, '\0');
-}
- 
-bool ConnectionHandler::sendLine(std::string& line) {
-    return sendFrameAscii(line, '\n');
-}
- 
-bool ConnectionHandler::getFrameAscii(std::string& frame, char delimiter) {
-    char ch;
-    // Stop when we encounter the null character. 
-    // Notice that the null character is not appended to the frame string.
-    try {
-        do{
-            getBytes(&ch, 1);
-            frame.append(1, ch);
-        }while (delimiter != ch);
-    } catch (std::exception& e) {
-        std::cerr << "recv failed (Error: " << e.what() << ')' << std::endl;
-        return false;
-    }
-    return true;
-}
- 
-bool ConnectionHandler::sendFrameAscii(const std::string& frame, char delimiter) {
-    bool result=sendBytes(frame.c_str(),frame.length());
-    if(!result) return false;
-    return sendBytes(&delimiter,1);
-}
  
 // Close down the connection properly.
 void ConnectionHandler::close() {
@@ -145,17 +114,29 @@ bool ConnectionHandler::getMessage(BidiMessage& message) {
 
 bool ConnectionHandler::sendMessage(BidiMessage &message) {
 
+    //
+    std::cout << "inside sendMesssage lastrq: " << protocol.getLastRqCode() << std::endl;
+//    protocol.setLastRqCode(8);
+    std::cout << "2inside sendMesssage lastrq: " << protocol.getLastRqCode() << std::endl;
+    //
+
+    if(message.getOpcode() == (short) 9){
+        return true;
+    }
+
     char encoded[message.getBytesLength()];
     encDec.encode(message, encoded);
 
-    bool toPrint = sendBytes(encoded, message.getBytesLength());
-    std::cout << "PRINT SENDBYTES RESULT" << toPrint << std::endl;
-    return toPrint;
+    return sendBytes(encoded, message.getBytesLength());
 }
 
 bool ConnectionHandler::processMessage() {
 
     bool result;
+
+    std::cout << "processMessage before while lasrrq: " << protocol.getLastRqCode() << std::endl;
+
+    protocol.setCommunicationCompleted(false);
 
     while(!protocol.isComunicationCompleted()) {
 
@@ -167,13 +148,18 @@ bool ConnectionHandler::processMessage() {
         std::cout << "after getMessage" << std::endl;
 
         std::cout << "**************Reply Opcode: " << answer.getOpcode() << std::endl << std::endl;
-
+        std::cout << "prot" << std::endl;
         if(!result) {
             std::cout << "1" << std::endl;
+            protocol.setCommunicationCompleted(false);
             return result;
         }
 
+        std::cout << "LASTRQCODE BEFORE PROCESS" << protocol.getLastRqCode() << std::endl;
+
         protocol.process(answer, reply);
+
+        std::cout << "LASTRQCODE AFTER PROCESS" << protocol.getLastRqCode()  << std::endl;
 
         if(reply.getOpcode() == -1){
 
@@ -183,7 +169,6 @@ bool ConnectionHandler::processMessage() {
         sendMessage(reply);
     }
 
-    protocol.setCommunicationCompleted(false);
 
 //    if(result){
 //

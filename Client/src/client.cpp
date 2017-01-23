@@ -16,6 +16,9 @@ int main (int argc, char *argv[]) {
     BidiInputConverter converter;
     BidiEncDec encDec = BidiEncDec();
     ClientProtocol protocol = ClientProtocol();
+//
+//    protocol.setLastRqCode(5);
+//
 
     ConnectionHandler connectionHandler(host, port, encDec, protocol);
     if (!connectionHandler.connect()) {
@@ -35,16 +38,20 @@ int main (int argc, char *argv[]) {
         BidiMessage messagePre = converter.convertInput(line);
         BidiMessage messagePost = BidiMessage();
 
+        std::cout << "before client process lastrq" << protocol.getLastRqCode() << std::endl;
         protocol.process(messagePre, messagePost);
+        std::cout << "after client process lastrq" << protocol.getLastRqCode() << std::endl;
 
         if(messagePost.isComplete()) {
 //        if(messagePre.isComplete()) {
+            std::cout << "1after client process lastrq" << protocol.getLastRqCode() << std::endl;
 
             if(!connectionHandler.sendMessage(messagePost)) {
 //            if(!connectionHandler.sendMessage(messagePre)) {
                 std::cout << "Disconnected. Exiting1...\n" << std::endl;
                 break;
             }
+            std::cout << "2after client process lastrq" << protocol.getLastRqCode() << std::endl;
 
             if(!connectionHandler.processMessage()){
                 std::cout << "Disconnected. Exiting2...\n" << std::endl;

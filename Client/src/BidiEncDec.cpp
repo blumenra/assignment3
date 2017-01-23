@@ -280,7 +280,7 @@ string BidiEncDec::incomingBytesToString(char nextByte){
         char fileNameBytes[incomingBytes.size()];
         incomingBytesToArr(fileNameBytes);
 
-        string aString = string(fileNameBytes);
+        string aString = string(fileNameBytes).substr(0, incomingBytes.size());
 
         return aString;
     }
