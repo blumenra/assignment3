@@ -19,8 +19,8 @@ BidiMessage ClientProtocol::process(BidiMessage message) {
 
 		case 3: //DATA
 
-            char data[message.getPacketSize()];
-            dataBytesBuffer.push_back(message.copyData((char*)data));
+            addDataToBuffer();
+
 			if(message.getPacketSize() < 512) {
 
 			}
@@ -60,4 +60,11 @@ BidiMessage ClientProtocol::process(BidiMessage message) {
             break;
 
 	}
+}
+
+void ClientProtocol::addDataToBuffer(BidiMessage message) {
+
+    char data[message.getPacketSize()];
+
+    dataBytesBuffer.push_back(message.copyData((char*)data));
 }
