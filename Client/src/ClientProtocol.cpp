@@ -85,9 +85,9 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
                 waitingToLogin = false;
 
 			}
-			else if(upDownProcess) {
-
-			}
+//			else if(upDownProcess) {
+//
+//			}
             // Needs to be fixed
 
 
@@ -120,9 +120,6 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
             break;
         }
 
-        }
-
-
         case 7: { //LOGRQ
 
             waitingToLogin = true;
@@ -130,6 +127,7 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 //            comunicationCompleted = true;
             break;
         }
+
         case 6: //DIRQ
         case 8: //DELRQ
         case 10: { //DISC
@@ -138,13 +136,11 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
             break;
         }
 
-        default:
+        default:{
 
             std::cout << "Received unknown package from server" << std::endl;
             break;
         }
-
-
 	}
 }
 
