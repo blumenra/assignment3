@@ -99,7 +99,10 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 //        ERROR
         case 5: {
 
-            std::cout << "++++++++++++++++++++++++++++++++++++++++++Error: " << message.getErrorCode() << std::endl;
+            std::cout << "Error: " << message.getErrorCode() << std::endl;
+            comunicationCompleted = true;
+            reply = message;
+
             break;
         }
 
@@ -116,6 +119,9 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
             else {
                 std::cout << "BCAST " << broadReason << " " << message.getFileName() << std::endl;
             }
+
+            comunicationCompleted = true;
+            reply = message;
 
             break;
         }
@@ -138,7 +144,7 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 
         default:{
 
-            std::cout << "Received unknown package from server" << std::endl;
+            throw std::invalid_argument( "Received unknown package from server" );
             break;
         }
 	}
