@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /users/studs/bsc/2016/blumenra/clion-2016.3.2/bin/cmake/bin/cmake
+CMAKE_COMMAND = /users/studs/msc/brukes/clion-2016.3/bin/cmake/bin/cmake
 
 # The command to remove a file.
-RM = /users/studs/bsc/2016/blumenra/clion-2016.3.2/bin/cmake/bin/cmake -E remove -f
+RM = /users/studs/msc/brukes/clion-2016.3/bin/cmake/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client
+CMAKE_SOURCE_DIR = /users/studs/msc/brukes/intelliJ/assignment3/Client
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug
+CMAKE_BINARY_DIR = /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignmen
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/users/studs/bsc/2016/blumenra/clion-2016.3.2/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/users/studs/msc/brukes/clion-2016.3/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -70,7 +70,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/users/studs/bsc/2016/blumenra/clion-2016.3.2/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/users/studs/msc/brukes/clion-2016.3/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -176,6 +176,33 @@ src/BidiMessage.s: src/BidiMessage.cpp.s
 src/BidiMessage.cpp.s:
 	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.s
 .PHONY : src/BidiMessage.cpp.s
+
+src/ClientProtocol.o: src/ClientProtocol.cpp.o
+
+.PHONY : src/ClientProtocol.o
+
+# target to build an object file
+src/ClientProtocol.cpp.o:
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o
+.PHONY : src/ClientProtocol.cpp.o
+
+src/ClientProtocol.i: src/ClientProtocol.cpp.i
+
+.PHONY : src/ClientProtocol.i
+
+# target to preprocess a source file
+src/ClientProtocol.cpp.i:
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.i
+.PHONY : src/ClientProtocol.cpp.i
+
+src/ClientProtocol.s: src/ClientProtocol.cpp.s
+
+.PHONY : src/ClientProtocol.s
+
+# target to generate assembly for a file
+src/ClientProtocol.cpp.s:
+	$(MAKE) -f CMakeFiles/Boost_Client.dir/build.make CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.s
+.PHONY : src/ClientProtocol.cpp.s
 
 src/bidiInputConverter.o: src/bidiInputConverter.cpp.o
 
@@ -273,6 +300,9 @@ help:
 	@echo "... src/BidiMessage.o"
 	@echo "... src/BidiMessage.i"
 	@echo "... src/BidiMessage.s"
+	@echo "... src/ClientProtocol.o"
+	@echo "... src/ClientProtocol.i"
+	@echo "... src/ClientProtocol.s"
 	@echo "... src/bidiInputConverter.o"
 	@echo "... src/bidiInputConverter.i"
 	@echo "... src/bidiInputConverter.s"
