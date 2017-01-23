@@ -6,14 +6,16 @@ waitingToLogin(false),
 lastRqCode(-1),
 dataBytesBuffer(),
 downloadingFileName(""),
-currentBlock(0)
+currentBlock(0),
+comunicationCompleted(false)
 {
 
 }
 
-BidiMessage ClientProtocol::process(BidiMessage message) {
+void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 
 	short opcode = message.getOpcode();
+    comunicationCompleted = false;
 
 	switch(opcode) {
 
@@ -74,13 +76,22 @@ BidiMessage ClientProtocol::process(BidiMessage message) {
 //        ACK
 		case 4: {
 
-            if (waitingToLogin) {
+
+
+
+            // Needs to be fixed
+            comunicationCompleted = true;
+            if(waitingToLogin) {
                 waitingToLogin = false;
-            }
-//			else if() {
-//
-//
-//			}
+
+			}
+			else if(upDownProcess) {
+
+			}
+            // Needs to be fixed
+
+
+
 
             break;
         }
@@ -88,7 +99,7 @@ BidiMessage ClientProtocol::process(BidiMessage message) {
 //        ERROR
         case 5: {
 
-            std::cout << "Error: " << message.getErrorCode() << std::endl;
+            std::cout << "++++++++++++++++++++++++++++++++++++++++++Error: " << message.getErrorCode() << std::endl;
             break;
         }
 
@@ -96,23 +107,39 @@ BidiMessage ClientProtocol::process(BidiMessage message) {
         case 9: {
 
             int broadReason = message.getDeletedAdded();
-            string occurrence = "";
 
-            if (broadReason != 0 && broadReason != 1) {
+            if(broadReason != 0 && broadReason != 1) {
 
                 //TODO: handle the case when the broadcast number is neither 0 nor 1
                 std::cout << "Illegal broadcast" << std::endl;
-            } else {
+            }
+            else {
                 std::cout << "BCAST " << broadReason << " " << message.getFileName() << std::endl;
             }
 
             break;
         }
 
-        default:{
+        }
+
+
+        case 7: { //LOGRQ
+
+            waitingToLogin = true;
+            reply = message;
+            comunicationCompleted = true;
+            break;
+        }
+        case 6: //DIRQ
+        case 8: //DELRQ
+        case 10: { //DISC
+
+            break;
+        }
+
+        default:
 
             std::cout << "Received unknown package from server" << std::endl;
-
             break;
         }
 
@@ -137,4 +164,8 @@ void ClientProtocol::setLastRqCode(int lastRqCode) {
 
 int ClientProtocol::getLastRqCode() const {
     return lastRqCode;
+}
+
+bool ClientProtocol::isComunicationCompleted() const {
+    return comunicationCompleted;
 }

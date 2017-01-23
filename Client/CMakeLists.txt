@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 3.6)
 project(Client)
 
-#CFLAGS(-g -Wall -Weffc++ -std=c++11)
-
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Weffc++")
 set(CMAKE_CXX_STANDARD 11)
 
 find_package(Boost 1.53.0 COMPONENTS
@@ -12,18 +9,17 @@ find_package(Boost 1.53.0 COMPONENTS
 include_directories(${Boost_INCLUDE_DIRS})
 
 set(SOURCE_FILES
-    include/ClientProtocol.h
-    include/BidiEncDec.h
-    include/BidiMessage.h
-    include/connectionHandler.h
-    include/bidiInputConverter.h
-    src/ClientProtocol.cpp
-    src/BidiEncDec.cpp
-    src/BidiMessage.cpp
-    src/client.cpp
-    src/connectionHandler.cpp
-    src/bidiInputConverter.cpp)
+        include/BidiEncDec.h
+        include/bidiInputConverter.h
+        include/BidiMessage.h
+        include/ClientProtocol.h
+        include/connectionHandler.h
+        src/BidiEncDec.cpp
+        src/bidiInputConverter.cpp
+        src/BidiMessage.cpp
+        src/client.cpp
+        src/ClientProtocol.cpp
+        src/connectionHandler.cpp)
 
 add_executable(Boost_Client src/client.cpp ${SOURCE_FILES})
-
 target_link_libraries(Boost_Client ${Boost_LIBRARIES})

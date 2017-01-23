@@ -8,7 +8,8 @@ using std::cerr;
 using std::endl;
 using std::string;
  
-ConnectionHandler::ConnectionHandler(string host, short port): host_(host), port_(port), io_service_(), socket_(io_service_){}
+ConnectionHandler::ConnectionHandler(string host, short port, BidiEncDec& encDec, ClientProtocol& protocol):
+host_(host), port_(port), io_service_(), socket_(io_service_), encDec(encDec), protocol(protocol){}
     
 ConnectionHandler::~ConnectionHandler() {
     close();
@@ -117,7 +118,7 @@ void ConnectionHandler::close() {
     }
 }
 
-bool ConnectionHandler::getMessage(BidiMessage& message, BidiEncDec decoder) {
+bool ConnectionHandler::getMessage(BidiMessage& message) {
 
     char ch[1];
 
@@ -129,7 +130,7 @@ bool ConnectionHandler::getMessage(BidiMessage& message, BidiEncDec decoder) {
             std::cout << "before decoder BYTE "<< ch[0] << std::endl;
             std::cout << ""<< std::endl;
             std::cout << "before decoder isComplete "<< message.isComplete() << std::endl;
-            decoder.decodeNextByte(ch[0], message);
+            encDec.decodeNextByte(ch[0], message);
             std::cout << "after decoder isComplete "<< message.isComplete() << std::endl;
             std::cout << "after decoder opcodeXXXXXXXXXXXXX "<< message.getOpcode() << std::endl;
             std::cout << "after decoder blockNumberXXXXXXXXXXXXX "<< message.getBlockNumber() << std::endl;
@@ -140,4 +141,64 @@ bool ConnectionHandler::getMessage(BidiMessage& message, BidiEncDec decoder) {
     }
 
     return true;
+}
+
+bool ConnectionHandler::sendMessage(BidiMessage &message) {
+
+    char encoded[message.getBytesLength()];
+    encDec.encode(message, encoded);
+
+    return sendBytes(encoded, message.getBytesLength());
+}
+
+bool ConnectionHandler::processMessage() {
+
+    bool result;
+
+    while(!protocol.isComunicationCompleted()) {
+
+        BidiMessage answer = BidiMessage();
+        BidiMessage reply = BidiMessage();
+
+        result = getMessage(answer);
+
+        if(!result) {
+            return result;
+        }
+
+        protocol.process(answer, reply);
+
+        if(reply.getOpcode() == -1){
+
+            break;
+        }
+
+        sendMessage(reply);
+    }
+
+//    if(result){
+//
+//        std::cout << "**************Reply Opcode: " << answer.getOpcode() << std::endl << std::endl;
+//        if(answer.getOpcode() == 3){
+//
+//            int ps = answer.getPacketSize();
+//            char receivedData[ps];
+//            answer.copyData(receivedData);
+//            std::cout << "DATA: " << string(receivedData) << std::endl << std::endl;
+//        }
+//    }
+
+
+    return result;
+
+
+
+
+
+
+
+
+
+//            TODO: send answer to protocol for a response. What is under here isn't needed.
+
 }
