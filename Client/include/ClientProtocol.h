@@ -6,7 +6,7 @@
 #include <boost/asio.hpp>
 #include "BidiMessage.h"
 
- 
+
 class ClientProtocol {
 private:
 	bool waitingToLogin;
@@ -14,17 +14,16 @@ private:
     vector<char> dataBytesBuffer;
     string downloadingFileName;
     int currentBlock;
-
+	bool comunicationCompleted;
 
     void addDataToBuffer(BidiMessage message);
 
 public:
     ClientProtocol();
 
+	void process(BidiMessage& message, BidiMessage& reply);
 
-    BidiMessage process();
-
-    BidiMessage process(BidiMessage message);
+	bool isComunicationCompleted() const;
 }; //class ConnectionHandler
  
 #endif

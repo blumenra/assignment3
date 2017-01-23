@@ -5,6 +5,7 @@
 #include <iostream>
 #include <boost/asio.hpp>
 #include "BidiEncDec.h"
+#include "ClientProtocol.h"
 
 using boost::asio::ip::tcp;
  
@@ -13,10 +14,12 @@ private:
     const std::string host_;
     const short port_;
     boost::asio::io_service io_service_;   // Provides core I/O functionality
-    tcp::socket socket_; 
- 
+    tcp::socket socket_;
+    BidiEncDec encDec;
+    ClientProtocol protocol;
+
 public:
-    ConnectionHandler(std::string host, short port);
+    ConnectionHandler(std::string host, short port, BidiEncDec& encDec, ClientProtocol& protocol);
     virtual ~ConnectionHandler();
  
     // Connect to the remote machine
@@ -49,7 +52,12 @@ public:
     // Close down the connection properly.
     void close();
 
-    bool getMessage(BidiMessage& message, BidiEncDec decoder);
+    bool getMessage(BidiMessage& message);
+
+    bool sendMessage(BidiMessage& message);
+
+    bool processMessage();
+
 }; //class ConnectionHandler
  
 #endif

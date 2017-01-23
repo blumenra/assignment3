@@ -6,20 +6,30 @@ waitingToLogin(false),
 upDownProcess(false),
 dataBytesBuffer(),
 downloadingFileName(""),
-currentBlock(0)
+currentBlock(0),
+comunicationCompleted(false)
 {
 
 }
 
-BidiMessage ClientProtocol::process(BidiMessage message) {
+void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 
 	short opcode = message.getOpcode();
+    comunicationCompleted = false;
 
 	switch(opcode) {
 
+        case 1: { //RRQ
+
+        }
+
+        case 2: { //WRQ
+
+        }
+
 		case 3: //DATA
 
-            addDataToBuffer();
+//            addDataToBuffer();
 
 			if(message.getPacketSize() < 512) {
 
@@ -33,25 +43,35 @@ BidiMessage ClientProtocol::process(BidiMessage message) {
 
 		case 4: //ACK
 
-			if(waitingToLogin) {
-				waitingToLogin = false;
+
+
+
+            // Needs to be fixed
+            comunicationCompleted = true;
+            if(waitingToLogin) {
+                waitingToLogin = false;
+
 			}
 			else if(upDownProcess) {
 
-				
 			}
+            // Needs to be fixed
+
+
+
 
             break;
 
-        case 5: //ERROR
+        case 5: { //ERROR
 
-            std::cout << "Error: " << message.getErrorCode() << std::endl;
+            std::cout << "++++++++++++++++++++++++++++++++++++++++++Error: " << message.getErrorCode() << std::endl;
             break;
+        }
 
-        case 9: //BCAST
+
+        case 9: { //BCAST
 
             int broadReason = message.getDeletedAdded();
-            string occurrence = "";
 
             if(broadReason != 0 && broadReason != 1) {
 
@@ -64,10 +84,26 @@ BidiMessage ClientProtocol::process(BidiMessage message) {
 
             break;
 
+        }
+
+
+        case 7: { //LOGRQ
+
+            waitingToLogin = true;
+            reply = message;
+            comunicationCompleted = true;
+            break;
+        }
+        case 6: //DIRQ
+        case 8: //DELRQ
+        case 10: { //DISC
+
+            break;
+        }
+
         default:
 
             std::cout << "Received unknown package from server" << std::endl;
-
             break;
 
 	}
@@ -77,5 +113,9 @@ void ClientProtocol::addDataToBuffer(BidiMessage message) {
 
     char data[message.getPacketSize()];
 
-    dataBytesBuffer.push_back(message.copyData((char*)data));
+//    dataBytesBuffer.push_back(message.copyData((char*)data));
+}
+
+bool ClientProtocol::isComunicationCompleted() const {
+    return comunicationCompleted;
 }
