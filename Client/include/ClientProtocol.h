@@ -10,7 +10,7 @@
 class ClientProtocol {
 private:
 	bool waitingToLogin;
-	bool upDownProcess;
+	int lastRqCode;
     vector<char> dataBytesBuffer;
     string downloadingFileName;
     int currentBlock;
@@ -21,6 +21,9 @@ private:
 public:
     ClientProtocol();
 
+    int getLastRqCode() const;
+
+    void setLastRqCode(int lastRqCode);
 
     BidiMessage process();
 

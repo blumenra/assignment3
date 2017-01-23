@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "../include/connectionHandler.h"
 #include "../include/bidiInputConverter.h"
+#include "../include/ClientProtocol.h"
 
 /**
 * This code assumes that the server replies the exact text the client sent it (as opposed to the practical session example)
@@ -21,6 +22,7 @@ int main (int argc, char *argv[]) {
 
     BidiInputConverter converter;
     BidiEncDec encDec = BidiEncDec();
+    ClientProtocol protocol = ClientProtocol();
 
     //From here we will see the rest of the ehco client implementation:
     while (1) {
@@ -66,6 +68,10 @@ int main (int argc, char *argv[]) {
                 break;
             }
 
+            std::cout << "last rq code before set"<< protocol.getLastRqCode() << std::endl;
+            std::cout << "opcode" << answer.getOpcode() << std::endl;
+            protocol.setLastRqCode(answer.getOpcode());
+            std::cout << "last rq code after set"<< protocol.getLastRqCode() << std::endl;
 //            TODO: send answer to protocol for a response. What is under here isn't needed.
 
 //            len=answer.length();
@@ -73,7 +79,11 @@ int main (int argc, char *argv[]) {
             // we filled up to the \n char - we must make sure now that a 0 char is also present. So we truncate last character.
 //            answer.resize(len-1);
             std::cout << "**************Reply Opcode: " << answer.getOpcode() << std::endl << std::endl;
+
+
             if(answer.getOpcode() == 3){
+
+                protocol.process(answer);
 
                 int ps = answer.getPacketSize();
                 char receivedData[ps];

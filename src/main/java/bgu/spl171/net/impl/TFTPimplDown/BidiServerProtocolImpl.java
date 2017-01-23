@@ -170,7 +170,7 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
 
                             if(filesList.get(key).isReadable()){
 
-                                files += key + "-1";
+                                files += key + "\0";
                             }
                         }
                     }

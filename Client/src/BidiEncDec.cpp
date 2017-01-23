@@ -292,21 +292,11 @@ string BidiEncDec::incomingBytesToString(char nextByte){
 }
 
 void BidiEncDec::incomingBytesToArr(char* bytesArr){
-    std::cout << "incomingBytesToArr size of incomingBytes: " << incomingBytes.size() << std::endl;
-    std::cout << "incomingBytesToArr incomingBytes[10]: " << (int)incomingBytes[10] << std::endl;
-
-//    char byteArr[incomingBytes.size()];
 
     for(unsigned int i=0; i<incomingBytes.size(); i++){
 
         bytesArr[i] = incomingBytes.at((unsigned long) i);
-//        byteArr[i] = incomingBytes.at((unsigned long) i);
     }
-
-//    shortBytes = byteArr;
-    std::cout << "ba0 "<< (int)bytesArr[0] << std::endl;
-//    std::cout << "ba1 "<< (int)shortBytes[1] << std::endl;
-
 }
 
 void BidiEncDec::doneWithMessage(){

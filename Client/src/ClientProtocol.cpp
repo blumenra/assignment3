@@ -3,7 +3,7 @@
 
 ClientProtocol::ClientProtocol():
 waitingToLogin(false),
-upDownProcess(false),
+lastRqCode(-1),
 dataBytesBuffer(),
 downloadingFileName(""),
 currentBlock(0)
@@ -17,58 +17,105 @@ BidiMessage ClientProtocol::process(BidiMessage message) {
 
 	switch(opcode) {
 
-		case 3: //DATA
+//        DATA
+		case 3: {
 
-            addDataToBuffer();
+            std::cout << "packet size in protocol" << message.getPacketSize() << std::endl;
+            addDataToBuffer(message);
 
-			if(message.getPacketSize() < 512) {
+            std::cout << " data bytes buffer size" << dataBytesBuffer.size() << std::endl;
+            if (message.getPacketSize() < 512) {
 
-			}
-            else{
+                std::cout << "here LAST RQ?" << lastRqCode << std::endl;
+                std::cout << "here? OPCODE" << opcode << std::endl;
+                switch(lastRqCode) {
+
+//                    RRQ
+                    case 1: {
+
+                    }
+
+//                    DIRQ
+                    case 6: {
+
+                        std::cout << "-1" << std::endl;
+                        unsigned long dataSize = dataBytesBuffer.size();
+                        char receivedData[dataSize];
+
+                        std::cout << "0" << std::endl;
+                        for (unsigned long i = 0; i < dataSize; ++i) {
+
+                            std::cout << "1" << std::endl;
+                            if(dataBytesBuffer[i] == '\0'){
+                                std::cout << "2" << std::endl;
+                                dataBytesBuffer[i] = '\n';
+                                std::cout << "3" << std::endl;
+                            }
+
+                            std::cout << "4" << std::endl;
+                            receivedData[i] = dataBytesBuffer.at(i);
+                        }
+                        std::cout << string(receivedData) << std::endl << std::endl;
+                        std::cout << "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" << std::endl;
+                    }
+
+                    default: {
+
+                    }
+                }
+
+            } else {
 
             }
 
             break;
+        }
 
+//        ACK
+		case 4: {
 
-		case 4: //ACK
-
-			if(waitingToLogin) {
-				waitingToLogin = false;
-			}
-			else if(upDownProcess) {
-
-				
-			}
+            if (waitingToLogin) {
+                waitingToLogin = false;
+            }
+//			else if() {
+//
+//
+//			}
 
             break;
+        }
 
-        case 5: //ERROR
+//        ERROR
+        case 5: {
 
             std::cout << "Error: " << message.getErrorCode() << std::endl;
             break;
+        }
 
-        case 9: //BCAST
+//        BCAST
+        case 9: {
 
             int broadReason = message.getDeletedAdded();
             string occurrence = "";
 
-            if(broadReason != 0 && broadReason != 1) {
+            if (broadReason != 0 && broadReason != 1) {
 
                 //TODO: handle the case when the broadcast number is neither 0 nor 1
                 std::cout << "Illegal broadcast" << std::endl;
-            }
-            else {
+            } else {
                 std::cout << "BCAST " << broadReason << " " << message.getFileName() << std::endl;
             }
 
             break;
+        }
 
-        default:
+        default:{
 
             std::cout << "Received unknown package from server" << std::endl;
 
             break;
+        }
+
 
 	}
 }
@@ -76,6 +123,18 @@ BidiMessage ClientProtocol::process(BidiMessage message) {
 void ClientProtocol::addDataToBuffer(BidiMessage message) {
 
     char data[message.getPacketSize()];
+    int size = message.getPacketSize();
 
-    dataBytesBuffer.push_back(message.copyData((char*)data));
+    for (int i = 0; i < size; ++i) {
+
+        dataBytesBuffer.push_back(data[i]);
+    }
+}
+
+void ClientProtocol::setLastRqCode(int lastRqCode) {
+    ClientProtocol::lastRqCode = lastRqCode;
+}
+
+int ClientProtocol::getLastRqCode() const {
+    return lastRqCode;
 }
