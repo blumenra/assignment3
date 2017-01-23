@@ -43,13 +43,9 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
         short opcode = message.getOpcode();
         BidiMessage response = null;
 
-        // Illegal Opcode
-        if (message.getOpcode() == -1) {
 
-            sendIllegalOpcodeError();
-        }
         // attempt to do something before logging in
-        else if (!connections.isLoggedIn(ownerClientId) && (opcode != 7)) {
+        if (!connections.isLoggedIn(ownerClientId) && (opcode != 7)) {
 
             sendPleaseLoginFirstError();
         }
@@ -239,14 +235,18 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
                 case 10: //DISC
 
                     response = BidiMessage.createAckMessage(0);
+
                     connections.send(ownerClientId, response);
-
                     connections.disconnect(ownerClientId);
+                    break;
 
+
+                default: //Illegal Opcode
+
+                    sendIllegalOpcodeError();
                     break;
             }
         }
-
     }
 
     @Override
