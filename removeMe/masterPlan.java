@@ -51,6 +51,8 @@
  *          outcome:
  *              the client sohuld receive an error message saying that the user is already logged in and print on his screen "ERROR <error No.>
  *      }
+ *      client tries to send legal input (DIRQ for example) before logging in
+ *      client tries to sends empty input
  *
  *
  *
