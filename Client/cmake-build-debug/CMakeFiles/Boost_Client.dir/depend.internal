@@ -19,6 +19,7 @@ CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o
 CMakeFiles/Boost_Client.dir/src/client.cpp.o
  /users/studs/msc/brukes/intelliJ/assignment3/Client/include/BidiEncDec.h
  /users/studs/msc/brukes/intelliJ/assignment3/Client/include/BidiMessage.h
+ /users/studs/msc/brukes/intelliJ/assignment3/Client/include/ClientProtocol.h
  /users/studs/msc/brukes/intelliJ/assignment3/Client/include/bidiInputConverter.h
  /users/studs/msc/brukes/intelliJ/assignment3/Client/include/connectionHandler.h
  /users/studs/msc/brukes/intelliJ/assignment3/Client/src/client.cpp

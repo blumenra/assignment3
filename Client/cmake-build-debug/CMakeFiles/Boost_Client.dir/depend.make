@@ -18,6 +18,7 @@ CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o: ../src/bidiInputConver
 
 CMakeFiles/Boost_Client.dir/src/client.cpp.o: ../include/BidiEncDec.h
 CMakeFiles/Boost_Client.dir/src/client.cpp.o: ../include/BidiMessage.h
+CMakeFiles/Boost_Client.dir/src/client.cpp.o: ../include/ClientProtocol.h
 CMakeFiles/Boost_Client.dir/src/client.cpp.o: ../include/bidiInputConverter.h
 CMakeFiles/Boost_Client.dir/src/client.cpp.o: ../include/connectionHandler.h
 CMakeFiles/Boost_Client.dir/src/client.cpp.o: ../src/client.cpp

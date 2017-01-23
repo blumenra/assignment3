@@ -81,6 +81,8 @@ stdlib.h
 /users/studs/msc/brukes/intelliJ/assignment3/Client/include/connectionHandler.h
 ../include/bidiInputConverter.h
 /users/studs/msc/brukes/intelliJ/assignment3/Client/include/bidiInputConverter.h
+../include/ClientProtocol.h
+/users/studs/msc/brukes/intelliJ/assignment3/Client/include/ClientProtocol.h
 
 /users/studs/msc/brukes/intelliJ/assignment3/Client/src/connectionHandler.cpp
 ../include/connectionHandler.h
