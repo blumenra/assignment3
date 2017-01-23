@@ -12,13 +12,22 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/CMakeCommonLanguageInclude.cmake"
   "/users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/CMakeExtraGeneratorDetermineCompilerMacrosAndIncludeDirs.cmake"
   "/users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/CMakeFindCodeBlocks.cmake"
+  "/users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/CMakeFindDependencyMacro.cmake"
   "/users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/CMakeGenericSystem.cmake"
   "/users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/CMakeLanguageInformation.cmake"
+  "/users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/CMakeParseArguments.cmake"
   "/users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/CMakeSystemSpecificInformation.cmake"
   "/users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/CMakeSystemSpecificInitialize.cmake"
+  "/users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/CheckIncludeFile.cmake"
+  "/users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/CheckLibraryExists.cmake"
+  "/users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/CheckSymbolExists.cmake"
   "/users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/Compiler/GNU-C.cmake"
   "/users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/Compiler/GNU-CXX.cmake"
   "/users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/Compiler/GNU.cmake"
+  "/users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake"
+  "/users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/FindPackageHandleStandardArgs.cmake"
+  "/users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/FindPackageMessage.cmake"
+  "/users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/FindThreads.cmake"
   "/users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/Platform/Linux-GNU-C.cmake"
   "/users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/Platform/Linux-GNU-CXX.cmake"
   "/users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/Platform/Linux-GNU.cmake"
@@ -44,5 +53,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/Client.dir/DependInfo.cmake"
+  "CMakeFiles/Boost_Client.dir/DependInfo.cmake"
   )

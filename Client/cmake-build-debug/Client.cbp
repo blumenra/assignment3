@@ -37,8 +37,8 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="Client">
-				<Option output="/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/Client" prefix_auto="0" extension_auto="0"/>
+			<Target title="Boost_Client">
+				<Option output="/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/Boost_Client" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -54,14 +54,14 @@
 					<Add directory="/usr/include/c++/5/backward"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/Makefile&quot;  VERBOSE=1 Client"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/Makefile&quot;  VERBOSE=1 Boost_Client"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="Client/fast">
-				<Option output="/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/Client" prefix_auto="0" extension_auto="0"/>
+			<Target title="Boost_Client/fast">
+				<Option output="/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/Boost_Client" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -77,7 +77,7 @@
 					<Add directory="/usr/include/c++/5/backward"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/Makefile&quot;  VERBOSE=1 Client/fast"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/Makefile&quot;  VERBOSE=1 Boost_Client/fast"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -85,31 +85,31 @@
 			</Target>
 		</Build>
 		<Unit filename="/users/studs/msc/brukes/intelliJ/assignment3/Client/include/BidiEncDec.h">
-			<Option target="Client"/>
+			<Option target="Boost_Client"/>
 		</Unit>
 		<Unit filename="/users/studs/msc/brukes/intelliJ/assignment3/Client/include/BidiMessage.h">
-			<Option target="Client"/>
+			<Option target="Boost_Client"/>
 		</Unit>
 		<Unit filename="/users/studs/msc/brukes/intelliJ/assignment3/Client/include/bidiInputConverter.h">
-			<Option target="Client"/>
+			<Option target="Boost_Client"/>
 		</Unit>
 		<Unit filename="/users/studs/msc/brukes/intelliJ/assignment3/Client/include/connectionHandler.h">
-			<Option target="Client"/>
+			<Option target="Boost_Client"/>
 		</Unit>
 		<Unit filename="/users/studs/msc/brukes/intelliJ/assignment3/Client/src/BidiEncDec.cpp">
-			<Option target="Client"/>
+			<Option target="Boost_Client"/>
 		</Unit>
 		<Unit filename="/users/studs/msc/brukes/intelliJ/assignment3/Client/src/BidiMessage.cpp">
-			<Option target="Client"/>
+			<Option target="Boost_Client"/>
 		</Unit>
 		<Unit filename="/users/studs/msc/brukes/intelliJ/assignment3/Client/src/bidiInputConverter.cpp">
-			<Option target="Client"/>
+			<Option target="Boost_Client"/>
 		</Unit>
 		<Unit filename="/users/studs/msc/brukes/intelliJ/assignment3/Client/src/client.cpp">
-			<Option target="Client"/>
+			<Option target="Boost_Client"/>
 		</Unit>
 		<Unit filename="/users/studs/msc/brukes/intelliJ/assignment3/Client/src/connectionHandler.cpp">
-			<Option target="Client"/>
+			<Option target="Boost_Client"/>
 		</Unit>
 		<Unit filename="/users/studs/msc/brukes/intelliJ/assignment3/Client/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
