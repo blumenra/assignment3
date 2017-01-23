@@ -7,7 +7,7 @@ lastRqCode(-1),
 dataBytesBuffer(),
 downloadingFileName(""),
 currentBlock(0),
-comunicationCompleted(false)
+communicationCompleted(false)
 {
 
 }
@@ -15,8 +15,9 @@ comunicationCompleted(false)
 void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 
 	short opcode = message.getOpcode();
-    comunicationCompleted = false;
+    communicationCompleted = false;
 
+    std::cout << "entered protocol process" << std::endl;
 	switch(opcode) {
 
 //        DATA
@@ -66,6 +67,7 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
                     }
                 }
 
+                communicationCompleted = true;
             } else {
 
             }
@@ -80,12 +82,12 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 
 
             // Needs to be fixed
-            comunicationCompleted = true;
+            communicationCompleted = true;
             if(waitingToLogin) {
                 waitingToLogin = false;
 
 			}
-//			else if(upDownProcess) {
+//			else if() {
 //
 //			}
             // Needs to be fixed
@@ -126,19 +128,25 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
             break;
         }
 
+
+
+
         case 7: { //LOGRQ
 
             waitingToLogin = true;
             reply = message;
-//            comunicationCompleted = true;
+            communicationCompleted = true;
             break;
         }
 
-        case 6: //DIRQ
-        case 8: //DELRQ
-        case 10: { //DISC
+//        DIRQ, DELRQ, DISQ
+        case 6:
+        case 8:
+        case 10: {
 
             reply = message;
+            communicationCompleted = true;
+            lastRqCode = opcode;
             break;
         }
 
@@ -170,5 +178,9 @@ int ClientProtocol::getLastRqCode() const {
 }
 
 bool ClientProtocol::isComunicationCompleted() const {
-    return comunicationCompleted;
+    return communicationCompleted;
+}
+
+void ClientProtocol::setCommunicationCompleted(bool communicationCompleted) {
+    ClientProtocol::communicationCompleted = communicationCompleted;
 }

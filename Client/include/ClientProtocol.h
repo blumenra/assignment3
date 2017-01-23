@@ -14,7 +14,7 @@ private:
     vector<char> dataBytesBuffer;
     string downloadingFileName;
     int currentBlock;
-	bool comunicationCompleted;
+	bool communicationCompleted;
 
     void addDataToBuffer(BidiMessage message);
 
@@ -24,6 +24,8 @@ public:
     int getLastRqCode() const;
 
     void setLastRqCode(int lastRqCode);
+
+    void setCommunicationCompleted(bool communicationCompleted);
 
     void process(BidiMessage& message, BidiMessage& reply);
 

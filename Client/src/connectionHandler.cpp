@@ -148,7 +148,9 @@ bool ConnectionHandler::sendMessage(BidiMessage &message) {
     char encoded[message.getBytesLength()];
     encDec.encode(message, encoded);
 
-    return sendBytes(encoded, message.getBytesLength());
+    bool toPrint = sendBytes(encoded, message.getBytesLength());
+    std::cout << "PRINT SENDBYTES RESULT" << toPrint << std::endl;
+    return toPrint;
 }
 
 bool ConnectionHandler::processMessage() {
@@ -160,9 +162,14 @@ bool ConnectionHandler::processMessage() {
         BidiMessage answer = BidiMessage();
         BidiMessage reply = BidiMessage();
 
+        std::cout << "entering getMessage" << std::endl;
         result = getMessage(answer);
+        std::cout << "after getMessage" << std::endl;
+
+        std::cout << "**************Reply Opcode: " << answer.getOpcode() << std::endl << std::endl;
 
         if(!result) {
+            std::cout << "1" << std::endl;
             return result;
         }
 
@@ -176,9 +183,10 @@ bool ConnectionHandler::processMessage() {
         sendMessage(reply);
     }
 
+    protocol.setCommunicationCompleted(false);
+
 //    if(result){
 //
-//        std::cout << "**************Reply Opcode: " << answer.getOpcode() << std::endl << std::endl;
 //        if(answer.getOpcode() == 3){
 //
 //            int ps = answer.getPacketSize();
@@ -189,6 +197,7 @@ bool ConnectionHandler::processMessage() {
 //    }
 
 
+    std::cout << "2" << std::endl;
     return result;
 
 //            TODO: send answer to protocol for a response. What is under here isn't needed.

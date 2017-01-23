@@ -42,12 +42,12 @@ int main (int argc, char *argv[]) {
 
             if(!connectionHandler.sendMessage(messagePost)) {
 //            if(!connectionHandler.sendMessage(messagePre)) {
-                std::cout << "Disconnected. Exiting...\n" << std::endl;
+                std::cout << "Disconnected. Exiting1...\n" << std::endl;
                 break;
             }
 
             if(!connectionHandler.processMessage()){
-                std::cout << "Disconnected. Exiting...\n" << std::endl;
+                std::cout << "Disconnected. Exiting2...\n" << std::endl;
                 break;
             }
 
