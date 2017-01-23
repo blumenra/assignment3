@@ -53,3 +53,62 @@ Makefile:126: recipe for target 'cmTC_e1436/fast' failed
 make: *** [cmTC_e1436/fast] Error 2
 
 
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_826c0/fast"
+make[1]: Entering directory '/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_826c0.dir/build.make CMakeFiles/cmTC_826c0.dir/build
+make[2]: Entering directory '/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_826c0.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_826c0.dir/CheckSymbolExists.c.o   -c /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_826c0
+/users/studs/bsc/2016/blumenra/clion-2016.3.2/bin/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_826c0.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_826c0.dir/CheckSymbolExists.c.o  -o cmTC_826c0 
+CMakeFiles/cmTC_826c0.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_826c0.dir/build.make:97: recipe for target 'cmTC_826c0' failed
+make[2]: *** [cmTC_826c0] Error 1
+make[2]: Leaving directory '/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_826c0/fast' failed
+make[1]: *** [cmTC_826c0/fast] Error 2
+make[1]: Leaving directory '/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+File /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_776ca/fast"
+make[1]: Entering directory '/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_776ca.dir/build.make CMakeFiles/cmTC_776ca.dir/build
+make[2]: Entering directory '/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_776ca.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_776ca.dir/CheckFunctionExists.c.o   -c /users/studs/bsc/2016/blumenra/clion-2016.3.2/bin/cmake/share/cmake-3.6/Modules/CheckFunctionExists.c
+Linking C executable cmTC_776ca
+/users/studs/bsc/2016/blumenra/clion-2016.3.2/bin/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_776ca.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_776ca.dir/CheckFunctionExists.c.o  -o cmTC_776ca -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_776ca.dir/build.make:97: recipe for target 'cmTC_776ca' failed
+make[2]: *** [cmTC_776ca] Error 1
+make[2]: Leaving directory '/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_776ca/fast' failed
+make[1]: *** [cmTC_776ca/fast] Error 2
+make[1]: Leaving directory '/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+

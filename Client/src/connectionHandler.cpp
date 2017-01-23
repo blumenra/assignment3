@@ -185,14 +185,6 @@ bool ConnectionHandler::processMessage() {
     std::cout << "2" << std::endl;
     return result;
 
-
-
-
-
-
-
-
-
 //            TODO: send answer to protocol for a response. What is under here isn't needed.
 
 }
