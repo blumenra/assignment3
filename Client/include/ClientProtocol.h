@@ -11,7 +11,7 @@ class ClientProtocol {
 private:
 	bool waitingToLogin;
 	bool upDownProcess;
-    vector<char> incomingDataBytes;
+    vector<char> dataBytesBuffer;
     string downloadingFileName;
     int currentBlock;
     
@@ -22,6 +22,7 @@ public:
     BidiMessage process();
 
 
+    BidiMessage process(BidiMessage message);
 }; //class ConnectionHandler
  
 #endif

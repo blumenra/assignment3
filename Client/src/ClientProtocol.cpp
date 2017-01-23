@@ -4,7 +4,7 @@
 ClientProtocol::ClientProtocol():
 waitingToLogin(false),
 upDownProcess(false),
-incomingDataBytes(),
+dataBytesBuffer(),
 downloadingFileName(""),
 currentBlock(0)
 {
@@ -18,9 +18,15 @@ BidiMessage ClientProtocol::process(BidiMessage message) {
 	switch(opcode) {
 
 		case 3: //DATA
-//			if() {
-//
-//			}
+
+            char data[message.getPacketSize()];
+            dataBytesBuffer.push_back(message.copyData((char*)data));
+			if(message.getPacketSize() < 512) {
+
+			}
+            else{
+
+            }
 
             break;
 
@@ -49,7 +55,8 @@ BidiMessage ClientProtocol::process(BidiMessage message) {
 
         default:
 
-            std::cerr << "Received unknown packet from server" << port << std::endl;
+            std::cout << "Received unknown package from server" << std::endl;
+
             break;
 
 	}
