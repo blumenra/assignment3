@@ -1,23 +1,22 @@
 Determining if the pthread_create exist failed with the following output:
 Change Dir: /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_e3ea3/fast"
-/usr/bin/make -f CMakeFiles/cmTC_e3ea3.dir/build.make CMakeFiles/cmTC_e3ea3.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_9bd05/fast"
+/usr/bin/make -f CMakeFiles/cmTC_9bd05.dir/build.make CMakeFiles/cmTC_9bd05.dir/build
 make[1]: Entering directory '/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_e3ea3.dir/CheckSymbolExists.c.o
-/usr/bin/cc    -Wall -Weffc++    -o CMakeFiles/cmTC_e3ea3.dir/CheckSymbolExists.c.o   -c /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c
-cc1: warning: command line option ‘-Weffc++’ is valid for C++/ObjC++ but not for C
-Linking C executable cmTC_e3ea3
-/users/studs/msc/brukes/clion-2016.3/bin/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e3ea3.dir/link.txt --verbose=1
-/usr/bin/cc   -Wall -Weffc++     CMakeFiles/cmTC_e3ea3.dir/CheckSymbolExists.c.o  -o cmTC_e3ea3 
-CMakeFiles/cmTC_e3ea3.dir/CheckSymbolExists.c.o: In function `main':
+Building C object CMakeFiles/cmTC_9bd05.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_9bd05.dir/CheckSymbolExists.c.o   -c /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_9bd05
+/users/studs/msc/brukes/clion-2016.3/bin/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9bd05.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_9bd05.dir/CheckSymbolExists.c.o  -o cmTC_9bd05 
+CMakeFiles/cmTC_9bd05.dir/CheckSymbolExists.c.o: In function `main':
 CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_e3ea3.dir/build.make:97: recipe for target 'cmTC_e3ea3' failed
-make[1]: *** [cmTC_e3ea3] Error 1
+CMakeFiles/cmTC_9bd05.dir/build.make:97: recipe for target 'cmTC_9bd05' failed
+make[1]: *** [cmTC_9bd05] Error 1
 make[1]: Leaving directory '/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_e3ea3/fast' failed
-make: *** [cmTC_e3ea3/fast] Error 2
+Makefile:126: recipe for target 'cmTC_9bd05/fast' failed
+make: *** [cmTC_9bd05/fast] Error 2
 
 File /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
 /* */
@@ -37,22 +36,21 @@ int main(int argc, char** argv)
 Determining if the function pthread_create exists in the pthreads failed with the following output:
 Change Dir: /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_997fd/fast"
-/usr/bin/make -f CMakeFiles/cmTC_997fd.dir/build.make CMakeFiles/cmTC_997fd.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_e1436/fast"
+/usr/bin/make -f CMakeFiles/cmTC_e1436.dir/build.make CMakeFiles/cmTC_e1436.dir/build
 make[1]: Entering directory '/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_997fd.dir/CheckFunctionExists.c.o
-/usr/bin/cc    -Wall -Weffc++ -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_997fd.dir/CheckFunctionExists.c.o   -c /users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/CheckFunctionExists.c
-cc1: warning: command line option ‘-Weffc++’ is valid for C++/ObjC++ but not for C
-Linking C executable cmTC_997fd
-/users/studs/msc/brukes/clion-2016.3/bin/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_997fd.dir/link.txt --verbose=1
-/usr/bin/cc   -Wall -Weffc++ -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_997fd.dir/CheckFunctionExists.c.o  -o cmTC_997fd -lpthreads 
+Building C object CMakeFiles/cmTC_e1436.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_e1436.dir/CheckFunctionExists.c.o   -c /users/studs/msc/brukes/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/CheckFunctionExists.c
+Linking C executable cmTC_e1436
+/users/studs/msc/brukes/clion-2016.3/bin/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e1436.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_e1436.dir/CheckFunctionExists.c.o  -o cmTC_e1436 -lpthreads 
 /usr/bin/ld: cannot find -lpthreads
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_997fd.dir/build.make:97: recipe for target 'cmTC_997fd' failed
-make[1]: *** [cmTC_997fd] Error 1
+CMakeFiles/cmTC_e1436.dir/build.make:97: recipe for target 'cmTC_e1436' failed
+make[1]: *** [cmTC_e1436] Error 1
 make[1]: Leaving directory '/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_997fd/fast' failed
-make: *** [cmTC_997fd/fast] Error 2
+Makefile:126: recipe for target 'cmTC_e1436/fast' failed
+make: *** [cmTC_e1436/fast] Error 2
 
 
 Determining if the pthread_create exist failed with the following output:
