@@ -81,6 +81,8 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
                         byte[] array = Files.readAllBytes(new File("Files/"+message.getFileName()).toPath());
                         filesList.get(message.getFileName()).setDeleable(true);
 
+                        System.out.println("file data: " + Arrays.toString(array));
+
                         sendDataMessages(array);
 
                     } catch (IOException e) {
@@ -100,15 +102,20 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
                             connections.send(ownerClientId, response);
                             break;
                         }
-                        else if(filesList.get(message.getFileName()).isUploading()) {
-
-                            response = BidiMessage.createErrorMessage(2, "Access violation – File cannot be written, read or deleted.");
-                            connections.send(ownerClientId, response);
-                            break;
-                        }
+//                        else if(filesList.get(message.getFileName()).isUploading()) {
+//
+//                            response = BidiMessage.createErrorMessage(2, "Access violation – File cannot be written, read or deleted.");
+//                            connections.send(ownerClientId, response);
+//                            break;
+//                        }
                         else {
 
-                            filesList.get(message.getFileName()).setUploading(true);
+                            String fileName = message.getFileName();
+
+                            BidiFile upFile = new BidiFile(fileName);
+                            filesList.put(fileName, upFile);
+                            upFile.setUploading(true);
+
                             response = BidiMessage.createAckMessage(0);
                             uploadingFileName = message.getFileName();
                         }
@@ -302,12 +309,19 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
             BidiMessage response = BidiMessage.createDataMessage(newArray.length, counter++, newArray);
             connections.send(ownerClientId, response);
         }
-
         if (len % x != 0) {
+
             byte[] newArray = Arrays.copyOfRange(data, len - len % x, len);
             BidiMessage response = BidiMessage.createDataMessage(newArray.length, counter+1, newArray);
             connections.send(ownerClientId, response);
         }
+        else {
+
+            byte[] newArray = {};
+            BidiMessage response = BidiMessage.createDataMessage(0, counter+1, newArray);
+            connections.send(ownerClientId, response);
+        }
+
     }
 
     private void removeFile(String fileName) {

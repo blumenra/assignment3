@@ -43,8 +43,7 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
         case 2: {
 
             reply = message;
-//            TODO: change to sendingFileName
-            receivingFileName = message.getFileName();
+            sendingFileName = message.getFileName();
             communicationCompleted = true;
             std::cout << "setting lastRqCode as: " << opcode << std::endl;
 
@@ -71,6 +70,10 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 
             previousReceivedBlock = message.getBlockNumber();
 
+            std::cout << "BLOCK# " << message.getBlockNumber() << std::endl;
+            std::cout << "PSIZE " << message.getPacketSize() << message.getBlockNumber() << std::endl;
+
+
             std::cout << " data bytes buffer size" << dataBytesBuffer.size() << std::endl;
             if (message.getPacketSize() < 512) {
 
@@ -85,14 +88,31 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 //                    RRQ in data
                     case 1: {
 
+                        std::cout << "are you here??" << std::endl;
                         for (unsigned long i = 0; i < dataSize; ++i) {
 
                             receivedData[i] = dataBytesBuffer.at(i);
                         }
 
-                        ofstream receivedFile (receivingFileName, ios::out | ios::binary);
-                        receivedFile.write(receivedData, dataSize);
-                        receivedFile.close();
+                        if(dataSize != 0){
+
+                            std::cout << "or here??" << std::endl;
+                            ofstream receivedFile (receivingFileName, ios::out | ios::binary);
+                            receivedFile.write(receivedData, dataSize);
+                            receivedFile.close();
+                        } else{
+
+                            std::cout << "write empty1" << std::endl;
+                            ofstream receivedFile (receivingFileName, ios::out);
+                            std::cout << "write empty2" << std::endl;
+                            receivedFile.write(receivedData, dataSize);
+                            std::cout << "write empty3" << std::endl;
+                            receivedFile.close();
+                            std::cout << "write empty4" << std::endl;
+                        }
+
+//                        DON'T REMOVE THIS COUT!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        std::cout << "RRQ " << receivingFileName << " complete" << std::endl;
                     }
 
 //                    DIRQ in data
@@ -128,8 +148,8 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
                 communicationCompleted = true;
             }
 
-
             reply = BidiMessage::createAckMessage(message.getBlockNumber());
+            std::cout << "creating ACK from Data opcode:" << reply.getOpcode() << std::endl;
             break;
         }
 
@@ -152,7 +172,12 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 //                WRQ in ACK
                 case 2: {
 
+                    std::cout << "WRQ in ACK 666" << std::endl;
+
+
                     if(message.getBlockNumber() != lastSentBlockNum+1) {
+
+                        std::cout << "1" << std::endl;
 
                         lastRqCode = -1;
                         sendingFileName = "";
@@ -162,12 +187,20 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
                     }
                     else {
 
+                        std::cout << "2" << std::endl;
+
                         fileReadStream = std::ifstream(sendingFileName, std::ifstream::binary);
+
+                        std::cout << "3" << std::endl;
+
 
                         // Find the length of the file
                         fileReadStream.seekg(0, fileReadStream.end);
                         std::streampos flength = fileReadStream.tellg();
                         fileReadStream.seekg(0, fileReadStream.beg);
+
+                        std::cout << "4" << std::endl;
+
 
                         // Create a vector to read it into
                         std::vector<unsigned char> bytes(flength);
@@ -175,11 +208,18 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
                         // Actually read data
                         fileReadStream.read((char *)bytes.data(), flength);
 
+
+                        std::cout << "5" << std::endl;
+
+
                         unsigned int length = (unsigned int) flength;
 
                         char data[length];
 
                         for (unsigned int i = 0; i < length; ++i) {
+
+                            std::cout << "6" << std::endl;
+
 
                             data[i] = bytes.at(i);
                         }
@@ -189,9 +229,15 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 
                         for (unsigned int i = 0; i < length - x + 1; i += x) {
 
+
+                            std::cout << "7" << std::endl;
+
                             char newArray[x];
 
                             for(int j = 0; j < x; j++) {
+
+                                std::cout << "8" << std::endl;
+
                                 newArray[j] = data[j];
                             }
 
@@ -200,9 +246,14 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 
                         if (length % x != 0) {
 
+                            std::cout << "9" << std::endl;
+
+
                             char newArray[length % x];
 
                             for(int j = 0; j < x; j++) {
+                                std::cout << "10" << std::endl;
+
                                 newArray[j] = data[length % x];
                             }
 
@@ -211,6 +262,8 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 
                             // Close the file explicitly, since we're finished with it
                             fileReadStream.close();
+
+                            std::cout << "11" << std::endl;
 
                             lastRqCode = -1;
                             sendingFileName = "";

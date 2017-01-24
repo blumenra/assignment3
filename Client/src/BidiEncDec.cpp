@@ -36,6 +36,14 @@ bool BidiEncDec::dataMessageCreator(char nextByte){
         case 2: {
 
             bytesToBlockNumber(nextByte);
+
+            if(currentMessageFieldNumber == 3 && incomingMessage.getPacketSize() == 0){
+
+                done = true;
+                int bytesLength = 6;
+                incomingMessage.setBytesLength(bytesLength);
+            }
+
             break;
         }
 
@@ -319,10 +327,15 @@ void BidiEncDec::emptyIncomingBytes(){
 short BidiEncDec::incomingBytesToShort(char nextByte){
 
     incomingBytes.push_back(nextByte);
+    std::cout << "IBTS nextByte" << (int)nextByte << std::endl;
+    std::cout << "IBTS incomingBytes[0]" << (int)incomingBytes[0] << std::endl;
+    std::cout << "IBTS incomingBytes[1]" << (int)incomingBytes[1] << std::endl;
 
     if(incomingBytes.size() == 2){
 
+        std::cout << "INSIDE INCOMONIG b2s" << std::endl;
         char shortBytes[2];
+        incomingBytesToArr(shortBytes);
         short num = bytesToShort(shortBytes);
 
         return num;
@@ -335,12 +348,18 @@ void BidiEncDec::shortToBytes(short num, char* byteArr){
 
     byteArr[0] = (char) ((num >> 8) & 0xFF);
     byteArr[1] = (char) (num & 0xFF);
+    std::cout << "outgoing Bytes 0: " << (int)byteArr[0] << std::endl;
+    std::cout << "outgoing Bytes 1: " << (int)byteArr[1] << std::endl;
 }
 
 short BidiEncDec::bytesToShort(char* byteArr){
 
+    std::cout << "Incoming Bytes 0: " << (int)byteArr[0] << std::endl;
+    std::cout << "Incoming Bytes 1: " << (int)byteArr[1] << std::endl;
     short result = (short)((byteArr[0] & 0xff) << 8);
+    std::cout << "result 1: " << result << std::endl;
     result += (short)(byteArr[1] & 0xff);
+    std::cout << "result 2: " << result << std::endl;
 
     return result;
 }
@@ -357,6 +376,7 @@ void BidiEncDec::putInByteArray(char* toPut, int toPutLength, char* container, i
 
 void BidiEncDec::decodeNextByte(char nextByte, BidiMessage& newMessage){
 
+    std::cout << "NEXTBYTE" << (short)nextByte << std::endl;
     bool done = false;
 
     if(isNewMessage){
@@ -370,6 +390,7 @@ void BidiEncDec::decodeNextByte(char nextByte, BidiMessage& newMessage){
     if(currentMessageFieldNumber == 0){
 
         bytesToOpcode(nextByte);
+        std::cout << "OPCODE IN DECODE" << newMessage.getOpcode() << std::endl;
 
 //        DIRQ, DISC
         if(incomingMessage.getOpcode() == 6 || incomingMessage.getOpcode() == 10){
@@ -457,6 +478,7 @@ void BidiEncDec::encode(BidiMessage message, char* encoded){
 
     short msgType = message.getOpcode();
     char msgTypeBytes[2];
+    shortToBytes(msgType, msgTypeBytes);
 
     switch (msgType){
 
@@ -505,11 +527,24 @@ void BidiEncDec::encode(BidiMessage message, char* encoded){
         case 4: {
 
             short blockNumber = message.getBlockNumber();
-            char blockNumberBytes[] = "";
+            char blockNumberBytes[2];
             shortToBytes(blockNumber, blockNumberBytes);
 
+//            std::cout << "inside ACK blockNumberBytes[0]: " << (int) blockNumberBytes[0] << std::endl;
+//            std::cout << "inside ACK blockNumberBytes[1]: " << (int) blockNumberBytes[1] << std::endl;
+//            std::cout << "***" << std::endl;
             putInByteArray(msgTypeBytes, 2, encoded, 0);
+
+//            std::cout << "inside ACK blockNumberBytes[0]: " << (int) blockNumberBytes[0] << std::endl;
+//            std::cout << "inside ACK blockNumberBytes[1]: " << (int) blockNumberBytes[1] << std::endl;
+//            std::cout << "***" << std::endl;
+
             putInByteArray(blockNumberBytes, 2, encoded, 2);
+
+//            std::cout << "inside ACK blockNumberBytes[0]: " << (int) blockNumberBytes[0] << std::endl;
+//            std::cout << "inside ACK blockNumberBytes[1]: " << (int) blockNumberBytes[1] << std::endl;
+//            std::cout << "***" << std::endl;
+
 
             break;
         }
@@ -557,6 +592,11 @@ void BidiEncDec::encode(BidiMessage message, char* encoded){
 
 //            char encodedT[] = "";
 
+            std::cout << "1XXXXXXXXXXXXXXXXXX" << (int) msgTypeBytes[0] << std::endl;
+            std::cout << "1XXXXXXXXXXXXXXXXXX" << (int) msgTypeBytes[1] << std::endl;
+            std::cout << "1XXXXXXXXXXXXXXXXXX" << msgType << std::endl;
+            std::cout << "1XXXXXXXXXXXXXXXXXX" << userNameBytes << std::endl;
+            std::cout << "1XXXXXXXXXXXXXXXXXX" << aByte << std::endl;
             putInByteArray(msgTypeBytes, 2, encoded, 0);
             putInByteArray(userNameBytes, (int) userName.length(), encoded, 2);
             putInByteArray(aByte, 1, encoded, encodedLength-1);

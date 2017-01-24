@@ -40,7 +40,7 @@ BidiMessage BidiMessage::createRRQMessage(string fileName) {
 
 BidiMessage BidiMessage::createWRQMessage(string fileName) {
 
-    return BidiMessage((short) 1, fileName, (char) 0);
+    return BidiMessage((short) 2, fileName, (char) 0);
 }
 
 BidiMessage BidiMessage::createDirMessage() {
