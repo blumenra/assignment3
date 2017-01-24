@@ -134,7 +134,7 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
 
                             filesList.get(uploadingFileName).setUploading(false);
 
-                            connections.broadcast(BidiMessage.createBcastMessage(1, message.getFileName()));
+                            connections.broadcast(BidiMessage.createBcastMessage(1, uploadingFileName));
 
                             response = BidiMessage.createAckMessage(message.getBlockNumber());
                             uploadingFileName = "";
