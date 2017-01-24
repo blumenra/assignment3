@@ -1,7 +1,7 @@
 
 #include "../include/BidiEncDec.h"
 
-
+//1
 bool BidiEncDec::delrqRrqWrqMessageCreator(char nextByte){
 
     bool done = false;

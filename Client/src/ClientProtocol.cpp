@@ -1,6 +1,6 @@
 #include "../include/ClientProtocol.h"
 
-
+//1
 ClientProtocol::ClientProtocol():
 waitingToLogin(false),
 lastRqCode(-1),
