@@ -12,7 +12,7 @@ private:
 	bool waitingToLogin;
 	int lastRqCode;
     vector<char> dataBytesBuffer;
-    string downloadingFileName;
+    string currentFileName;
     int currentBlock;
 	bool communicationCompleted;
 
