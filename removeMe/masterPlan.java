@@ -64,7 +64,10 @@
  *          outcome:
  *              the client should receive the lowest error code message
  *      }
- *
+ *      client sends DISC {
+ *          outcome:
+ *              only after receiveing ACK for it all threads should terminate gracfully
+ *      }
  *
  *
  */
