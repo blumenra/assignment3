@@ -81,6 +81,7 @@ BidiMessage::BidiMessage(const BidiMessage& original){
     std::cout << "isComplete original? "<< original.isComplete() << std::endl;
     this->complete = original.isComplete();
     std::cout << "isComplete? this"<< complete << std::endl;
+    this->bytesLength = original.getBytesLength();
 
     this->bytesLength = original.getBytesLength();
     switch (opcode){
@@ -191,7 +192,7 @@ errorCode(-1),
 errMsg(""),
 aByte((char) 0),
 complete(true),
-bytesLength(packetSize+6)
+bytesLength((packetSize + 6))
 {
     setData(data);
 }

@@ -21,8 +21,8 @@ private:
 	bool communicationCompleted;
 	string sendingFileName;
     vector<unsigned char> uploadFileData;
-	std::ifstream fileReadStream;
-    void addDataToBuffer(BidiMessage message);
+
+	void addDataToBuffer(BidiMessage message);
 
 public:
     ClientProtocol();

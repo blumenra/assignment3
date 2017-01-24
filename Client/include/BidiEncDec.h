@@ -57,7 +57,7 @@ public:
 
     void decodeNextByte(char nextByte, BidiMessage& newMessage);
 
-    void encode(BidiMessage message, char* encoded);
+    void encode(BidiMessage& message, char* encoded);
 
     virtual ~BidiEncDec();
 };

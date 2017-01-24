@@ -126,7 +126,12 @@ bool ConnectionHandler::sendMessage(BidiMessage &message) {
     }
 
     char encoded[message.getBytesLength()];
+    std::cout << "message bytesLength " << message.getBytesLength() << std::endl;
+    std::cout << "message packetSize " << message.getPacketSize() << std::endl;
+
     encDec.encode(message, encoded);
+
+
 
     return sendBytes(encoded, message.getBytesLength());
 }
@@ -159,6 +164,9 @@ bool ConnectionHandler::processMessage() {
         std::cout << "LASTRQCODE BEFORE PROCESS" << protocol.getLastRqCode() << std::endl;
 
         protocol.process(answer, reply);
+
+        std::cout << "44reply.getOpcode(): " << reply.getOpcode() << std::endl;
+
 
         std::cout << "LASTRQCODE AFTER PROCESS" << protocol.getLastRqCode()  << std::endl;
 
