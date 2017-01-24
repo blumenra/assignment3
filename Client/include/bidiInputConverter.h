@@ -7,7 +7,7 @@
 #include <iostream>
 #include <vector>
 
-
+//1
 using namespace std;
 
 class BidiInputConverter {

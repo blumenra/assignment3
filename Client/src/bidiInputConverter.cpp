@@ -3,6 +3,7 @@
 #include <string.h>
 #include <sstream>	
 
+//1
 BidiMessage BidiInputConverter::convertInput(string input) {
 
 

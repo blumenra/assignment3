@@ -1,6 +1,6 @@
 CFLAGS = -g -Wall -Weffc++ -std=c++11
 CC = g++
-BOOST  = -lboost_locale -lboost_system
+BOOST  = -lboost_locale -lboost_system -lboost_filesystem -lboost_thread
 
 
 # All Targets

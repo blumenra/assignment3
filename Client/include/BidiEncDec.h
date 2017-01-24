@@ -8,6 +8,8 @@
 
 #endif //CLIENT_BIDIENCDEC_H
 
+
+//1
 using namespace std;
 
 class BidiEncDec {
