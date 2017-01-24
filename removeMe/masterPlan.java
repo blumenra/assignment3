@@ -60,7 +60,14 @@
  *      client ask to read a file smaller that 512 bytes
  *      client ask to read a file of EXACTLY 512 bytes
  *      client ask to read a file of EXACTLY 512 bytes
- *
+ *      clients does things that require more than one error message response{
+ *          outcome:
+ *              the client should receive the lowest error code message
+ *      }
+ *      client sends DISC {
+ *          outcome:
+ *              only after receiveing ACK for it all threads should terminate gracfully
+ *      }
  *
  *
  */

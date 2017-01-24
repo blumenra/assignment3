@@ -5,6 +5,8 @@
 #include <iostream>
 #include <boost/asio.hpp>
 #include "BidiMessage.h"
+#include <fstream>
+#include <iostream>
 
 //1
 class ClientProtocol {
@@ -14,7 +16,11 @@ private:
     vector<char> dataBytesBuffer;
     string receivingFileName;
     int previousReceivedBlock;
+    int lastSentBlockNum;
+    bool startReading;
 	bool communicationCompleted;
+	string sendingFileName;
+	std::ifstream fileReadStream;
 
     void addDataToBuffer(BidiMessage message);
 
@@ -30,6 +36,8 @@ public:
     void process(BidiMessage& message, BidiMessage& reply);
 
 	bool isComunicationCompleted() const;
+
+	bool isStartReading() const;
 }; //class ConnectionHandler
  
 #endif
