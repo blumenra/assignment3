@@ -7,6 +7,11 @@ lastRqCode(-1),
 dataBytesBuffer(),
 currentFileName(""),
 currentBlock(0),
+priviouslySentBlockNum(0),
+lastSentBlockNum(0),
+startReading(false),
+sendingFileName(""),
+fileReadStream(NULL),
 communicationCompleted(false)
 {
     std::cout << "new protocol 333" << std::endl;
@@ -78,17 +83,88 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 //        ACK
 		case 4: {
 
+            std::cout << "ACK " << message.getBlockNumber() << std::endl;
+
             switch (lastRqCode){
 
 //                RRQ in ACK
                 case 1: {
 
+                    //TODO: this field needs to be set to false in the first received data!!!
+                    startReading = true;
 
+                    break;
                 }
 
 //                WRQ in ACK
                 case 2: {
 
+                    if(message.getBlockNumber() != lastSentBlockNum+1) {
+
+                        lastRqCode = -1;
+                        sendingFileName = "";
+                        communicationCompleted = true;
+                        lastSentBlockNum = 0;
+                        fileReadStream.close();
+                    }
+                    else {
+
+                        fileReadStream = std::ifstream(sendingFileName, std::ifstream::binary);
+
+                        // Find the length of the file
+                        fileReadStream.seekg(0, fileReadStream.end);
+                        std::streampos length = fileReadStream.tellg();
+                        fileReadStream.seekg(0, fileReadStream.beg);
+
+                        // Create a vector to read it into
+                        std::vector<unsigned char> bytes(length);
+
+                        // Actually read data
+                        fileReadStream.read((char *)bytes.data(), length);
+
+                        char data[length];
+
+                        for (unsigned long i = 0; i < length; ++i) {
+
+                            data[i] = bytes.at(i);
+                        }
+
+
+                        int x = 512;  // chunk size
+
+                        for (int i = 0; i < length - x + 1; i += x) {
+
+                            char newArray[x];
+
+                            for(int j = 0; j < x; j++) {
+                                newArray[j] = data[j];
+                            }
+
+                            reply = BidiMessage::createDataMessage(x, lastSentBlockNum++, newArray);
+                        }
+
+                        if (length % x != 0) {
+
+                            char newArray[length % x];
+
+                            for(int j = 0; j < x; j++) {
+                                newArray[j] = data[length % x];
+                            }
+
+                            reply = BidiMessage::createDataMessage(length % x, lastSentBlockNum++, newArray);
+
+
+                            // Close the file explicitly, since we're finished with it
+                            fileReadStream.close();
+
+                            lastRqCode = -1;
+                            sendingFileName = "";
+                            communicationCompleted = true;
+                            lastSentBlockNum = 0;
+                        }
+                    }
+
+                    break;
                 }
 
                 default: {
@@ -96,6 +172,8 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
                     lastRqCode = -1;
                     currentFileName = "";
                     communicationCompleted = true;
+
+                    break;
                 }
             }
 
@@ -205,4 +283,8 @@ bool ClientProtocol::isComunicationCompleted() const {
 
 void ClientProtocol::setCommunicationCompleted(bool communicationCompleted) {
     ClientProtocol::communicationCompleted = communicationCompleted;
+}
+
+bool ClientProtocol::isStartReading() const {
+    return startReading;
 }
