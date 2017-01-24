@@ -128,12 +128,7 @@ bool ConnectionHandler::sendMessage(BidiMessage &message) {
     char encoded[message.getBytesLength()];
     encDec.encode(message, encoded);
 
-    for(int i = 0; i < message.getBytesLength(); i++){
-
-        std::cout << (int) encoded[i] << ", " << std::endl;
-    }
-//    return sendBytes(encoded, message.getBytesLength());
-    return true;
+    return sendBytes(encoded, message.getBytesLength());
 }
 
 bool ConnectionHandler::processMessage() {
