@@ -41,6 +41,8 @@ public:
             protocol.process(messagePre, messagePost);
             std::cout << "after client process lastrq" << protocol.getLastRqCode() << std::endl;
 
+            std::cout << "messagePost opcode: " << messagePost.getOpcode() << std::endl;
+
             if(messagePost.isComplete()) {
 //        if(messagePre.isComplete()) {
                 std::cout << "1after client process lastrq" << protocol.getLastRqCode() << std::endl;
