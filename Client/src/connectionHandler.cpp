@@ -167,7 +167,10 @@ bool ConnectionHandler::processMessage() {
             break;
         }
 
-        sendMessage(reply);
+        if(!protocol.isStartReading()) {
+
+            sendMessage(reply);
+        }
     }
 
 
