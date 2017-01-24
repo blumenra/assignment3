@@ -160,7 +160,7 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
                     connections.send(ownerClientId, response);
                     break;
 
-                case 5: //ACK
+                case 4: //ACK
 
                     switch (lastRqCode){
 
