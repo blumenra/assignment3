@@ -473,12 +473,16 @@ void BidiEncDec::decodeNextByte(char nextByte, BidiMessage& newMessage){
 
 
 
-void BidiEncDec::encode(BidiMessage message, char* encoded){
+void BidiEncDec::encode(BidiMessage& message, char* encoded){
 
 
     short msgType = message.getOpcode();
     char msgTypeBytes[2];
     shortToBytes(msgType, msgTypeBytes);
+
+    std::cout << "55 msgType: " << msgType << std::endl;
+    std::cout << "55 msgTypeBytes0: " << (int)msgTypeBytes[0] << std::endl;
+    std::cout << "55 msgTypeBytes1: " << (int)msgTypeBytes[1] << std::endl;
 
     switch (msgType){
 
@@ -503,22 +507,70 @@ void BidiEncDec::encode(BidiMessage message, char* encoded){
 
 //            DATA
         case 3: {
-
+            std::cout << "51 msgTypeBytes0: " << (int)msgTypeBytes[0] << std::endl;
+            std::cout << "51 msgTypeBytes1: " << (int)msgTypeBytes[1] << std::endl;
             short packetSize = message.getPacketSize();
-            char packetSizeBytes[] = "";
+            char packetSizeBytes[2];
+
+            std::cout << "51.5 msgTypeBytes0: " << (int)msgTypeBytes[0] << std::endl;
+            std::cout << "51.5 msgTypeBytes1: " << (int)msgTypeBytes[1] << std::endl;
             shortToBytes(packetSize, packetSizeBytes);
 
+            std::cout << "52 msgTypeBytes0: " << (int)msgTypeBytes[0] << std::endl;
+            std::cout << "52 msgTypeBytes1: " << (int)msgTypeBytes[1] << std::endl;
             short blockNumber = message.getBlockNumber();
-            char blockNumberBytes[] = "";
+            char blockNumberBytes[2];
             shortToBytes(blockNumber, blockNumberBytes);
 
+            std::cout << "53 msgTypeBytes0: " << (int)msgTypeBytes[0] << std::endl;
+            std::cout << "53 msgTypeBytes1: " << (int)msgTypeBytes[1] << std::endl;
             char data[packetSize];
             message.copyData(data);
 
+            std::cout << "54 msgTypeBytes0: " << (int)msgTypeBytes[0] << std::endl;
+            std::cout << "54 msgTypeBytes1: " << (int)msgTypeBytes[1] << std::endl;
+            std::cout << "60 encoded: " << std::endl;
+            for(int i = 0; i < message.getBytesLength(); i++) {
+
+                std::cout << (int)encoded[i] << ", " << std::endl;
+            }
+
+            std::cout << "56 msgTypeBytes0: " << (int)msgTypeBytes[0] << std::endl;
+            std::cout << "56 msgTypeBytes1: " << (int)msgTypeBytes[1] << std::endl;
             putInByteArray(msgTypeBytes, 2, encoded, 0);
+            std::cout << "57 msgTypeBytes0: " << (int)msgTypeBytes[0] << std::endl;
+            std::cout << "57 msgTypeBytes1: " << (int)msgTypeBytes[1] << std::endl;
+
+            std::cout << "61 encoded: " << std::endl;
+            for(int i = 0; i < message.getBytesLength(); i++) {
+
+                std::cout << (int)encoded[i] << ", " << std::endl;
+            }
+
             putInByteArray(packetSizeBytes, 2, encoded, 2);
+
+            std::cout << "62 encoded: " << std::endl;
+            for(int i = 0; i < message.getBytesLength(); i++) {
+
+                std::cout << (int) encoded[i] << ", " << std::endl;
+            }
+
             putInByteArray(blockNumberBytes, 2, encoded, 4);
+
+            std::cout << "63 encoded: " << std::endl;
+            for(int i = 0; i < message.getBytesLength(); i++) {
+
+                std::cout << (int)encoded[i] << ", " << std::endl;
+            }
+
             putInByteArray(data, (int) packetSize, encoded, 6);
+
+            std::cout << "64 encoded: " << std::endl;
+            for(int i = 0; i < message.getBytesLength(); i++) {
+
+                std::cout << (int)encoded[i] << ", " << std::endl;
+            }
+
 
             break;
         }

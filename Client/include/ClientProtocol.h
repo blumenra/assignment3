@@ -20,10 +20,9 @@ private:
     bool startReading;
 	bool communicationCompleted;
 	string sendingFileName;
-	std::ifstream fileReadStream;
-	bool readyToDisconnect;
-
-    void addDataToBuffer(BidiMessage message);
+    vector<unsigned char> uploadFileData;
+    bool readyToDisconnect;
+	void addDataToBuffer(BidiMessage message);
 
 public:
     ClientProtocol();
