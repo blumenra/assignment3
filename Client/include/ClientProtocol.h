@@ -12,8 +12,8 @@ private:
 	bool waitingToLogin;
 	int lastRqCode;
     vector<char> dataBytesBuffer;
-    string currentFileName;
-    int currentBlock;
+    string receivingFileName;
+    int previousReceivedBlock;
 	bool communicationCompleted;
 
     void addDataToBuffer(BidiMessage message);
