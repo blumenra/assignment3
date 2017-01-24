@@ -28,9 +28,14 @@ public class ConnectionsImpl<T> implements Connections<T> {
     @Override
     public void broadcast(T msg) {
 
-        for(Integer key : clients.keySet()) {
+//        for(Integer key : clients.keySet()) {
+//
+//            clients.get(key).send(msg);
+//        }
 
-            clients.get(key).send(msg);
+        for(ConnectionHandler<T> client : clients.values()) {
+
+            client.send(msg);
         }
     }
 
