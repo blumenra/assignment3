@@ -17,7 +17,6 @@ private:
     string receivingFileName;
     int previousReceivedBlock;
     int lastSentBlockNum;
-    int priviouslySentBlockNum;
     bool startReading;
 	bool communicationCompleted;
 	string sendingFileName;

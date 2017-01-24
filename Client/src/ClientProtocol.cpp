@@ -8,7 +8,6 @@ lastRqCode(-1),
 dataBytesBuffer(),
 receivingFileName(""),
 previousReceivedBlock(0),
-priviouslySentBlockNum(0),
 lastSentBlockNum(0),
 startReading(false),
 sendingFileName(""),
@@ -167,18 +166,20 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 
                         // Find the length of the file
                         fileReadStream.seekg(0, fileReadStream.end);
-                        std::streampos length = fileReadStream.tellg();
+                        std::streampos flength = fileReadStream.tellg();
                         fileReadStream.seekg(0, fileReadStream.beg);
 
                         // Create a vector to read it into
-                        std::vector<unsigned char> bytes(length);
+                        std::vector<unsigned char> bytes(flength);
 
                         // Actually read data
-                        fileReadStream.read((char *)bytes.data(), length);
+                        fileReadStream.read((char *)bytes.data(), flength);
+
+                        unsigned int length = (unsigned int) flength;
 
                         char data[length];
 
-                        for (unsigned long i = 0; i < length; ++i) {
+                        for (unsigned int i = 0; i < length; ++i) {
 
                             data[i] = bytes.at(i);
                         }
@@ -186,7 +187,7 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 
                         int x = 512;  // chunk size
 
-                        for (int i = 0; i < length - x + 1; i += x) {
+                        for (unsigned int i = 0; i < length - x + 1; i += x) {
 
                             char newArray[x];
 
