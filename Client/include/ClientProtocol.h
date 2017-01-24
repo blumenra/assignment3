@@ -6,7 +6,7 @@
 #include <boost/asio.hpp>
 #include "BidiMessage.h"
 
-
+//1
 class ClientProtocol {
 private:
 	bool waitingToLogin;

@@ -78,10 +78,13 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 //        ACK
 		case 4: {
 
+            std::cout << "ACK " << message.getBlockNumber() << std::endl;
+
             switch (lastRqCode){
 
 //                RRQ in ACK
                 case 1: {
+
 
                 }
 
@@ -104,7 +107,7 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 //        ERROR
         case 5: {
 
-            std::cout << "++++++++++++++++++++++++++++++++++++++++++Error: " << message.getErrorCode() << std::endl;
+            std::cout << "Error " << message.getErrorCode() << std::endl;
             break;
         }
 
