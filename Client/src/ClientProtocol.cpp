@@ -11,7 +11,7 @@ previousReceivedBlock(0),
 lastSentBlockNum(0),
 startReading(false),
 sendingFileName(""),
-fileReadStream(NULL),
+uploadFileData(),
 communicationCompleted(false)
 {
     std::cout << "new protocol 333" << std::endl;
@@ -45,6 +45,25 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
             reply = message;
             sendingFileName = message.getFileName();
             communicationCompleted = true;
+
+            // read file
+            std::ifstream fileReadStream(sendingFileName, std::ifstream::binary);
+
+            // Find the length of the file
+            fileReadStream.seekg(0, fileReadStream.end);
+            std::streampos flength = fileReadStream.tellg();
+            fileReadStream.seekg(0, fileReadStream.beg);
+
+            std::cout << "4" << std::endl;
+
+
+            // Create a vector to read it into
+            uploadFileData = std::vector<unsigned char>(flength);
+
+            // Actually read data
+            fileReadStream.read((char *)uploadFileData.data(), flength);
+
+
             std::cout << "setting lastRqCode as: " << opcode << std::endl;
 
             setLastRqCode(opcode);
@@ -175,7 +194,7 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
                     std::cout << "WRQ in ACK 666" << std::endl;
 
 
-                    if(message.getBlockNumber() != lastSentBlockNum+1) {
+                    if(message.getBlockNumber() != lastSentBlockNum+1 && (message.getBlockNumber() != 0)) {
 
                         std::cout << "1" << std::endl;
 
@@ -189,78 +208,69 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 
                         std::cout << "2" << std::endl;
 
-                        fileReadStream = std::ifstream(sendingFileName, std::ifstream::binary);
-
-                        std::cout << "3" << std::endl;
-
-
-                        // Find the length of the file
-                        fileReadStream.seekg(0, fileReadStream.end);
-                        std::streampos flength = fileReadStream.tellg();
-                        fileReadStream.seekg(0, fileReadStream.beg);
-
-                        std::cout << "4" << std::endl;
-
-
-                        // Create a vector to read it into
-                        std::vector<unsigned char> bytes(flength);
-
-                        // Actually read data
-                        fileReadStream.read((char *)bytes.data(), flength);
-
-
-                        std::cout << "5" << std::endl;
-
-
-                        unsigned int length = (unsigned int) flength;
-
-                        char data[length];
-
-                        for (unsigned int i = 0; i < length; ++i) {
-
-                            std::cout << "6" << std::endl;
-
-
-                            data[i] = bytes.at(i);
-                        }
-
-
                         int x = 512;  // chunk size
 
-                        for (unsigned int i = 0; i < length - x + 1; i += x) {
+                        int dataSize = (int) ((uploadFileData.size() % x) - 1);
+
+                        std::cout << "dataSize: " << dataSize << std::endl;
+
+                        char data[dataSize];
+
+                        for (unsigned int i = 0; i < dataSize; ++i) {
+
+                            std::cout << "uploadFileData.at(i): " << uploadFileData.at(0) << std::endl;
 
 
-                            std::cout << "7" << std::endl;
+                            data[i] = uploadFileData.at(0);
+                            std::cout << "after data[i]" << std::endl;
 
-                            char newArray[x];
+                            uploadFileData.erase(uploadFileData.begin());
+                            std::cout << "after erase" << std::endl;
 
-                            for(int j = 0; j < x; j++) {
-
-                                std::cout << "8" << std::endl;
-
-                                newArray[j] = data[j];
-                            }
-
-                            reply = BidiMessage::createDataMessage(x, lastSentBlockNum++, newArray);
                         }
 
-                        if (length % x != 0) {
+                        reply = BidiMessage::createDataMessage(dataSize, lastSentBlockNum++, data);
 
-                            std::cout << "9" << std::endl;
+                        std::cout << "reply.getOpcode(): " << reply.getOpcode() << std::endl;
 
 
-                            char newArray[length % x];
 
-                            for(int j = 0; j < x; j++) {
-                                std::cout << "10" << std::endl;
+//
+////                        for (unsigned int i = 0; i < uploadingDataLength - x + 1; i += x) {
+////
+////
+////                            std::cout << "7" << std::endl;
+////
+////                            char newArray[x];
+////
+////                            for(int j = 0; j < x; j++) {
+////
+////                                std::cout << "8" << std::endl;
+////
+////                                newArray[j] = data[j];
+////                            }
+////
+////                            reply = BidiMessage::createDataMessage(x, lastSentBlockNum++, newArray);
+////                        }
+//
+//                        if (uploadingDataLength % x != 0) {
 
-                                newArray[j] = data[length % x];
-                            }
 
-                            reply = BidiMessage::createDataMessage(length % x, lastSentBlockNum++, newArray);
+//                            char newArray[uploadingDataLength % x];
 
+//                            for(int j = 0; j < x; j++) {
+//                                std::cout << "10" << std::endl;
+//
+//                                newArray[j] = data[uploadingDataLength % x];
+//                            }
+//
+//                            reply = BidiMessage::createDataMessage(uploadingDataLength % x, lastSentBlockNum++, newArray);
+//
 
                             // Close the file explicitly, since we're finished with it
+
+                        if(dataSize < x) {
+
                             fileReadStream.close();
 
                             std::cout << "11" << std::endl;
@@ -272,10 +282,14 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
                         }
                     }
 
+                    std::cout << "15" << std::endl;
+
                     break;
                 }
 
                 default: {
+
+                    std::cout << "16" << std::endl;
 
                     lastRqCode = -1;
                     receivingFileName = "";
