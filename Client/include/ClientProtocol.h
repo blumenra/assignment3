@@ -14,12 +14,11 @@ private:
 	bool waitingToLogin;
 	int lastRqCode;
     vector<char> dataBytesBuffer;
-    string currentFileName;
-    int currentBlock;
-	int previousBlock;
-	int lastSentBlockNum;
-	int priviouslySentBlockNum;
-	bool startReading;
+    string receivingFileName;
+    int previousReceivedBlock;
+    int lastSentBlockNum;
+    int priviouslySentBlockNum;
+    bool startReading;
 	bool communicationCompleted;
 	string sendingFileName;
 	std::ifstream fileReadStream;

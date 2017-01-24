@@ -15,8 +15,8 @@
 du -a -h --max-depth=1 | sort -hr
 
 
+http://stackoverflow.com/questions/22059189/read-a-file-as-byte-array
 
-http://stackoverflow.com/questions/21112562/reading-and-writing-a-file-in-byte-array-in-c-c
 FILE *fileptr;
 char *buffer;
 long filelen;

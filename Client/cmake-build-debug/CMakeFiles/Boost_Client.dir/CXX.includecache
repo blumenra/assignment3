@@ -63,6 +63,8 @@ ClientProtocol.h
 /users/studs/msc/brukes/intelliJ/assignment3/Client/include/BidiMessage.h
 
 /users/studs/msc/brukes/intelliJ/assignment3/Client/src/ClientProtocol.cpp
+fstream
+-
 ../include/ClientProtocol.h
 /users/studs/msc/brukes/intelliJ/assignment3/Client/include/ClientProtocol.h
 

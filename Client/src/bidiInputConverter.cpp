@@ -30,6 +30,7 @@ BidiMessage BidiInputConverter::convertInput(string input) {
 	}
 	else if(command == "RRQ") {
 
+		std::cout << "IN RRQ" << std::endl;
 		completeMessage = BidiMessage::createRRQMessage(arg);
 	}
 	else if(command == "WRQ") {

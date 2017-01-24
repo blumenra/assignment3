@@ -1,3 +1,4 @@
+#include <fstream>
 #include "../include/ClientProtocol.h"
 
 //1
@@ -5,8 +6,8 @@ ClientProtocol::ClientProtocol():
 waitingToLogin(false),
 lastRqCode(-1),
 dataBytesBuffer(),
-currentFileName(""),
-currentBlock(0),
+receivingFileName(""),
+previousReceivedBlock(0),
 priviouslySentBlockNum(0),
 lastSentBlockNum(0),
 startReading(false),
@@ -26,30 +27,78 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
     std::cout << "entered protocol process" << std::endl;
     switch(opcode) {
 
+//        RRQ
+        case 1: {
+
+            reply = message;
+            receivingFileName = message.getFileName();
+            communicationCompleted = true;
+            std::cout << "setting lastRqCode as: " << opcode << std::endl;
+
+            setLastRqCode(opcode);
+            std::cout << "set lastRqCode as: " << lastRqCode << std::endl;
+            break;
+        }
+
+//        WRQ
+        case 2: {
+
+            reply = message;
+//            TODO: change to sendingFileName
+            receivingFileName = message.getFileName();
+            communicationCompleted = true;
+            std::cout << "setting lastRqCode as: " << opcode << std::endl;
+
+            setLastRqCode(opcode);
+            std::cout << "set lastRqCode as: " << lastRqCode << std::endl;
+            break;
+        }
 //        DATA
         case 3: {
 
+//            TODO: deal with this reply on the server and check
+            if(previousReceivedBlock == message.getBlockNumber() + 1){
+
+                dataBytesBuffer.clear();
+                lastRqCode = -1;
+                communicationCompleted = true;
+                reply = BidiMessage::createAckMessage(0);
+                std::cout << "Received wrong data block from server" << std::endl;
+                break;
+            }
             std::cout << "packet size in protocol" << message.getPacketSize() << std::endl;
             addDataToBuffer(message);
             std::cout << "here2 LAST RQ?" << lastRqCode << std::endl;
+
+            previousReceivedBlock = message.getBlockNumber();
 
             std::cout << " data bytes buffer size" << dataBytesBuffer.size() << std::endl;
             if (message.getPacketSize() < 512) {
 
                 std::cout << "here R LAST RQ?" << lastRqCode << std::endl;
                 std::cout << "here? OPCODE" << opcode << std::endl;
+
+                unsigned long dataSize = dataBytesBuffer.size();
+                char receivedData[dataSize];
+
                 switch(lastRqCode) {
 
 //                    RRQ in data
                     case 1: {
 
+                        for (unsigned long i = 0; i < dataSize; ++i) {
+
+                            receivedData[i] = dataBytesBuffer.at(i);
+                        }
+
+                        ofstream receivedFile (receivingFileName, ios::out | ios::binary);
+                        receivedFile.write(receivedData, dataSize);
+                        receivedFile.close();
                     }
 
 //                    DIRQ in data
                     case 6: {
 
-                        unsigned long dataSize = dataBytesBuffer.size();
-                        char receivedData[dataSize];
                         std::cout << "data size: " << dataSize << std::endl;
 
 
@@ -62,21 +111,26 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
                             receivedData[i] = dataBytesBuffer.at(i);
                         }
                         std::cout << string(receivedData).substr(0, dataSize) << std::endl;
-                        dataBytesBuffer.clear();
-                        std::cout << "BUFFERSIZE" << dataBytesBuffer.size() << std::endl;
-                        std::cout << "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" << std::endl;
+
                     }
 
                     default: {
 
                     }
                 }
+
+                dataBytesBuffer.clear();
+
+                std::cout << "BUFFERSIZE" << dataBytesBuffer.size() << std::endl;
+                std::cout << "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" << std::endl;
+
+                std::cout << "fileName: " << receivingFileName << std::endl;
                 lastRqCode = -1;
                 communicationCompleted = true;
-            } else {
-
             }
 
+
+            reply = BidiMessage::createAckMessage(message.getBlockNumber());
             break;
         }
 
@@ -170,7 +224,7 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
                 default: {
 
                     lastRqCode = -1;
-                    currentFileName = "";
+                    receivingFileName = "";
                     communicationCompleted = true;
 
                     break;
@@ -191,7 +245,7 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
         case 9: {
 
             reply = message;
-            if(message.getFileName() == currentFileName){
+            if(message.getFileName() == receivingFileName){
 
                 communicationCompleted = false;
             }
@@ -226,7 +280,7 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
         case 8: {
 
             reply = message;
-            currentFileName = message.getFileName();
+            receivingFileName = message.getFileName();
             communicationCompleted = true;
             std::cout << "setting lastRqCode as: " << opcode << std::endl;
 

@@ -12,9 +12,9 @@ BidiMessage BidiMessage::createBcastMessage(int event, string fileName){
     return BidiMessage((short) 9, (char) event, fileName, (char) 0);
 }
 
-BidiMessage BidiMessage::createAckMessage(int ackNum){
+BidiMessage BidiMessage::createAckMessage(int blockckNumber){
 
-    return BidiMessage((short) 4, (short) ackNum);
+    return BidiMessage((short) 4, (short) blockckNumber);
 }
 
 BidiMessage BidiMessage::createErrorMessage(int errNum, string errMsg){
