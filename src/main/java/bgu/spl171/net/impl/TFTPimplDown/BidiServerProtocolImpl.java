@@ -17,7 +17,6 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
     private ByteArrayOutputStream byteOutPutStream = new ByteArrayOutputStream();
     private String uploadingFileName = "";
     private int currentBlock = 0;
-    private int lastRqCode = -1;
 
 
     public BidiServerProtocolImpl(Map<String, BidiFile> filesList) {
@@ -56,7 +55,6 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
 
                 case 1: //RRQ
 
-                    lastRqCode = 1;
                     synchronized (filesList){
 
                         if(!filesList.containsKey(message.getFileName())) {
@@ -73,13 +71,13 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
                         }
                         else {
 
-                            filesList.get(message.getFileName()).setDeleable(false);
+                            filesList.get(message.getFileName()).setDeletable(false);
                         }
                     }
 
                     try {
                         byte[] array = Files.readAllBytes(new File("Files/"+message.getFileName()).toPath());
-                        filesList.get(message.getFileName()).setDeleable(true);
+                        filesList.get(message.getFileName()).setDeletable(true);
 
                         System.out.println("file data: " + Arrays.toString(array));
 
@@ -102,12 +100,7 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
                             connections.send(ownerClientId, response);
                             break;
                         }
-//                        else if(filesList.get(message.getFileName()).isUploading()) {
-//
-//                            response = BidiMessage.createErrorMessage(2, "Access violation – File cannot be written, read or deleted.");
-//                            connections.send(ownerClientId, response);
-//                            break;
-//                        }
+
                         else {
 
                             String fileName = message.getFileName();
@@ -169,10 +162,8 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
 
                 case 4: //ACK
 
-                    switch (lastRqCode){
 
 
-                    }
 
                     break;
 

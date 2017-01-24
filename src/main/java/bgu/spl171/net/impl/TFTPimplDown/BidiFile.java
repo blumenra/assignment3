@@ -11,14 +11,14 @@ public class BidiFile {
 
 
 
-    private boolean deleable;
+    private boolean deletable;
 
     public BidiFile(String fileName) {
 
         this.fileName = fileName;
         this.readable = true;
         this.uploading = false;
-        this.deleable = true;
+        this.deletable = true;
     }
 
     public void setReadable(boolean readable) {
@@ -31,19 +31,19 @@ public class BidiFile {
 
         if(uploading) {
 
-            setDeleable(false);
+            setDeletable(false);
             setReadable(false);
         }
         else {
 
-            setDeleable(true);
+            setDeletable(true);
             setReadable(true);
         }
 
     }
 
-    public void setDeleable(boolean deleable) {
-        this.deleable = deleable;
+    public void setDeletable(boolean deletable) {
+        this.deletable = deletable;
     }
 
     public String getFileName() {
@@ -59,6 +59,6 @@ public class BidiFile {
     }
 
     public boolean isDeletable() {
-        return deleable;
+        return deletable;
     }
 }

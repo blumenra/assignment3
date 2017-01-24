@@ -7,12 +7,13 @@ waitingToLogin(false),
 lastRqCode(-1),
 dataBytesBuffer(),
 receivingFileName(""),
-previousReceivedBlock(0),
+previousReceivedBlock(-1),
 lastSentBlockNum(0),
 startReading(false),
 sendingFileName(""),
 fileReadStream(NULL),
-communicationCompleted(false)
+communicationCompleted(false),
+readyToDisconnect(false)
 {
     std::cout << "new protocol 333" << std::endl;
 }
@@ -55,15 +56,15 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
         case 3: {
 
 //            TODO: deal with this reply on the server and check
-            if(previousReceivedBlock == message.getBlockNumber() + 1){
-
-                dataBytesBuffer.clear();
-                lastRqCode = -1;
-                communicationCompleted = true;
-                reply = BidiMessage::createAckMessage(0);
-                std::cout << "Received wrong data block from server" << std::endl;
-                break;
-            }
+//            if(previousReceivedBlock != message.getBlockNumber() + 1){
+//
+//                dataBytesBuffer.clear();
+//                lastRqCode = -1;
+//                communicationCompleted = true;
+//                reply = BidiMessage::createAckMessage(0);
+//                std::cout << "Received wrong data block from server" << std::endl;
+//                break;
+//            }
             std::cout << "packet size in protocol" << message.getPacketSize() << std::endl;
             addDataToBuffer(message);
             std::cout << "here2 LAST RQ?" << lastRqCode << std::endl;
@@ -275,6 +276,16 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
                     break;
                 }
 
+//                DISC
+                case 10: {
+
+                    readyToDisconnect = true;
+                    communicationCompleted = true;
+                    lastRqCode = -1;
+
+                    break;
+                }
+
                 default: {
 
                     lastRqCode = -1;
@@ -318,8 +329,18 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
             break;
         }
 
+//        DIRQ, DISQ
+        case 6:
+        case 10: {
 
+            reply = message;
+            communicationCompleted = true;
+            std::cout << "setting lastRqCode as: " << opcode << std::endl;
 
+            setLastRqCode(opcode);
+            std::cout << "set lastRqCode as: " << lastRqCode << std::endl;
+            break;
+        }
 
         case 7: { //LOGRQ
 
@@ -335,19 +356,6 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 
             reply = message;
             receivingFileName = message.getFileName();
-            communicationCompleted = true;
-            std::cout << "setting lastRqCode as: " << opcode << std::endl;
-
-            setLastRqCode(opcode);
-            std::cout << "set lastRqCode as: " << lastRqCode << std::endl;
-            break;
-        }
-
-//        DIRQ, DISQ
-        case 6:
-        case 10: {
-
-            reply = message;
             communicationCompleted = true;
             std::cout << "setting lastRqCode as: " << opcode << std::endl;
 
@@ -395,4 +403,8 @@ void ClientProtocol::setCommunicationCompleted(bool communicationCompleted) {
 
 bool ClientProtocol::isStartReading() const {
     return startReading;
+}
+
+bool ClientProtocol::isReadyToDisconnect() const {
+    return readyToDisconnect;
 }

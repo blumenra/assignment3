@@ -160,6 +160,11 @@ bool ConnectionHandler::processMessage() {
 
         protocol.process(answer, reply);
 
+        if(protocol.isReadyToDisconnect()){
+
+            return false;
+        }
+
         std::cout << "LASTRQCODE AFTER PROCESS" << protocol.getLastRqCode()  << std::endl;
 
         if(reply.getOpcode() == -1){

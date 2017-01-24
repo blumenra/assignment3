@@ -21,6 +21,7 @@ private:
 	bool communicationCompleted;
 	string sendingFileName;
 	std::ifstream fileReadStream;
+	bool readyToDisconnect;
 
     void addDataToBuffer(BidiMessage message);
 
@@ -38,6 +39,9 @@ public:
 	bool isComunicationCompleted() const;
 
 	bool isStartReading() const;
+
+	bool isReadyToDisconnect() const;
+
 }; //class ConnectionHandler
  
 #endif
