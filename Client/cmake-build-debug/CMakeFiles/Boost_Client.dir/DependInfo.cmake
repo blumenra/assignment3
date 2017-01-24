@@ -4,12 +4,12 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/BidiEncDec.cpp" "/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o"
-  "/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/BidiMessage.cpp" "/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.o"
-  "/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/ClientProtocol.cpp" "/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o"
-  "/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/bidiInputConverter.cpp" "/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o"
-  "/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/client.cpp" "/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles/Boost_Client.dir/src/client.cpp.o"
-  "/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/connectionHandler.cpp" "/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o"
+  "/users/studs/msc/brukes/intelliJ/assignment3/Client/src/BidiEncDec.cpp" "/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o"
+  "/users/studs/msc/brukes/intelliJ/assignment3/Client/src/BidiMessage.cpp" "/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.o"
+  "/users/studs/msc/brukes/intelliJ/assignment3/Client/src/ClientProtocol.cpp" "/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o"
+  "/users/studs/msc/brukes/intelliJ/assignment3/Client/src/bidiInputConverter.cpp" "/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o"
+  "/users/studs/msc/brukes/intelliJ/assignment3/Client/src/client.cpp" "/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/Boost_Client.dir/src/client.cpp.o"
+  "/users/studs/msc/brukes/intelliJ/assignment3/Client/src/connectionHandler.cpp" "/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

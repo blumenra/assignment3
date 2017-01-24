@@ -5,7 +5,7 @@ ClientProtocol::ClientProtocol():
 waitingToLogin(false),
 lastRqCode(-1),
 dataBytesBuffer(),
-downloadingFileName(""),
+currentFileName(""),
 currentBlock(0),
 communicationCompleted(false)
 {
@@ -92,6 +92,8 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 
                 default: {
 
+                    lastRqCode = -1;
+                    currentFileName = "";
                     communicationCompleted = true;
                 }
             }
@@ -110,7 +112,11 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
         case 9: {
 
             reply = message;
-            communicationCompleted = false;
+            if(message.getFileName() == currentFileName){
+
+                communicationCompleted = false;
+            }
+
             int broadReason = message.getDeletedAdded();
 
             if(broadReason != 0 && broadReason != 1) {
@@ -136,9 +142,22 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
             break;
         }
 
-//        DIRQ, DELRQ, DISQ
+
+//        DELRQ
+        case 8: {
+
+            reply = message;
+            currentFileName = message.getFileName();
+            communicationCompleted = true;
+            std::cout << "setting lastRqCode as: " << opcode << std::endl;
+
+            setLastRqCode(opcode);
+            std::cout << "set lastRqCode as: " << lastRqCode << std::endl;
+            break;
+        }
+
+//        DIRQ, DISQ
         case 6:
-        case 8:
         case 10: {
 
             reply = message;

@@ -34,19 +34,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /users/studs/bsc/2016/blumenra/clion-2016.3.2/bin/cmake/bin/cmake
+CMAKE_COMMAND = /users/studs/msc/brukes/clion-2016.3/bin/cmake/bin/cmake
 
 # The command to remove a file.
-RM = /users/studs/bsc/2016/blumenra/clion-2016.3.2/bin/cmake/bin/cmake -E remove -f
+RM = /users/studs/msc/brukes/clion-2016.3/bin/cmake/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client
+CMAKE_SOURCE_DIR = /users/studs/msc/brukes/intelliJ/assignment3/Client
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug
+CMAKE_BINARY_DIR = /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Boost_Client.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/Boost_Client.dir/flags.make
 
 CMakeFiles/Boost_Client.dir/src/client.cpp.o: CMakeFiles/Boost_Client.dir/flags.make
 CMakeFiles/Boost_Client.dir/src/client.cpp.o: ../src/client.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Boost_Client.dir/src/client.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Client.dir/src/client.cpp.o -c /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/client.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Boost_Client.dir/src/client.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Client.dir/src/client.cpp.o -c /users/studs/msc/brukes/intelliJ/assignment3/Client/src/client.cpp
 
 CMakeFiles/Boost_Client.dir/src/client.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Boost_Client.dir/src/client.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/client.cpp > CMakeFiles/Boost_Client.dir/src/client.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/msc/brukes/intelliJ/assignment3/Client/src/client.cpp > CMakeFiles/Boost_Client.dir/src/client.cpp.i
 
 CMakeFiles/Boost_Client.dir/src/client.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Client.dir/src/client.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/client.cpp -o CMakeFiles/Boost_Client.dir/src/client.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/msc/brukes/intelliJ/assignment3/Client/src/client.cpp -o CMakeFiles/Boost_Client.dir/src/client.cpp.s
 
 CMakeFiles/Boost_Client.dir/src/client.cpp.o.requires:
 
@@ -83,16 +83,16 @@ CMakeFiles/Boost_Client.dir/src/client.cpp.o.provides.build: CMakeFiles/Boost_Cl
 
 CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o: CMakeFiles/Boost_Client.dir/flags.make
 CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o: ../src/BidiEncDec.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o -c /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/BidiEncDec.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o -c /users/studs/msc/brukes/intelliJ/assignment3/Client/src/BidiEncDec.cpp
 
 CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/BidiEncDec.cpp > CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/msc/brukes/intelliJ/assignment3/Client/src/BidiEncDec.cpp > CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.i
 
 CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/BidiEncDec.cpp -o CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/msc/brukes/intelliJ/assignment3/Client/src/BidiEncDec.cpp -o CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.s
 
 CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o.requires:
 
@@ -107,16 +107,16 @@ CMakeFiles/Boost_Client.dir/src/BidiEncDec.cpp.o.provides.build: CMakeFiles/Boos
 
 CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o: CMakeFiles/Boost_Client.dir/flags.make
 CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o: ../src/bidiInputConverter.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o -c /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/bidiInputConverter.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o -c /users/studs/msc/brukes/intelliJ/assignment3/Client/src/bidiInputConverter.cpp
 
 CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/bidiInputConverter.cpp > CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/msc/brukes/intelliJ/assignment3/Client/src/bidiInputConverter.cpp > CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.i
 
 CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/bidiInputConverter.cpp -o CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/msc/brukes/intelliJ/assignment3/Client/src/bidiInputConverter.cpp -o CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.s
 
 CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o.requires:
 
@@ -131,16 +131,16 @@ CMakeFiles/Boost_Client.dir/src/bidiInputConverter.cpp.o.provides.build: CMakeFi
 
 CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.o: CMakeFiles/Boost_Client.dir/flags.make
 CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.o: ../src/BidiMessage.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.o -c /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/BidiMessage.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.o -c /users/studs/msc/brukes/intelliJ/assignment3/Client/src/BidiMessage.cpp
 
 CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/BidiMessage.cpp > CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/msc/brukes/intelliJ/assignment3/Client/src/BidiMessage.cpp > CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.i
 
 CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/BidiMessage.cpp -o CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/msc/brukes/intelliJ/assignment3/Client/src/BidiMessage.cpp -o CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.s
 
 CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.o.requires:
 
@@ -155,16 +155,16 @@ CMakeFiles/Boost_Client.dir/src/BidiMessage.cpp.o.provides.build: CMakeFiles/Boo
 
 CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o: CMakeFiles/Boost_Client.dir/flags.make
 CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o: ../src/ClientProtocol.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o -c /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/ClientProtocol.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o -c /users/studs/msc/brukes/intelliJ/assignment3/Client/src/ClientProtocol.cpp
 
 CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/ClientProtocol.cpp > CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/msc/brukes/intelliJ/assignment3/Client/src/ClientProtocol.cpp > CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.i
 
 CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/ClientProtocol.cpp -o CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/msc/brukes/intelliJ/assignment3/Client/src/ClientProtocol.cpp -o CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.s
 
 CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o.requires:
 
@@ -179,16 +179,16 @@ CMakeFiles/Boost_Client.dir/src/ClientProtocol.cpp.o.provides.build: CMakeFiles/
 
 CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o: CMakeFiles/Boost_Client.dir/flags.make
 CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o: ../src/connectionHandler.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o -c /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/connectionHandler.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o -c /users/studs/msc/brukes/intelliJ/assignment3/Client/src/connectionHandler.cpp
 
 CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/connectionHandler.cpp > CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/studs/msc/brukes/intelliJ/assignment3/Client/src/connectionHandler.cpp > CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.i
 
 CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/src/connectionHandler.cpp -o CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/studs/msc/brukes/intelliJ/assignment3/Client/src/connectionHandler.cpp -o CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.s
 
 CMakeFiles/Boost_Client.dir/src/connectionHandler.cpp.o.requires:
 
@@ -227,7 +227,7 @@ Boost_Client: /usr/lib/x86_64-linux-gnu/libboost_chrono.so
 Boost_Client: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
 Boost_Client: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
 Boost_Client: CMakeFiles/Boost_Client.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable Boost_Client"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable Boost_Client"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Boost_Client.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -249,6 +249,6 @@ CMakeFiles/Boost_Client.dir/clean:
 .PHONY : CMakeFiles/Boost_Client.dir/clean
 
 CMakeFiles/Boost_Client.dir/depend:
-	cd /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug /users/studs/bsc/2016/blumenra/spl/2017/assignments/assignment3/Client/cmake-build-debug/CMakeFiles/Boost_Client.dir/DependInfo.cmake --color=$(COLOR)
+	cd /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /users/studs/msc/brukes/intelliJ/assignment3/Client /users/studs/msc/brukes/intelliJ/assignment3/Client /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug /users/studs/msc/brukes/intelliJ/assignment3/Client/cmake-build-debug/CMakeFiles/Boost_Client.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Boost_Client.dir/depend
 
