@@ -83,6 +83,8 @@ stdlib.h
 /users/studs/msc/brukes/intelliJ/assignment3/Client/include/connectionHandler.h
 ../include/bidiInputConverter.h
 /users/studs/msc/brukes/intelliJ/assignment3/Client/include/bidiInputConverter.h
+boost/thread.hpp
+-
 
 /users/studs/msc/brukes/intelliJ/assignment3/Client/src/connectionHandler.cpp
 ../include/connectionHandler.h
