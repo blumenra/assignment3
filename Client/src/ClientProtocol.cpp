@@ -78,8 +78,6 @@ void ClientProtocol::process(BidiMessage& message, BidiMessage& reply) {
 //        ACK
 		case 4: {
 
-            std::cout << "ACK " << message.getBlockNumber() << std::endl;
-
             switch (lastRqCode){
 
 //                RRQ in ACK
