@@ -8,9 +8,7 @@ import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Map;
 
-/**
- * Created by blumenra on 1/18/17.
- */
+
 public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage> {
 
     private final Map<String, BidiFile> filesList;
@@ -19,6 +17,7 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
     private ByteArrayOutputStream byteOutPutStream = new ByteArrayOutputStream();
     private String uploadingFileName = "";
     private int currentBlock = 0;
+    private int lastRqCode = -1;
 
 
     public BidiServerProtocolImpl(Map<String, BidiFile> filesList) {
@@ -57,6 +56,7 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
 
                 case 1: //RRQ
 
+                    lastRqCode = 1;
                     synchronized (filesList){
 
                         if(!filesList.containsKey(message.getFileName())) {
@@ -158,6 +158,15 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
                     }
 
                     connections.send(ownerClientId, response);
+                    break;
+
+                case 5: //ACK
+
+                    switch (lastRqCode){
+
+
+                    }
+
                     break;
 
                 case 6: //DIRQ
