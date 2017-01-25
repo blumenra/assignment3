@@ -16,17 +16,6 @@ public class ReactorMain {
 
     public static void main(String[] args) {
 
-//        // REMOVE FROM HERE
-//
-//        File file = new File("Files/removeMe.txt");
-//        System.out.println(file.exists());
-//
-//        // REMOVE UP TO HERE
-
-
-
-
-
         int port = 7777;
         int nThreads = 5;
         Map<String, BidiFile> filesList = new ConcurrentHashMap<>();

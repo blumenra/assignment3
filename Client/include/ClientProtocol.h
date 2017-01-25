@@ -17,7 +17,7 @@ private:
     string receivingFileName;
     int previousReceivedBlock;
     int lastSentBlockNum;
-    bool startReading;
+    bool dontReply;
 	bool communicationCompleted;
 	string sendingFileName;
     vector<unsigned char> uploadFileData;

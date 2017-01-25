@@ -42,7 +42,7 @@
  *     }
  *     Add a map that maps between clienID and its connectionHandler -> this will be initialized in the server
  * }
- * remove the removeMe.txt file in the Files folder
+ * ***********************remove the removeMe.txt file in the Files folder
  * handle all 'new' object in client side (delete if necessary)
  * not sure if DISC means the client should be removed from the logged-in users list or his CH shoud be completley removed from server
  *
@@ -73,7 +73,14 @@
  */
 // protocol for
 
-
+/*
+* remove Files, received folders empty the bin remove all files from Client that are not supposed to be there
+* remove all hidden files and folders
+* remove Target folder
+* delete the newsfeed, echo, rci folders
+*
+*
+* */
 
 
 /**

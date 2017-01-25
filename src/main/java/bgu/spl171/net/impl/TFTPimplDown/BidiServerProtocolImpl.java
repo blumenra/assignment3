@@ -38,20 +38,18 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
     @Override
     public void process(BidiMessage message) {
 
-        System.out.println("protocol opcode: " + message.getOpcode());
         short opcode = message.getOpcode();
         BidiMessage response = null;
 
 
         // attempt to do something before logging in
-        if (!connections.isLoggedIn(ownerClientId) && (opcode != 7)) {
+        if (!connections.isLoggedIn(ownerClientId) && ((opcode != 7) && (opcode != 1) && (opcode != 2) && (opcode != 8))) {
 
             sendPleaseLoginFirstError();
         }
+
         else {
             switch (opcode) {
-
-                //TODO: when  file was deleted/added => broadcast the shit out of it!!
 
                 case 1: //RRQ
 
@@ -71,6 +69,13 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
                         }
                         else {
 
+                            if (!connections.isLoggedIn(ownerClientId)) {
+
+                                sendPleaseLoginFirstError();
+
+                                break;
+                            }
+
                             filesList.get(message.getFileName()).setDeletable(false);
                         }
                     }
@@ -78,8 +83,6 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
                     try {
                         byte[] array = Files.readAllBytes(new File("Files/"+message.getFileName()).toPath());
                         filesList.get(message.getFileName()).setDeletable(true);
-
-                        System.out.println("file data: " + Arrays.toString(array));
 
                         sendDataMessages(array);
 
@@ -103,6 +106,13 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
 
                         else {
 
+                            if (!connections.isLoggedIn(ownerClientId)) {
+
+                                sendPleaseLoginFirstError();
+
+                                break;
+                            }
+
                             String fileName = message.getFileName();
 
                             BidiFile upFile = new BidiFile(fileName);
@@ -114,6 +124,13 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
                         }
                     }
 
+                    if (!connections.isLoggedIn(ownerClientId)) {
+
+                        sendPleaseLoginFirstError();
+
+                        break;
+                    }
+
                     connections.send(ownerClientId, response);
                     break;
 
@@ -122,6 +139,7 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
                     if(message.getPacketSize() < 512) {
 
                         FileOutputStream fos = null;
+
                         try {
 
                             byteOutPutStream.write(message.getData());
@@ -160,11 +178,7 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
                     connections.send(ownerClientId, response);
                     break;
 
-                case 4: //ACK
-
-
-
-
+                case 4:
                     break;
 
                 case 6: //DIRQ
@@ -184,13 +198,12 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
 
 
                     byte[] byteFiles = files.getBytes();
-                    System.out.println("bytesFiles: " + Arrays.toString(byteFiles));
                     sendDataMessages(byteFiles);
+
                     break;
 
                 case 7: //LOGRQ
 
-                    System.out.println("user name: " + message.getUserName());
                     String userName = message.getUserName();
 
                     // if the user is NOT logged in
@@ -215,15 +228,21 @@ public class BidiServerProtocolImpl implements BidiMessagingProtocol<BidiMessage
                         // Files does NOT exist
                         if (!filesList.containsKey(message.getFileName())) {
 
-                            System.out.println("exist");
                             response = BidiMessage.createErrorMessage(1, "File not found – RRQ \\ DELRQ of non-existing file");
                         }
                         // File exists but not accessible
                         else if (!filesList.get(message.getFileName()).isDeletable()) {
-                            System.out.println("access");
+
                             response = BidiMessage.createErrorMessage(2, "Access violation – File cannot be written, read or deleted");
                         }
                         else {
+
+                            if (!connections.isLoggedIn(ownerClientId)) {
+
+                                sendPleaseLoginFirstError();
+
+                                break;
+                            }
 
                             filesList.remove(message.getFileName());
                             response = BidiMessage.createAckMessage(0);

@@ -38,12 +38,8 @@ bool ConnectionHandler::getBytes(char bytes[], unsigned int bytesToRead) {
     boost::system::error_code error;
     try {
         while (!error && bytesToRead > tmp ) {
-            std::cout << "before SOCKET BYTESTOREAD "<< bytesToRead << std::endl;
-            std::cout << "before socket" << std::endl;
+
             tmp += socket_.read_some(boost::asio::buffer(bytes+tmp, bytesToRead-tmp), error);
-            std::cout << "after SOCKET bytes[0] "<< (int)bytes[0] << std::endl;
-            std::cout << "after SOCKET bytes[1] "<< (int)bytes[1] << std::endl;
-            std::cout << "after socket tmp" << tmp << std::endl;
         }
         if(error)
             throw boost::system::system_error(error);
@@ -55,19 +51,16 @@ bool ConnectionHandler::getBytes(char bytes[], unsigned int bytesToRead) {
 }
  
 bool ConnectionHandler::sendBytes(const char bytes[], int bytesToWrite) {
+
     int tmp = 0;
-    std::cout << "before try" << std::endl;
+
     boost::system::error_code error;
+
     try {
-        std::cout << "before while error : "<< error << std::endl;
-        std::cout << "before while bytesToWrite: "<< bytesToWrite << std::endl;
+
         while (!error && bytesToWrite > tmp ) {
-            std::cout << "before while bytesToWrite in: "<< bytesToWrite << std::endl;
-            std::cout << "before while tmp: "<< tmp << std::endl;
-            std::cout << "Inside sendBytes while" << std::endl;
-            tmp += socket_.write_some(boost::asio::buffer(bytes + tmp, bytesToWrite - tmp), error);
-            std::cout << "before while bytesToWrite in a: "<< bytesToWrite << std::endl;
-            std::cout << "before while tmp a: "<< tmp << std::endl;
+
+            tmp += socket_.write_some(boost::asio::buffer(bytes + tmp, (size_t) (bytesToWrite - tmp)), error);
         }
         if(error)
             throw boost::system::system_error(error);
@@ -94,16 +87,10 @@ bool ConnectionHandler::getMessage(BidiMessage& message) {
 
     try {
         do{
-            std::cout << "BEFORE getBytes" << std::endl;
+
             getBytes(ch, 1);
-            std::cout << "BEFORE decoder" << std::endl;
-            std::cout << "before decoder BYTE "<< ch[0] << std::endl;
-            std::cout << ""<< std::endl;
-            std::cout << "before decoder isComplete "<< message.isComplete() << std::endl;
             encDec.decodeNextByte(ch[0], message);
-            std::cout << "after decoder isComplete "<< message.isComplete() << std::endl;
-            std::cout << "after decoder opcodeXXXXXXXXXXXXX "<< message.getOpcode() << std::endl;
-            std::cout << "after decoder blockNumberXXXXXXXXXXXXX "<< message.getBlockNumber() << std::endl;
+
         }while(!message.isComplete());
     } catch (std::exception& e) {
         std::cerr << "recv failed (Error: " << e.what() << ')' << std::endl;
@@ -115,23 +102,21 @@ bool ConnectionHandler::getMessage(BidiMessage& message) {
 
 bool ConnectionHandler::sendMessage(BidiMessage &message) {
 
-    //
-    std::cout << "inside sendMesssage lastrq: " << protocol.getLastRqCode() << std::endl;
-//    protocol.setLastRqCode(8);
-    std::cout << "2inside sendMesssage lastrq: " << protocol.getLastRqCode() << std::endl;
-    //
-
     if(message.getOpcode() == (short) 9){
         return true;
     }
+    if(message.getOpcode() == (short) 10){
+
+        char encoded[message.getBytesLength()];
+        encDec.encode(message, encoded);
+
+        sendBytes(encoded, message.getBytesLength());
+
+        return false;
+    }
 
     char encoded[message.getBytesLength()];
-    std::cout << "message bytesLength " << message.getBytesLength() << std::endl;
-    std::cout << "message packetSize " << message.getPacketSize() << std::endl;
-
     encDec.encode(message, encoded);
-
-
 
     return sendBytes(encoded, message.getBytesLength());
 }
@@ -140,8 +125,6 @@ bool ConnectionHandler::processMessage() {
 
     bool result;
 
-    std::cout << "processMessage before while lasrrq: " << protocol.getLastRqCode() << std::endl;
-
     protocol.setCommunicationCompleted(false);
 
     while(!protocol.isComunicationCompleted()) {
@@ -149,19 +132,18 @@ bool ConnectionHandler::processMessage() {
         BidiMessage answer = BidiMessage();
         BidiMessage reply = BidiMessage();
 
-        std::cout << "entering getMessage" << std::endl;
         result = getMessage(answer);
-        std::cout << "after getMessage" << std::endl;
 
-        std::cout << "**************Reply Opcode: " << answer.getOpcode() << std::endl << std::endl;
-        std::cout << "prot" << std::endl;
         if(!result) {
-            std::cout << "1" << std::endl;
+
             protocol.setCommunicationCompleted(false);
             return result;
         }
 
-        std::cout << "LASTRQCODE BEFORE PROCESS" << protocol.getLastRqCode() << std::endl;
+        if(protocol.isReadyToDisconnect()) {
+
+            return false;
+        }
 
         protocol.process(answer, reply);
 
@@ -170,7 +152,6 @@ bool ConnectionHandler::processMessage() {
             return false;
         }
 
-        std::cout << "LASTRQCODE AFTER PROCESS" << protocol.getLastRqCode()  << std::endl;
 
         if(reply.getOpcode() == -1){
 
@@ -183,22 +164,5 @@ bool ConnectionHandler::processMessage() {
         }
     }
 
-
-//    if(result){
-//
-//        if(answer.getOpcode() == 3){
-//
-//            int ps = answer.getPacketSize();
-//            char receivedData[ps];
-//            answer.copyData(receivedData);
-//            std::cout << "DATA: " << string(receivedData) << std::endl << std::endl;
-//        }
-//    }
-
-
-    std::cout << "2" << std::endl;
     return result;
-
-//            TODO: send answer to protocol for a response. What is under here isn't needed.
-
 }

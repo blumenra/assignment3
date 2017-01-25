@@ -29,9 +29,7 @@ private:
 public:
 
     static BidiMessage createDataMessage(int packetSize, int blockNum, char* fileData);
-    static BidiMessage createBcastMessage(int event, string fileName);
     static BidiMessage createAckMessage(int blockckNumber);
-    static BidiMessage createErrorMessage(int errNum, string errMsg);
     static BidiMessage createLoginMessage(string userName);
     static BidiMessage createDeleteMessage(string fileName);
     static BidiMessage createRRQMessage(string fileName);

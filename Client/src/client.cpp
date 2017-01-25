@@ -3,7 +3,7 @@
 #include "../include/bidiInputConverter.h"
 #include <boost/thread.hpp>
 
-//1
+
 class Task{
 private:
     int id;
@@ -37,27 +37,14 @@ public:
             BidiMessage messagePre = converter.convertInput(line);
             BidiMessage messagePost = BidiMessage();
 
-            std::cout << "before client process lastrq" << protocol.getLastRqCode() << std::endl;
             protocol.process(messagePre, messagePost);
-            std::cout << "after client process lastrq" << protocol.getLastRqCode() << std::endl;
-
-            std::cout << "messagePost opcode: " << messagePost.getOpcode() << std::endl;
 
             if(messagePost.isComplete()) {
-//        if(messagePre.isComplete()) {
-                std::cout << "1after client process lastrq" << protocol.getLastRqCode() << std::endl;
 
                 if(!connectionHandler.sendMessage(messagePost)) {
-//            if(!connectionHandler.sendMessage(messagePre)) {
-                    std::cout << "Disconnected. Exiting1...\n" << std::endl;
-                    break;
+
+                    return;
                 }
-                std::cout << "2after client process lastrq" << protocol.getLastRqCode() << std::endl;
-
-
-            } else{
-
-                std::cout << "Not complete message" << std::endl;
             }
         }
     }
@@ -67,8 +54,8 @@ public:
         while(1) {
 
             if(!connectionHandler.processMessage()){
-                std::cout << "Disconnected. Exiting2...\n" << std::endl;
-                break;
+
+                return;
             }
         }
     }
@@ -107,47 +94,6 @@ int main (int argc, char *argv[]) {
     boost::thread serverThread(&Task::communicate, &communicator);
     userThread.join();
     serverThread.join();
-
-
-
-
-
-
-//    //From here we will see the rest of the ehco client implementation:
-//    while (1) {
-//        const short bufsize = 1024;
-//        char buf[bufsize];
-//        std::cin.getline(buf, bufsize);
-//        std::string line(buf);
-//
-//        BidiMessage messagePre = converter.convertInput(line);
-//        BidiMessage messagePost = BidiMessage();
-//
-//        std::cout << "before client process lastrq" << protocol.getLastRqCode() << std::endl;
-//        protocol.process(messagePre, messagePost);
-//        std::cout << "after client process lastrq" << protocol.getLastRqCode() << std::endl;
-//
-//        if(messagePost.isComplete()) {
-////        if(messagePre.isComplete()) {
-//            std::cout << "1after client process lastrq" << protocol.getLastRqCode() << std::endl;
-//
-//            if(!connectionHandler.sendMessage(messagePost)) {
-////            if(!connectionHandler.sendMessage(messagePre)) {
-//                std::cout << "Disconnected. Exiting1...\n" << std::endl;
-//                break;
-//            }
-//            std::cout << "2after client process lastrq" << protocol.getLastRqCode() << std::endl;
-//
-//            if(!connectionHandler.processMessage()){
-//                std::cout << "Disconnected. Exiting2...\n" << std::endl;
-//                break;
-//            }
-//
-//        } else{
-//
-//            std::cout << "Not complete message" << std::endl;
-//        }
-//    }
 
     return 0;
 }

@@ -20,18 +20,12 @@ public class ConnectionsImpl<T> implements Connections<T> {
     public boolean send(int connectionId, T msg) {
 
         clients.get(connectionId).send(msg);
-//        System.out.println(clients.get(connectionId) == null);
-        //TODO: decide when to return what boolean
+
         return false;
     }
 
     @Override
     public void broadcast(T msg) {
-
-//        for(Integer key : clients.keySet()) {
-//
-//            clients.get(key).send(msg);
-//        }
 
         for(ConnectionHandler<T> client : clients.values()) {
 
@@ -41,6 +35,7 @@ public class ConnectionsImpl<T> implements Connections<T> {
 
     @Override
     public void disconnect(int connectionId) {
+
 
         loggedInUsers.remove(connectionId);
         clients.remove(connectionId);

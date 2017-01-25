@@ -149,6 +149,12 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
             case 2: {
 
                 bytesToBlockNumber(nextByte);
+
+                if(currentMessageFieldNumber == 3 && incomingMessage.getPacketSize() == 0){
+
+                    done = true;
+                }
+
                 break;
             }
 
@@ -564,10 +570,6 @@ public class BidiEncDecImpl implements MessageEncoderDecoder<BidiMessage>{
                 encoded = new byte[0];
             }
         }
-
-        System.out.println(message.getErrMsg());
-        System.out.println("encoded:");
-        System.out.println(Arrays.toString(encoded));
 
         return encoded;
     }

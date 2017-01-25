@@ -7,26 +7,15 @@ BidiMessage BidiMessage::createDataMessage(int packetSize, int blockNum, char* f
     return BidiMessage((short) 3, (short) packetSize, (short) blockNum, fileData);
 }
 
-BidiMessage BidiMessage::createBcastMessage(int event, string fileName){
-
-    return BidiMessage((short) 9, (char) event, fileName, (char) 0);
-}
-
 BidiMessage BidiMessage::createAckMessage(int blockckNumber){
 
     return BidiMessage((short) 4, (short) blockckNumber);
-}
-
-BidiMessage BidiMessage::createErrorMessage(int errNum, string errMsg){
-
-    return BidiMessage((short) 7, (short) errNum, errMsg, (char) 0);
 }
 
 BidiMessage BidiMessage::createLoginMessage(string userName) {
 
     return BidiMessage((short) 7, userName, (char) 0);
 }
-
 
 BidiMessage BidiMessage::createDeleteMessage(string fileName) {
 
@@ -78,9 +67,7 @@ bytesLength(0)
 BidiMessage::BidiMessage(const BidiMessage& original){
 
     this->opcode = original.getOpcode();
-    std::cout << "isComplete original? "<< original.isComplete() << std::endl;
     this->complete = original.isComplete();
-    std::cout << "isComplete? this"<< complete << std::endl;
     this->bytesLength = original.getBytesLength();
 
     this->bytesLength = original.getBytesLength();
@@ -274,14 +261,9 @@ short BidiMessage::getBlockNumber()const {
 
 void BidiMessage::copyData(char* dataCopy)const {
 
-
-//    std::cout << "packetSize: " << packetSize << std::endl;
     for(int i=0; i<packetSize; i++){
-//        std::cout << "i: " << i << std::endl;
-//        std::cout << "DATAi: " << (int)data[i] << std::endl;
 
         dataCopy[i] = this->data[i];
-//        std::cout << "DATACOPYi: " << (int)dataCopy[i] << std::endl;
     }
 
 }

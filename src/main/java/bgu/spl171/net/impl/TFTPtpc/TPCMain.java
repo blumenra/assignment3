@@ -19,17 +19,6 @@ public class TPCMain {
 
     public static void main(String[] args) {
 
-//        // REMOVE FROM HERE
-//
-//        File file = new File("Files/removeMe.txt");
-//        System.out.println(file.exists());
-//
-//        // REMOVE UP TO HERE
-
-
-
-
-
         int port = 7777;
         Map<String, BidiFile> filesList = new ConcurrentHashMap<>();
 
@@ -40,5 +29,4 @@ public class TPCMain {
                 BidiEncDecImpl::new //message encoder decoder factory
         ).serve();
     }
-
 }
